@@ -1,0 +1,19 @@
+Add one more problem (10 points)
+
+Represent following numbers in 2’s complement system
+5
+
+7
+
+-6
+
+-2
+
+Recognize following 2’s complement numbers
+1100
+
+0110
+
+0000
+
+1000

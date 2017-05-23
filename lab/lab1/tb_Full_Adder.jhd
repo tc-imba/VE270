@@ -1,0 +1,3 @@
+MODULE tb_Full_Adder
+SUBMODULE Circuit1
+INSTANCE UUT

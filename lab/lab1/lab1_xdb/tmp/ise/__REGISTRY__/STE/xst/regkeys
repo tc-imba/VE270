@@ -1,0 +1,6 @@
+CommandLine
+/opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/xst -ise /home/liu/SJTU/VE270/lab/lab1/lab1.ise -intstyle ise -ifn /home/liu/SJTU/VE270/lab/lab1/Circuit1.xst -ofn /home/liu/SJTU/VE270/lab/lab1/Circuit1.syr -finalclean 1
+s
+FormatString
+xst [-ifn <InputFile>] [-ofn <OutputFile>] [-ise <iseProjectFile>] [--quiet] [-intstyle <Style>] [--deb <DebugLevel>] [--finalclean <Clean>] [--PcubeFlow] [--globOptFlow] [--XstNtrc]
+s

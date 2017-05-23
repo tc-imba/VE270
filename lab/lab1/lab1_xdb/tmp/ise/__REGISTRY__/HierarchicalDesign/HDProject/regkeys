@@ -1,0 +1,24 @@
+CommandLine-Map
+
+s
+CommandLine-Ngdbuild
+/opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/ngdbuild -ise /home/liu/SJTU/VE270/lab/lab1/lab1.ise -intstyle ise -dd _ngo -nt timestamp -i -p xc3s1200e-fg320-4 Circuit1.ngc Circuit1.ngd
+s
+CommandLine-Par
+
+s
+CommandLine-Xst
+
+s
+Previous-NGD
+Circuit1_prev_built.ngd
+s
+Previous-NGM
+
+s
+Previous-Packed-NCD
+
+s
+Previous-Routed-NCD
+
+s

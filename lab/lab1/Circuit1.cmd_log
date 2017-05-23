@@ -1,0 +1,9 @@
+sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "/home/liu/SJTU/VE270/lab/lab1/Circuit1.sch" Circuit1.vhf
+sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "/home/liu/SJTU/VE270/lab/lab1/Circuit1.sch" Circuit1.vhf
+xst -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -ifn "/home/liu/SJTU/VE270/lab/lab1/Circuit1.xst" -ofn "/home/liu/SJTU/VE270/lab/lab1/Circuit1.syr"
+ngdbuild -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -dd _ngo  -nt timestamp -i -p xc3s1200e-fg320-4 "Circuit1.ngc" Circuit1.ngd
+map -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -p xc3s1200e-fg320-4 -cm area -pr off -k 4 -c 100 -o Circuit1_map.ncd Circuit1.ngd Circuit1.pcf
+par -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit1_map.ncd Circuit1.ncd Circuit1.pcf
+trce -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -e 3 -s 4 -xml Circuit1 Circuit1.ncd -o Circuit1.twr Circuit1.pcf
+xst -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -ifn "/home/liu/SJTU/VE270/lab/lab1/Circuit1.xst" -ofn "/home/liu/SJTU/VE270/lab/lab1/Circuit1.syr"
+ngdbuild -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -dd _ngo  -nt timestamp -i -p xc3s1200e-fg320-4 "Circuit1.ngc" Circuit1.ngd

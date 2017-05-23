@@ -1,5 +1,5 @@
-set -tmpdir "C:/Users/MSY/Documents/VE270/lab/lab1/xst/projnav.tmp"
-set -xsthdpdir "C:/Users/MSY/Documents/VE270/lab/lab1/xst"
+set -tmpdir "/home/liu/SJTU/VE270/lab/lab1/xst/projnav.tmp"
+set -xsthdpdir "/home/liu/SJTU/VE270/lab/lab1/xst"
 run
 -ifn Circuit2.prj
 -ifmt mixed

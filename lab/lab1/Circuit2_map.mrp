@@ -1,16 +1,16 @@
-Release 10.1 Map K.31 (nt)
+Release 10.1 Map K.31 (lin64)
 Xilinx Mapping Report File for Design 'Circuit2'
 
 Design Information
 ------------------
-Command Line   : map -ise C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise
--intstyle ise -p xc3s1200e-fg320-4 -cm area -pr off -k 4 -c 100 -o
-Circuit2_map.ncd Circuit2.ngd Circuit2.pcf 
+Command Line   : map -ise /home/liu/SJTU/VE270/lab/lab1/lab1.ise -intstyle ise
+-p xc3s1200e-fg320-4 -cm area -pr off -k 4 -c 100 -o Circuit2_map.ncd
+Circuit2.ngd Circuit2.pcf 
 Target Device  : xc3s1200e
 Target Package : fg320
 Target Speed   : -4
 Mapper Version : spartan3e -- $Revision: 1.46 $
-Mapped Date    : Tue May 23 19:35:26 2017
+Mapped Date    : Tue May 23 19:48:45 2017
 
 Design Summary
 --------------
@@ -26,8 +26,8 @@ Logic Distribution:
   Total Number of 4 input LUTs:           2 out of  17,344    1%
   Number of bonded IOBs:                  5 out of     250    2%
 
-Peak Memory Usage:  230 MB
-Total REAL time to MAP completion:  5 secs 
+Peak Memory Usage:  413 MB
+Total REAL time to MAP completion:  1 secs 
 Total CPU time to MAP completion:   1 secs 
 
 NOTES:

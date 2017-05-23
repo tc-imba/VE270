@@ -6,3 +6,9 @@ map -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -intstyle ise -p xc3s1
 par -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf
 par -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf
 par -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf
+xst -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -ifn "/home/liu/SJTU/VE270/lab/lab1/Circuit2.xst" -ofn "/home/liu/SJTU/VE270/lab/lab1/Circuit2.syr"
+ngdbuild -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -dd _ngo  -nt timestamp -i -p xc3s1200e-fg320-4 "Circuit2.ngc" Circuit2.ngd
+map -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -p xc3s1200e-fg320-4 -cm area -pr off -k 4 -c 100 -o Circuit2_map.ncd Circuit2.ngd Circuit2.pcf
+par -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf
+trce -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -e 3 -s 4 -xml Circuit2 Circuit2.ncd -o Circuit2.twr Circuit2.pcf -ucf Circuit2.ucf
+bitgen -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -f Circuit2.ut Circuit2.ncd

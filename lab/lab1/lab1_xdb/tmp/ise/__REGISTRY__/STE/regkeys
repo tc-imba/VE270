@@ -1,12 +1,6 @@
 MostRecentClient
-par
-s
-MostRecentClient
-ngdbuild
--
-SteInfoVersion
-0.0
+bitgen
 s
 SteInfoVersion
 0.0
--
+s

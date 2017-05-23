@@ -1,18 +1,21 @@
-Release 10.1 - xst K.31 (nt)
+Release 10.1 - xst K.31 (lin64)
 Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
---> Parameter TMPDIR set to C:/Users/MSY/Documents/VE270/lab/lab1/xst/projnav.tmp
+--> 
+Parameter TMPDIR set to /home/liu/SJTU/VE270/lab/lab1/xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.38 secs
+Total CPU time to Xst completion: 0.03 secs
  
---> Parameter xsthdpdir set to C:/Users/MSY/Documents/VE270/lab/lab1/xst
+--> 
+Parameter xsthdpdir set to /home/liu/SJTU/VE270/lab/lab1/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.38 secs
+Total CPU time to Xst completion: 0.03 secs
  
---> Reading design: Circuit2.prj
+--> 
+Reading design: Circuit2.prj
 
 TABLE OF CONTENTS
   1) Synthesis Options Summary
@@ -105,28 +108,30 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
-Compiling vhdl file "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf" in Library work.
-Entity <Circuit1> compiled.
-Entity <Circuit1> (Architecture <BEHAVIORAL>) compiled.
-Compiling vhdl file "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf" in Library work.
-Entity <Circuit2> compiled.
-Entity <Circuit2> (Architecture <BEHAVIORAL>) compiled.
+WARNING:HDLParsers:3607 - Unit work/Circuit2 is now defined in a different file.  It was defined in "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf", and is now defined in "/home/liu/SJTU/VE270/lab/lab1/Circuit2.vhf".
+WARNING:HDLParsers:3607 - Unit work/Circuit2/BEHAVIORAL is now defined in a different file.  It was defined in "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf", and is now defined in "/home/liu/SJTU/VE270/lab/lab1/Circuit2.vhf".
+WARNING:HDLParsers:3607 - Unit work/Circuit1 is now defined in a different file.  It was defined in "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf", and is now defined in "/home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf".
+WARNING:HDLParsers:3607 - Unit work/Circuit1/BEHAVIORAL is now defined in a different file.  It was defined in "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf", and is now defined in "/home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf".
+Compiling vhdl file "/home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf" in Library work.
+Architecture behavioral of Entity circuit1 is up to date.
+Compiling vhdl file "/home/liu/SJTU/VE270/lab/lab1/Circuit2.vhf" in Library work.
+Architecture behavioral of Entity circuit2 is up to date.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
 =========================================================================
-Analyzing hierarchy for entity <Circuit2> in library <work> (architecture <BEHAVIORAL>).
+Analyzing hierarchy for entity <Circuit2> in library <work> (architecture <behavioral>).
 
-Analyzing hierarchy for entity <Circuit1> in library <work> (architecture <BEHAVIORAL>).
+Analyzing hierarchy for entity <Circuit1> in library <work> (architecture <behavioral>).
 
 
 =========================================================================
 *                            HDL Analysis                               *
 =========================================================================
-Analyzing Entity <Circuit2> in library <work> (Architecture <BEHAVIORAL>).
+Analyzing Entity <Circuit2> in library <work> (Architecture <behavioral>).
 Entity <Circuit2> analyzed. Unit <Circuit2> generated.
 
-Analyzing Entity <Circuit1> in library <work> (Architecture <BEHAVIORAL>).
+Analyzing Entity <Circuit1> in library <work> (Architecture <behavioral>).
 Entity <Circuit1> analyzed. Unit <Circuit1> generated.
 
 
@@ -137,12 +142,12 @@ Entity <Circuit1> analyzed. Unit <Circuit1> generated.
 Performing bidirectional port resolution...
 
 Synthesizing Unit <Circuit1>.
-    Related source file is "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf".
+    Related source file is "/home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf".
 Unit <Circuit1> synthesized.
 
 
 Synthesizing Unit <Circuit2>.
-    Related source file is "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf".
+    Related source file is "/home/liu/SJTU/VE270/lab/lab1/Circuit2.vhf".
 Unit <Circuit2> synthesized.
 
 
@@ -156,7 +161,7 @@ Found no macro
 *                       Advanced HDL Synthesis                          *
 =========================================================================
 
-Loading device for application Rf_Device from file '3s1200e.nph' in environment C:\Xilinx\10.1\ISE.
+Loading device for application Rf_Device from file '3s1200e.nph' in environment /opt/Xilinx/10.1/ISE.
 
 =========================================================================
 Advanced HDL Synthesis Report
@@ -286,14 +291,15 @@ Delay:               8.336ns (Levels of Logic = 5)
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.55 secs
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 2.19 secs
  
 --> 
 
-Total memory usage is 253720 kilobytes
+
+Total memory usage is 369352 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    0 (   0 filtered)
+Number of warnings :    4 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

@@ -1,11 +1,11 @@
-Release 10.1 ngdbuild K.31 (nt)
+Release 10.1 ngdbuild K.31 (lin64)
 Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
 
-Command Line: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\ngdbuild.exe -ise
-C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise -intstyle ise -dd _ngo -nt
-timestamp -i -p xc3s1200e-fg320-4 Circuit2.ngc Circuit2.ngd
+Command Line: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/ngdbuild -ise
+/home/liu/SJTU/VE270/lab/lab1/lab1.ise -intstyle ise -dd _ngo -nt timestamp -i
+-p xc3s1200e-fg320-4 Circuit2.ngc Circuit2.ngd
 
-Reading NGO file "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.ngc" ...
+Reading NGO file "/home/liu/SJTU/VE270/lab/lab1/Circuit2.ngc" ...
 Reading in constraint information from 'Circuit2.ucf'...
 Gathering constraint information from source properties...
 Done.
@@ -28,7 +28,7 @@ NGDBUILD Design Results Summary:
   Number of errors:     0
   Number of warnings:   0
 
-Total memory usage is 124256 kilobytes
+Total memory usage is 212504 kilobytes
 
 Writing NGD file "Circuit2.ngd" ...
 

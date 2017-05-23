@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : Circuit1.vhf
--- /___/   /\     Timestamp : 05/23/2017 18:46:28
+-- /___/   /\     Timestamp : 05/23/2017 19:23:09
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /home/liu/SJTU/VE270/lab/lab1/Circuit1.sch Circuit1.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.sch Circuit1.vhf
 --Design Name: Circuit1
 --Device: spartan3e
 --Purpose:

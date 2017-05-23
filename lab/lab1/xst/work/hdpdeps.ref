@@ -1,8 +1,15 @@
-V3 7
-FL /home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf 2017/05/23.18:46:28 K.31
-EN work/Circuit1 1495537691 FL /home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf \
+V3 11
+FL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf 2017/05/23.19:23:09 K.31
+EN work/Circuit1 1495539314 FL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf \
       PB ieee/std_logic_1164 1200023565 PH ieee/NUMERIC_STD 1200023568 LB UNISIM \
       PH unisim/VCOMPONENTS 1200023571
-AR work/Circuit1/BEHAVIORAL 1495537692 \
-      FL /home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf EN work/Circuit1 1495537691 \
+AR work/Circuit1/BEHAVIORAL 1495539315 \
+      FL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf EN work/Circuit1 1495539314 \
       CP XOR2 CP AND2 CP OR2
+FL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf 2017/05/23.19:23:11 K.31
+EN work/Circuit2 1495539316 FL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf \
+      PB ieee/std_logic_1164 1200023565 PH ieee/NUMERIC_STD 1200023568 LB UNISIM \
+      PH unisim/VCOMPONENTS 1200023571
+AR work/Circuit2/BEHAVIORAL 1495539317 \
+      FL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf EN work/Circuit2 1495539316 \
+      CP Circuit1

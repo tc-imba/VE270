@@ -1,2 +1,4 @@
-AR circuit1 behavioral /home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf sub00/vhpl01 1495537692
-EN circuit1 NULL /home/liu/SJTU/VE270/lab/lab1/Circuit1.vhf sub00/vhpl00 1495537691
+AR circuit1 behavioral C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf sub00/vhpl01 1495539315
+EN circuit1 NULL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.vhf sub00/vhpl00 1495539314
+EN circuit2 NULL C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf sub00/vhpl02 1495539316
+AR circuit2 behavioral C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.vhf sub00/vhpl03 1495539317

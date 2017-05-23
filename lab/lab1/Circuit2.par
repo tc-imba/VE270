@@ -1,0 +1,10 @@
+Release 10.1 par K.31 (nt)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+
+MTYS::  Tue May 23 19:37:50 2017
+
+par -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf 
+
+
+Constraints file: Circuit2.pcf.
+ERROR:Par:424 - Invalid Installation. License could not be acquired. 

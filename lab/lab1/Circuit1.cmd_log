@@ -7,3 +7,4 @@ par -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 
 trce -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -e 3 -s 4 -xml Circuit1 Circuit1.ncd -o Circuit1.twr Circuit1.pcf
 xst -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -ifn "/home/liu/SJTU/VE270/lab/lab1/Circuit1.xst" -ofn "/home/liu/SJTU/VE270/lab/lab1/Circuit1.syr"
 ngdbuild -ise "/home/liu/SJTU/VE270/lab/lab1/lab1.ise" -intstyle ise -dd _ngo  -nt timestamp -i -p xc3s1200e-fg320-4 "Circuit1.ngc" Circuit1.ngd
+sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit1.sch" Circuit1.vhf

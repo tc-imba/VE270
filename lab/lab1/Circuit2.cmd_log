@@ -1,1 +1,8 @@
 sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "/home/liu/SJTU/VE270/lab/lab1/Circuit2.sch" Circuit2.vhf
+sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.sch" Circuit2.vhf
+xst -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -intstyle ise -ifn "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.xst" -ofn "C:/Users/MSY/Documents/VE270/lab/lab1/Circuit2.syr"
+ngdbuild -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -intstyle ise -dd _ngo  -nt timestamp -i -p xc3s1200e-fg320-4 "Circuit2.ngc" Circuit2.ngd
+map -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -intstyle ise -p xc3s1200e-fg320-4 -cm area -pr off -k 4 -c 100 -o Circuit2_map.ncd Circuit2.ngd Circuit2.pcf
+par -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf
+par -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf
+par -ise "C:/Users/MSY/Documents/VE270/lab/lab1/lab1.ise" -w -intstyle ise -ol std -t 1 Circuit2_map.ncd Circuit2.ncd Circuit2.pcf

@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{circuits.logic.US}
+\usetikzlibrary{arrows.meta}
+\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=4.0cm}
+\renewcommand{\thesection}{Problem \arabic{section}.}
+\title{VE270 Homework 2}
+\author{Liu Yihao 515370910207}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{}
+\begin{center}
+\begin{tabular}{cc|ccc}
+x&y&$\rm x\oplus y'$&$\rm x'\oplus y$&$\rm(x \oplus y)'$\\
+\hline
+0&0&1&1&1\\
+0&1&0&0&0\\
+1&0&0&0&0\\
+1&1&1&1&1\\
+\end{tabular}
+\end{center}
+$$\rm x\oplus y'=x'\oplus y=(x\oplus y)'$$
+
+\section{}
+\begin{enumerate}[(a)]
+\item $$\rm S\oplus E$$
+\item $$\rm S+H'$$
+\item $$\rm S\oplus EH'$$
+\end{enumerate}
+
+\section{}
+\begin{align*}
+F&=\rm a'b(c+d')+a(b'+c)+a(b+d)c\\
+&=\rm a'bc+a'bd'+ab'+ac+abc+acd\\
+\end{align*}
+
+\end{document}

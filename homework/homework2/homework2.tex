@@ -10,6 +10,7 @@
 \usepackage{tikz}
 \usetikzlibrary{circuits.logic.US}
 \usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
 \geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=4.0cm}
 \renewcommand{\thesection}{Problem \arabic{section}.}
 \title{VE270 Homework 2}
@@ -41,8 +42,94 @@ $$\rm x\oplus y'=x'\oplus y=(x\oplus y)'$$
 
 \section{}
 \begin{align*}
-F&=\rm a'b(c+d')+a(b'+c)+a(b+d)c\\
+\rm F&=\rm a'b(c+d')+a(b'+c)+a(b+d)c\\
 &=\rm a'bc+a'bd'+ab'+ac+abc+acd\\
+&=\rm a'bc+a'bd'+ab'+ac(1+b+d)\\
+&=\rm a'bc+a'bd'+ab'+ac
 \end{align*}
+
+\section{}
+\begin{align*}
+\rm F'&=\rm (abc+a'b)'\\
+&=\rm (abc)'(a'b)'\\
+&=\rm (a'+b'+c')(a+b')\\
+&=\rm aa'+ab'+ac'+a'b'+b'+b'c'\\
+&=\rm 0+b'(1+a+c')+ac'\\
+&=\rm b'+ac'
+\end{align*}
+
+\section{}
+\begin{align*}
+\rm F&=\rm a'b'c'+a'bc'+ab'c'+ab'c+abc'\\
+&=\rm a'c'(b+b')+ac'(b+b')+ab'c\\
+&=\rm a'c'+ac'+ab'c\\
+&=\rm c'+ab'c
+\end{align*}
+
+\section{}
+\begin{align*}
+\rm F(a,b,b)&=\rm abc+ab+a+b+c\\
+&=\rm m_1+m_2+m_3+m_4+m_5+m_6+m_7\\
+&=\rm \sum m(1,2,3,4,5,6,7)
+\end{align*}
+
+\section{}
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\matrix[column sep=20mm]{
+		& \node [and gate,inputs=nii,scale=1.5] (g1) {};\\
+		\node (m0) {$m_0$}; \\
+		\\
+		\node (m1) {$m_1$}; & \node [and gate,inputs=ini,scale=1.5] (g2) {}; & \node [or gate,inputs=nnn,scale=1.5] (g4) {}; & \node (F) {F};\\
+		\\
+		\node (m2) {$m_2$}; \\
+		& \node [and gate,inputs=iin,scale=1.5] (g3) {}; \\
+	};
+	\filldraw (m0)+(right:8mm) circle [radius=0.5mm];
+	\filldraw (m1)+(right:12mm) circle [radius=0.5mm];
+	\filldraw (m2)+(right:16mm) circle [radius=0.5mm];
+	\draw (m0) -- ++(right:8mm) |- (g1.input 1) (m0) -- ++(right:20mm) |- (g2.input 1) (m0) -- ++(right:8mm) |- (g3.input 1);
+	\draw (m1) -- ++(right:12mm) |- (g1.input 2) (m1) -- ++(right:12mm) |- (g2.input 2) (m1) -- ++(right:12mm) |- (g3.input 2);
+	\draw (m2) -- ++(right:16mm) |- (g1.input 3) (m2) -- ++(right:20mm) |- (g2.input 3) (m2) -- ++(right:16mm) |- (g3.input 3);
+	\draw (g1.output) -- ++(right:10mm) |- (g4.input 1) (g2.output) -- ++(right:10mm) |- (g4.input 2) (g3.output) -- ++(right:10mm) |- (g4.input 3);
+	\draw (g4.output) -- (F);
+	\end{tikzpicture}
+\end{center}
+
+\section{}
+\begin{enumerate}[(a)]
+\item
+\begin{align*}
+\rm F(a,b,b)&=\rm ab'c+abc+a'bc+abc'\\
+&=\rm ab(c+c')+ac(b+b')+bc(a+a')\\
+&=\rm ab+ac+bc
+\end{align*}
+\item
+
+\end{enumerate}
+
+\section{}
+\section{}
+\section{}
+
+\section{}
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\matrix[column sep=10mm]{
+		& & & \node [and gate,inputs=nniinnn,scale=1.5] (g2) {}; \\
+		\node (f) {f}; & \node (d) {d}; & \node (a) {a}; \\
+		& & \node (b) {b}; & \node [and gate,inputs=nnnnn,scale=1.5] (g1) {};   & \node [or gate,inputs=nnn,scale=1.5] (g4) {}; & \node (F) {F};  \\
+		\node (g) {g}; & \node (e) {e}; & \node (c) {c}; \\
+		& & & \node [and gate,inputs=nnniiii,scale=1.5] (g3) {}; \\
+	};
+	\draw (a) |- (g1.input 1) (b) -- (g1.input 3) (c) |- (g1.input 5) (d) |- (g1.input 2) (e) |- (g1.input 4);
+	\draw (a) |- (g2.input 7) (b) -- ++(right:5mm) |- (g2.input 6) (c) -- ++(left:5mm) |- (g2.input 5); 
+	\draw (a) -- ++(left:10mm) |- (g3.input 1) (b) -- ++(right:5mm) |- (g3.input 2) (c) |- (g3.input 3);
+	\draw (d) |- (g2.input 4) (e) -- ++(left:5mm) |- (g2.input 3) (f)  |- (g2.input 2) (g) -- ++(left:5mm) |- (g2.input 1);
+	\draw (d) -- ++(left:10mm) |- (g3.input 4) (e) |- (g3.input 5) (f) -- ++(left:10mm) |- (g3.input 6) (g)  |- (g3.input 7);
+	\filldraw (b)+(right:5mm) circle [radius=0.5mm];
+	\draw (g1.output) -- (g4.input 2) (g2.output) -- ++(right:6mm) |- (g4.input 1) (g3.output) -- ++(right:6mm) |- (g4.input 3) (g4.output) -- (F);
+	\end{tikzpicture}
+\end{center}
 
 \end{document}

@@ -104,18 +104,95 @@ $$\rm x\oplus y'=x'\oplus y=(x\oplus y)'$$
 &=\rm ab(c+c')+ac(b+b')+bc(a+a')\\
 &=\rm ab+ac+bc
 \end{align*}
-\item
-
+\item \ 
+\begin{center}
+	\begin{tikzpicture}
+	\input{kmap_3}
+	\draw (-2.25,2.75) node {bc} (-2.75,2.25) node {a};
+	\draw (-1.5,1.5) node {0} (-0.5,1.5) node {0};
+	\draw (-1.5,0.5) node {0} (-0.5,0.5) node {1};
+	\draw (0.5,1.5) node {1} (1.5,1.5) node {0};
+	\draw (0.5,0.5) node {1} (1.5,0.5) node {1};
+	\draw (0,0.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\draw (1,0.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\draw (0.5,1) node[draw,rounded corners,minimum width=0.7cm,minimum height=1.7cm] {};
+	\end{tikzpicture}
+\end{center}
+$$\rm F(a,b,b)=ab+ac+bc$$
 \end{enumerate}
 
 \section{}
-\section{}
-\section{}
+\begin{center}
+	\begin{tikzpicture}
+	\input{kmap_4}
+	\draw (-2.25,2.75) node {cd} (-2.75,2.25) node {ab};
+	\draw (-1.5,1.5) node {0} (-0.5,1.5) node {0};
+	\draw (-1.5,0.5) node {1} (-0.5,0.5) node {1};
+	\draw (0.5,1.5) node {0} (1.5,1.5) node {0};
+	\draw (0.5,0.5) node {0} (1.5,0.5) node {0};
+	\draw (-1.5,-0.5) node {1} (-0.5,-0.5) node {1};
+	\draw (-1.5,-1.5) node {0} (-0.5,-1.5) node {0};
+	\draw (0.5,-0.5) node {1} (1.5,-0.5) node {0};
+	\draw (0.5,-1.5) node {0} (1.5,-1.5) node {0};
+	\draw (-1,0) node[draw,rounded corners,minimum width=1.7cm,minimum height=1.7cm] {};
+	\draw (0,-0.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\end{tikzpicture}
+\end{center}
+$$\rm F(a,b,b)=c'd+abd$$
 
 \section{}
 \begin{center}
+	\begin{tikzpicture}
+	\input{kmap_4}
+	\draw (-2.25,2.75) node {cd} (-2.75,2.25) node {ab};
+	\draw (-1.5,1.5) node {X} (-0.5,1.5) node {X};
+	\draw (-1.5,0.5) node {X} (-0.5,0.5) node {1};
+	\draw (0.5,1.5) node {0} (1.5,1.5) node {X};
+	\draw (0.5,0.5) node {0} (1.5,0.5) node {X};
+	\draw (-1.5,-0.5) node {0} (-0.5,-0.5) node {0};
+	\draw (-1.5,-1.5) node {X} (-0.5,-1.5) node {X};
+	\draw (0.5,-0.5) node {0} (1.5,-0.5) node {0};
+	\draw (0.5,-1.5) node {X} (1.5,-1.5) node {1};
+	\draw (-1,1) node[draw,rounded corners,minimum width=1.7cm,minimum height=1.7cm] {};
+	\draw[rounded corners] (2,2.5) -- (1.1,1.6) -- (1.6,1.1) -- (2.5,2);
+	\draw[rounded corners] (-2,2.5) -- (-1.1,1.6) -- (-1.6,1.1) -- (-2.5,2);
+	\draw[rounded corners] (2,-2.5) -- (1.1,-1.6) -- (1.6,-1.1) -- (2.5,-2);
+	\draw[rounded corners] (-2,-2.5) -- (-1.1,-1.6) -- (-1.6,-1.1) -- (-2.5,-2);
+	\end{tikzpicture}
+\end{center}
+$$\rm F(a,b,b)=a'c'+b'd'$$
+
+\section{}
+\begin{center}
+	\begin{tikzpicture}
+	\input{kmap_4}
+	\draw (-2.25,2.75) node {cd} (-2.75,2.25) node {ab};
+	\draw (-1.5,1.5) node {0} (-0.5,1.5) node {0};
+	\draw (-1.5,0.5) node {0} (-0.5,0.5) node {0};
+	\draw (0.5,1.5) node {0} (1.5,1.5) node {0};
+	\draw (0.5,0.5) node {1} (1.5,0.5) node {1};
+	\draw (-1.5,-0.5) node {0} (-0.5,-0.5) node {1};
+	\draw (-1.5,-1.5) node {1} (-0.5,-1.5) node {1};
+	\draw (0.5,-0.5) node {1} (1.5,-0.5) node {0};
+	\draw (0.5,-1.5) node {0} (1.5,-1.5) node {0};
+	\draw (-1,-1.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\draw (0,-0.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\draw (1,0.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\draw (-0.5,-1) node[draw,rounded corners,minimum width=0.7cm,minimum height=1.7cm] {};
+	\draw (0.5,0) node[draw,rounded corners,minimum width=0.7cm,minimum height=1.7cm] {};
+	\end{tikzpicture}
+\end{center}
+
+The squared implicants are all prime implicants, but none of them is essential prime implicants.
+
+\newpage
+\section{}
+
+\begin{center}
+	original
+	
 	\begin{tikzpicture}[circuit logic US]
-	\matrix[column sep=10mm]{
+	\matrix[column sep=12mm]{
 		& & & \node [and gate,inputs=nniinnn,scale=1.5] (g2) {}; \\
 		\node (f) {f}; & \node (d) {d}; & \node (a) {a}; \\
 		& & \node (b) {b}; & \node [and gate,inputs=nnnnn,scale=1.5] (g1) {};   & \node [or gate,inputs=nnn,scale=1.5] (g4) {}; & \node (F) {F};  \\
@@ -123,13 +200,48 @@ $$\rm x\oplus y'=x'\oplus y=(x\oplus y)'$$
 		& & & \node [and gate,inputs=nnniiii,scale=1.5] (g3) {}; \\
 	};
 	\draw (a) |- (g1.input 1) (b) -- (g1.input 3) (c) |- (g1.input 5) (d) |- (g1.input 2) (e) |- (g1.input 4);
-	\draw (a) |- (g2.input 7) (b) -- ++(right:5mm) |- (g2.input 6) (c) -- ++(left:5mm) |- (g2.input 5); 
-	\draw (a) -- ++(left:10mm) |- (g3.input 1) (b) -- ++(right:5mm) |- (g3.input 2) (c) |- (g3.input 3);
-	\draw (d) |- (g2.input 4) (e) -- ++(left:5mm) |- (g2.input 3) (f)  |- (g2.input 2) (g) -- ++(left:5mm) |- (g2.input 1);
-	\draw (d) -- ++(left:10mm) |- (g3.input 4) (e) |- (g3.input 5) (f) -- ++(left:10mm) |- (g3.input 6) (g)  |- (g3.input 7);
-	\filldraw (b)+(right:5mm) circle [radius=0.5mm];
+	\draw (a) |- (g2.input 7) (b) -- ++(right:6mm) |- (g2.input 6) (c) -- ++(left:6mm) |- (g2.input 5); 
+	\draw (a) -- ++(left:12mm) |- (g3.input 1) (b) -- ++(right:6mm) |- (g3.input 2) (c) |- (g3.input 3);
+	\draw (d) |- (g2.input 4) (e) -- ++(left:6mm) |- (g2.input 3) (f)  |- (g2.input 2) (g) -- ++(left:6mm) |- (g2.input 1);
+	\draw (d) -- ++(left:12mm) |- (g3.input 4) (e) |- (g3.input 5) (f) -- ++(left:12mm) |- (g3.input 6) (g)  |- (g3.input 7);
+	\filldraw (b)+(right:6mm) circle [radius=0.5mm];
 	\draw (g1.output) -- (g4.input 2) (g2.output) -- ++(right:6mm) |- (g4.input 1) (g3.output) -- ++(right:6mm) |- (g4.input 3) (g4.output) -- (F);
 	\end{tikzpicture}
+	
+	delay: 2 \quad gate inputs: 22
+	
+	\begin{align*}
+	\rm F(a,b,b,d,e,f,g)&=\rm abcde+abcd'e'fg+abcd'e'f'g'\\
+	&=\rm abc[de+d'e'(fg+f'g')]
+	\end{align*}	
+	
+	\begin{tikzpicture}[circuit logic US]
+	\matrix[column sep=12mm]{
+		\node (a) {a}; \\
+		\node (b) {b}; & & & & \node [and gate,inputs=nnn,scale=1.5] (g1) {};\\
+		\node (c) {c}; \\
+		\node (d) {d}; & & & \node [and gate,scale=1.5] (g6) {}; & & \node [and gate,scale=1.5] (g10) {}; & \node (F) {F}; \\
+		\node (e) {e}; & & \node [and gate,inputs=ii,scale=1.5] (g7) {}; & & \node [or gate,scale=1.5] (g9) {};\\
+		\node (f) {f}; & \node [and gate,scale=1.5] (g3) {}; & & \node [and gate,scale=1.5] (g8) {}; \\
+		& & \node [or gate,scale=1.5] (g5) {};\\
+		\node (g) {g}; & \node [and gate,inputs=ii,scale=1.5] (g4) {};\\
+	};
+	\draw (a) -- ++(right:6mm) |- (g1.input 1) (b) -- ++(right:6mm) |- (g1.input 2) (c) -- ++(right:6mm) |- (g1.input 3);
+	\draw (f) -- ++(right:6mm) |- (g3.input 1) (g) -- ++(right:12mm) |- (g3.input 2) (f) -- ++(right:6mm) |- (g4.input 1) (g) -- ++(right:12mm) |- (g4.input 2);
+	\draw (g3.output) -- ++(right:6mm) |- (g5.input 1) (g4.output) -- ++(right:6mm) |- (g5.input 2);
+	\draw (d) --++(right:6mm) |- (g6.input 1) (e) --++(right:12mm) |- (g6.input 2) (d) --++(right:6mm) |- (g7.input 1) (e) --++(right:12mm) |- (g7.input 2);
+	\draw (g7.output) -- ++(right:6mm) |- (g8.input 1) (g5.output) -- ++(right:6mm) |- (g8.input 2);
+	\draw (g6.output) -- ++(right:6mm) |- (g9.input 1) (g8.output) -- ++(right:6mm) |- (g9.input 2);
+	\draw (g1.output) -- ++(right:6mm) |- (g10.input 1) (g9.output) -- ++(right:6mm) |- (g10.input 2) (g10.output) -- (F);
+	\filldraw (d)+(right:6mm) circle [radius=0.5mm];
+	\filldraw (e)+(right:12mm) circle [radius=0.5mm];
+	\filldraw (f)+(right:6mm) circle [radius=0.5mm];
+	\filldraw (g)+(right:12mm) circle [radius=0.5mm];
+	\end{tikzpicture}
+	
+	delay: 5 \quad gate inputs: 19
 \end{center}
+
+
 
 \end{document}

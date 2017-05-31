@@ -37,7 +37,7 @@ $$\rm x\oplus y'=x'\oplus y=(x\oplus y)'$$
 \begin{enumerate}[(a)]
 \item $$\rm S\oplus E$$
 \item $$\rm S+H'$$
-\item $$\rm S\oplus EH'$$
+\item $$\rm (S\oplus E)(S+H')=SE'+S'EH'$$
 \end{enumerate}
 
 \section{}
@@ -145,22 +145,23 @@ $$\rm F(a,b,b)=c'd+abd$$
 	\begin{tikzpicture}
 	\input{kmap_4}
 	\draw (-2.25,2.75) node {cd} (-2.75,2.25) node {ab};
-	\draw (-1.5,1.5) node {X} (-0.5,1.5) node {X};
-	\draw (-1.5,0.5) node {X} (-0.5,0.5) node {1};
-	\draw (0.5,1.5) node {0} (1.5,1.5) node {X};
-	\draw (0.5,0.5) node {0} (1.5,0.5) node {X};
-	\draw (-1.5,-0.5) node {0} (-0.5,-0.5) node {0};
-	\draw (-1.5,-1.5) node {X} (-0.5,-1.5) node {X};
-	\draw (0.5,-0.5) node {0} (1.5,-0.5) node {0};
+	\draw (-1.5,1.5) node {0} (-0.5,1.5) node {0};
+	\draw (-1.5,0.5) node {0} (-0.5,0.5) node {1};
+	\draw (0.5,1.5) node {X} (1.5,1.5) node {0};
+	\draw (0.5,0.5) node {X} (1.5,0.5) node {0};
+	\draw (-1.5,-0.5) node {X} (-0.5,-0.5) node {X};
+	\draw (-1.5,-1.5) node {0} (-0.5,-1.5) node {0};
+	\draw (0.5,-0.5) node {X} (1.5,-0.5) node {X};
 	\draw (0.5,-1.5) node {X} (1.5,-1.5) node {1};
-	\draw (-1,1) node[draw,rounded corners,minimum width=1.7cm,minimum height=1.7cm] {};
-	\draw[rounded corners] (2,2.5) -- (1.1,1.6) -- (1.6,1.1) -- (2.5,2);
-	\draw[rounded corners] (-2,2.5) -- (-1.1,1.6) -- (-1.6,1.1) -- (-2.5,2);
-	\draw[rounded corners] (2,-2.5) -- (1.1,-1.6) -- (1.6,-1.1) -- (2.5,-2);
-	\draw[rounded corners] (-2,-2.5) -- (-1.1,-1.6) -- (-1.6,-1.1) -- (-2.5,-2);
+	\draw (0,0) node[draw,rounded corners,minimum width=1.7cm,minimum height=1.7cm] {};
+	\draw (1,-1) node[draw,rounded corners,minimum width=1.7cm,minimum height=1.7cm] {};
+	%\draw[rounded corners] (2,2.5) -- (1.1,1.6) -- (1.6,1.1) -- (2.5,2);
+	%\draw[rounded corners] (-2,2.5) -- (-1.1,1.6) -- (-1.6,1.1) -- (-2.5,2);
+	%\draw[rounded corners] (2,-2.5) -- (1.1,-1.6) -- (1.6,-1.1) -- (2.5,-2);
+	%\draw[rounded corners] (-2,-2.5) -- (-1.1,-1.6) -- (-1.6,-1.1) -- (-2.5,-2);
 	\end{tikzpicture}
 \end{center}
-$$\rm F(a,b,b)=a'c'+b'd'$$
+$$\rm F(a,b,b)=ac+bd$$
 
 \section{}
 \begin{center}

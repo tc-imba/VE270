@@ -63,7 +63,8 @@ $$\rm x\oplus y'=x'\oplus y=(x\oplus y)'$$
 \rm F&=\rm a'b'c'+a'bc'+ab'c'+ab'c+abc'\\
 &=\rm a'c'(b+b')+ac'(b+b')+ab'c\\
 &=\rm a'c'+ac'+ab'c\\
-&=\rm c'+ab'c
+&=\rm c'+ab'c\\
+&=\rm c'+ab'
 \end{align*}
 
 \section{}
@@ -164,6 +165,7 @@ $$\rm F(a,b,b)=c'd+abd$$
 $$\rm F(a,b,b)=ac+bd$$
 
 \section{}
+The squared implicants are prime implicants.
 \begin{center}
 	\begin{tikzpicture}
 	\input{kmap_4}
@@ -184,9 +186,24 @@ $$\rm F(a,b,b)=ac+bd$$
 	\end{tikzpicture}
 \end{center}
 
-The squared implicants are all prime implicants, but none of them is essential prime implicants.
+The squared implicants are essential prime implicants.
+\begin{center}
+	\begin{tikzpicture}
+	\input{kmap_4}
+	\draw (-2.25,2.75) node {cd} (-2.75,2.25) node {ab};
+	\draw (-1.5,1.5) node {0} (-0.5,1.5) node {0};
+	\draw (-1.5,0.5) node {0} (-0.5,0.5) node {0};
+	\draw (0.5,1.5) node {0} (1.5,1.5) node {0};
+	\draw (0.5,0.5) node {1} (1.5,0.5) node {1};
+	\draw (-1.5,-0.5) node {0} (-0.5,-0.5) node {1};
+	\draw (-1.5,-1.5) node {1} (-0.5,-1.5) node {1};
+	\draw (0.5,-0.5) node {1} (1.5,-0.5) node {0};
+	\draw (0.5,-1.5) node {0} (1.5,-1.5) node {0};
+	\draw (-1,-1.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\draw (1,0.5) node[draw,rounded corners,minimum width=1.7cm,minimum height=0.7cm] {};
+	\end{tikzpicture}
+\end{center}
 
-\newpage
 \section{}
 
 \begin{center}

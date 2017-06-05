@@ -1,0 +1,12 @@
+select figure at 1836 1630 7 -branches -sn=1
+select figure at 1832 1627 7 -branches -sn=1
+select figure at 1907 1523 7 -branches -sn=1
+select figure at 1904 1520 7 -branches -sn=1
+select figure at 1800 1501 7 -branches -sn=1
+select figure at 1797 1497 7 -branches -sn=1
+select figure at 1860 1513 7 -branches -sn=1
+select figure at 1813 1504 7 -branches -sn=1
+move branchpt at 1808 1504 to 1424 1504 -keepConn -sn=1
+move branchpt at 1424 1504 to 1440 1504 -keepConn -sn=1
+move wire at 1440 1504 1824 1504 to 1440 1344 1824 1344 -keepConn -sn=1
+select figure at 1604 1504 7 -branches -sn=1

@@ -1,0 +1,42 @@
+add instance and4b1 1376 1552 R0 -sn=1
+select figure at 1422 1199 7 -branches -sn=1
+select figure at 1377 1273 7 -branches -sn=1
+select figure at 1373 1269 7 -branches -sn=1
+select figure at 1445 1364 7 -branches -sn=1
+select figure at 1442 1360 7 -branches -sn=1
+select figure at 1573 1292 7 -branches -sn=1
+select figure at 1675 1232 7 -branches -sn=1
+select figure at 1672 1229 7 -branches -sn=1
+BeginGroup
+add wire 1376 1296 1344 1296 -sn=1
+add iomarker 1344 1296 0 Input Unknown -sn=1
+EndGroup
+BeginGroup
+add wire 1376 1360 1344 1360 -sn=1
+add iomarker 1344 1360 0 Input Unknown -sn=1
+EndGroup
+BeginGroup
+add wire 1376 1424 1344 1424 -sn=1
+add iomarker 1344 1424 0 Input Unknown -sn=1
+EndGroup
+BeginGroup
+add wire 1376 1488 1344 1488 -sn=1
+add iomarker 1344 1488 0 Input Unknown -sn=1
+EndGroup
+BeginGroup
+add wire 1632 1392 1664 1392 -sn=1
+add iomarker 1664 1392 0 Output Unknown -sn=1
+EndGroup
+select figure at 1298 1303 7 -branches -sn=1
+select figure at 1294 1299 7 -branches -sn=1
+select figure at 1294 1299 7 -branches -sn=1
+name net at 1344 1296 7 IN0 -sn=1
+select figure at 1293 1367 7 -branches -sn=1
+select figure at 1289 1364 7 -branches -sn=1
+select figure at 1293 1367 7 -branches -all -sn=1
+set attr NA|XLXN_2|Name value IN1 -sn=1
+select figure at 1284 1439 7 -branches -sn=1
+select figure at 1280 1436 7 -branches -sn=1
+select figure at 1284 1439 7 -branches -all -sn=1
+set attr NA|XLXN_3|Name value IN2 -sn=1
+select figure at 1307 1453 7 -branches -sn=1

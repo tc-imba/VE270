@@ -1,0 +1,4 @@
+select figure at 2173 1410 7 -branches -sn=1
+select figure at 2170 1406 7 -branches -sn=1
+select figure at 305 445 7 -branches -sn=1
+select all in 302 441 2194 1741 -branches -enclosed -noattrwin -sn=1

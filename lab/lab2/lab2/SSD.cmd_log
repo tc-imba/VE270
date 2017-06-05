@@ -1,0 +1,1 @@
+sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "/disk/Documents/SJTU/VE270/lab/lab2/lab2/SSD.sch" SSD.vhf

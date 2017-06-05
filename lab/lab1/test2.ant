@@ -8,7 +8,7 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : ISE
 --  /   /         Filename : test2.ant
--- /___/   /\     Timestamp : Tue May 23 19:04:05 2017
+-- /___/   /\     Timestamp : Mon Jun  5 22:19:23 2017
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
@@ -31,7 +31,7 @@ ENTITY test2 IS
 END test2;
 
 ARCHITECTURE testbench_arch OF test2 IS
-    FILE RESULTS: TEXT OPEN WRITE_MODE IS "/home/liu/SJTU/VE270/lab/lab1/test2.ano";
+    FILE RESULTS: TEXT OPEN WRITE_MODE IS "/disk/Documents/SJTU/VE270/lab/lab1/test2.ano";
 
     COMPONENT Circuit2
         PORT (

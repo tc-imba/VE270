@@ -1,0 +1,23 @@
+\newcommand{\drawmuxtwo}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(down:7.5mm) node {$s_0$};
+	\draw (#2) ++(right:7.5mm) node {$d$};
+	\draw (#2) ++(left:7.5mm) ++(up:2.5mm) node {$i_0$} ++(down:5mm) node {$i_1$};
+}
+\newcommand{\drawmuxfour}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=3cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(left:7.5mm) ++(up:7.5mm) node {$i_0$} ++(down:5mm) node {$i_1$} ++(down:5mm) node {$i_2$} ++(down:5mm) node {$i_3$};
+	\draw (#2) ++(down:12.5mm)++(left:3.33mm) node {$s_1$} ++(right:6.66mm) node {$s_0$};
+	\draw (#2) ++(right:7.5mm) node {$d$};
+}
+\newcommand{\drawmuxeight}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=5cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(left:7.5mm) ++(up:17.5mm) node {$i_0$} ++(down:5mm) node {$i_1$} ++(down:5mm) node {$i_2$} ++(down:5mm) node {$i_3$} ++(down:5mm) node {$i_4$} ++(down:5mm) node {$i_5$} ++(down:5mm) node {$i_6$} ++(down:5mm) node {$i_7$};
+	\draw (#2) ++(down:22.5mm) node {$s_1$} ++(left:5mm) node {$s_2$} ++(right:10mm) node {$s_0$};
+	\draw (#2) ++(right:7.5mm) node {$d$};
+}
+\newcommand{\drawdecodereight}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=5cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(right:7.5mm) ++(up:17.5mm) node {$d_0$} ++(down:5mm) node {$d_1$} ++(down:5mm) node {$d_2$} ++(down:5mm) node {$d_3$} ++(down:5mm) node {$d_4$} ++(down:5mm) node {$d_5$} ++(down:5mm) node {$d_6$} ++(down:5mm) node {$d_7$};
+	\draw (#2) ++(left:7.5mm) node {$i_1$} ++(up:5mm) node {$i_0$} ++(down:10mm) node {$i_2$};
+}

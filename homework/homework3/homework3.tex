@@ -17,6 +17,8 @@
 \author{Liu Yihao 515370910207}
 \date{}
 
+\include{blocks}
+
 \begin{document}
 \maketitle
 
@@ -128,10 +130,10 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 \begin{center}
 	\begin{tikzpicture}
 	\foreach \i in {1,2,3,4} {
-		\draw (0,8-2*\i) node (m\i) [shape=rectangle,draw,minimum height=1.5cm] {2x1 mux};
+		\drawmuxtwo{(0,10-2.5*\i)}{m\i}{2x1 mux};
 	}
-	\foreach \i/\j in {1/0,2/2,3/4,4/6} \draw (-3,8-2*\i+0.4) node (i\j) {$i_\j$};
-	\foreach \i/\j in {1/1,2/3,3/5,4/7} \draw (-3,8-2*\i-0.4) node (i\j) {$i_\j$};
+	\foreach \i/\j in {1/0,2/2,3/4,4/6} \draw (-3,10-2.5*\i+0.25) node (i\j) {$i_\j$};
+	\foreach \i/\j in {1/1,2/3,3/5,4/7} \draw (-3,10-2.5*\i-0.25) node (i\j) {$i_\j$};
 	\foreach \i in {0,1,...,7} {
 		\draw (i\i);
 		\pgfgetlastxy{\xi}{\yi};
@@ -139,12 +141,12 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 		\pgfgetlastxy{\xj}{\yj};
 		\draw (i\i) -- (\xj,\yi);
 	}
-	\draw (4,3) node (m) [shape=rectangle,draw,minimum height=3cm] {4x1 mux};
-	\draw (m1.east) -- ++(right:16mm) |- ($(m.west)+(up:7.5mm)$);
-	\draw (m2.east) -- ++(right:8mm) |- ($(m.west)+(up:2.5mm)$);
-	\draw (m3.east) -- ++(right:8mm) |- ($(m.west)+(down:2.5mm)$);
-	\draw (m4.east) -- ++(right:16mm) |- ($(m.west)+(down:7.5mm)$);
-	\draw (6,3) node (d) {d} (m) -- (d);
+	\drawmuxfour{(4,3.75)}{m}{4x1 mux};
+	\draw (m1.east) -- ++(right:14mm) |- ($(m.west)+(up:7.5mm)$);
+	\draw (m2.east) -- ++(right:7mm) |- ($(m.west)+(up:2.5mm)$);
+	\draw (m3.east) -- ++(right:7mm) |- ($(m.west)+(down:2.5mm)$);
+	\draw (m4.east) -- ++(right:14mm) |- ($(m.west)+(down:7.5mm)$);
+	\draw (m.east) ++(right:1.5cm) node (d) {$d$} (m) -- (d);
 	\foreach \i in {0,1,2} {
 		\draw (5-0.66*\i,0) node (s\i) {$s_\i$};
 	}
@@ -155,7 +157,62 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 		\pgfgetlastxy{\xx}{\yy};
 		\draw (s\i) -- (\xx,\y);
 	}
+	\draw (s0) -- (5,-1.25) -| (m4) (5,-1.25) -- (-4,-1.25) -- (-4,6.25);
+	\foreach \i in {1,2,3} \draw (-4,8.75-2.5*\i) -| (m\i.south);
 	\end{tikzpicture}
 \end{center}
+
+\section{}
+\begin{center}
+	\begin{tikzpicture}
+	\drawmuxeight{(0,0)}{m}{8x1 mux};
+	\draw (m.east) ++(right:1.5cm) node (d) {$d$} (m) -- (d);
+ 	\foreach \i in {0,...,3} {
+ 		\draw (-3,1.75-0.5*\i) node (i\i) {$i_\i$};
+ 		\draw (i\i) -- (-1,1.75-0.5*\i);
+ 	}
+ 	\foreach \i in {4,...,7} {
+ 		\draw (-3,1.75-0.5*\i) node (i\i) {0};
+ 		\draw (i\i) -- (-1,1.75-0.5*\i);
+ 	}
+ 	\draw (-0.5,-3.5) node (s2) {0} (0,-3.5) node (s1) {$s_1$} (0.5,-3.5) node (s0) {$s_0$};
+ 	\draw (s2) -- (-0.5,-2.5) (s1) -- (0,-2.5) (s0) -- (0.5,-2.5);
+	\end{tikzpicture}
+\end{center}
+
+\section{}
+$$\rm F=c'+ab'$$
+\begin{center}
+	\begin{tikzpicture}
+	\drawmuxfour{(0,0)}{m}{4x1 mux};
+	\draw (m.east) ++(right:1.5cm) node (F) {F} (m) -- (F);
+ 	\draw (-3,0.75) node (i0) {0} (i0) -- (-1,0.75);
+ 	\draw (-3,0.25) node (i1) {b} (i1) -- (-1.2,0.25);
+ 	\draw (-1.1,0.25) circle[radius=1mm];
+ 	\draw (-3,-0.25) node (i2) {1} (i2) -- (-1,-0.25);
+ 	\draw (-3,-0.75) node (i3) {1} (i3) -- (-1,-0.75);
+ 	\draw (-0.33,-2.5) node (c) {c} (0.33,-2.5) node (a) {a};
+ 	\draw (c) -- (-0.33,-1.5) (a) -- (0.33,-1.5);
+	\end{tikzpicture}
+\end{center}
+
+\section{}
+$$\rm F=c'+ab'$$
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\drawdecodereight{(0,0)}{m}{3x8 decoder};
+	\draw (4,0.25) node [nor gate,inputs=nnn,scale=2] (g) {};
+	\draw (1,1.25) -- ++(right:1cm) |- (g.input 1);
+	\draw (1,0.25) -- (g.input 2);
+	\draw (1,-1.75) -- ++(right:1cm) |- (g.input 3);
+	\draw (g.output) ++(right:1.5cm) node (F) {F} (g.output) -- (F);
+	\foreach \i / \j in {1/c,2/b,3/a} {
+		\draw (-3,1-0.5*\i) node (\j) {\j};
+		\draw (\j) -- (-1,1-0.5*\i);
+	}
+	\end{tikzpicture}
+\end{center}
+
+
 
 \end{document}

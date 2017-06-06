@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : SSD_CA.vhf
--- /___/   /\     Timestamp : 06/05/2017 22:15:07
+-- /___/   /\     Timestamp : 06/06/2017 19:10:19
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /disk/Documents/SJTU/VE270/lab/lab2/SSD_CA.sch SSD_CA.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab2/SSD_CA.sch SSD_CA.vhf
 --Design Name: SSD_CA
 --Device: spartan3e
 --Purpose:
@@ -53,12 +53,12 @@ architecture BEHAVIORAL of SSD_CA is
              OUT4 : out   std_logic);
    end component;
    
-   component NOR2
+   component OR2
       port ( I0 : in    std_logic; 
              I1 : in    std_logic; 
              O  : out   std_logic);
    end component;
-   attribute BOX_TYPE of NOR2 : component is "BLACK_BOX";
+   attribute BOX_TYPE of OR2 : component is "BLACK_BOX";
    
 begin
    XLXI_8 : DIGIT_1
@@ -75,7 +75,7 @@ begin
                 IN3=>B3,
                 OUT4=>XLXN_30);
    
-   XLXI_14 : NOR2
+   XLXI_15 : OR2
       port map (I0=>XLXN_30,
                 I1=>XLXN_29,
                 O=>CA);

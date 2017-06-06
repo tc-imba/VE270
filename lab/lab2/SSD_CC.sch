@@ -26,25 +26,12 @@ BEGIN SCHEMATIC
             LINE N 64 -32 0 -32 
             LINE N 320 -224 384 -224 
         END BLOCKDEF
-        BEGIN BLOCKDEF inv
-            TIMESTAMP 2000 1 1 10 10 10
-            LINE N 0 -32 64 -32 
-            LINE N 224 -32 160 -32 
-            LINE N 64 -64 128 -32 
-            LINE N 128 -32 64 0 
-            LINE N 64 0 64 -64 
-            CIRCLE N 128 -48 160 -16 
-        END BLOCKDEF
         BEGIN BLOCK XLXI_1 DIGIT_2
             PIN IN0 B0
             PIN IN1 B1
             PIN IN2 B2
             PIN IN3 B3
-            PIN OUT2 XLXN_5
-        END BLOCK
-        BEGIN BLOCK XLXI_5 inv
-            PIN I XLXN_5
-            PIN O CC
+            PIN OUT2 CC
         END BLOCK
     END NETLIST
     BEGIN SHEET 1 3520 2720
@@ -70,11 +57,9 @@ BEGIN SCHEMATIC
             WIRE 1280 1472 1296 1472
         END BRANCH
         IOMARKER 1264 1472 B3 R180 28
-        BEGIN BRANCH XLXN_5
-            WIRE 1680 1280 1712 1280
-        END BRANCH
-        INSTANCE XLXI_5 1712 1312 R0
         BEGIN BRANCH CC
+            WIRE 1680 1280 1712 1280
+            WIRE 1712 1280 1936 1280
             WIRE 1936 1280 1968 1280
         END BRANCH
         IOMARKER 1968 1280 CC R0 28

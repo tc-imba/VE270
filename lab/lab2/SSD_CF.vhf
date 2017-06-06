@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : SSD_CF.vhf
--- /___/   /\     Timestamp : 06/05/2017 22:15:08
+-- /___/   /\     Timestamp : 06/06/2017 19:10:27
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /disk/Documents/SJTU/VE270/lab/lab2/SSD_CF.sch SSD_CF.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab2/SSD_CF.sch SSD_CF.vhf
 --Design Name: SSD_CF
 --Device: spartan3e
 --Purpose:
@@ -71,14 +71,14 @@ architecture BEHAVIORAL of SSD_CF is
              OUT3 : out   std_logic);
    end component;
    
-   component NOR4
+   component OR4
       port ( I0 : in    std_logic; 
              I1 : in    std_logic; 
              I2 : in    std_logic; 
              I3 : in    std_logic; 
              O  : out   std_logic);
    end component;
-   attribute BOX_TYPE of NOR4 : component is "BLACK_BOX";
+   attribute BOX_TYPE of OR4 : component is "BLACK_BOX";
    
 begin
    XLXI_18 : DIGIT_2
@@ -109,7 +109,7 @@ begin
                 IN3=>B3,
                 OUT3=>XLXN_33);
    
-   XLXI_25 : NOR4
+   XLXI_26 : OR4
       port map (I0=>XLXN_43,
                 I1=>XLXN_33,
                 I2=>XLXN_30,

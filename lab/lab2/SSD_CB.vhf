@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : SSD_CB.vhf
--- /___/   /\     Timestamp : 06/05/2017 22:15:07
+-- /___/   /\     Timestamp : 06/06/2017 19:10:20
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /disk/Documents/SJTU/VE270/lab/lab2/SSD_CB.sch SSD_CB.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab2/SSD_CB.sch SSD_CB.vhf
 --Design Name: SSD_CB
 --Device: spartan3e
 --Purpose:
@@ -37,13 +37,6 @@ architecture BEHAVIORAL of SSD_CB is
    attribute BOX_TYPE   : string ;
    signal XLXN_29 : std_logic;
    signal XLXN_30 : std_logic;
-   component NOR2
-      port ( I0 : in    std_logic; 
-             I1 : in    std_logic; 
-             O  : out   std_logic);
-   end component;
-   attribute BOX_TYPE of NOR2 : component is "BLACK_BOX";
-   
    component DIGIT_5
       port ( IN0  : in    std_logic; 
              IN1  : in    std_logic; 
@@ -60,12 +53,14 @@ architecture BEHAVIORAL of SSD_CB is
              OUT6 : out   std_logic);
    end component;
    
-begin
-   XLXI_14 : NOR2
-      port map (I0=>XLXN_30,
-                I1=>XLXN_29,
-                O=>CB);
+   component OR2
+      port ( I0 : in    std_logic; 
+             I1 : in    std_logic; 
+             O  : out   std_logic);
+   end component;
+   attribute BOX_TYPE of OR2 : component is "BLACK_BOX";
    
+begin
    XLXI_16 : DIGIT_5
       port map (IN0=>B0,
                 IN1=>B1,
@@ -79,6 +74,11 @@ begin
                 IN2=>B2,
                 IN3=>B3,
                 OUT6=>XLXN_30);
+   
+   XLXI_18 : OR2
+      port map (I0=>XLXN_30,
+                I1=>XLXN_29,
+                O=>CB);
    
 end BEHAVIORAL;
 

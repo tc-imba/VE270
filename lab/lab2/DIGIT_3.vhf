@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : DIGIT_3.vhf
--- /___/   /\     Timestamp : 06/05/2017 22:15:06
+-- /___/   /\     Timestamp : 06/06/2017 18:40:13
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /disk/Documents/SJTU/VE270/lab/lab2/DIGIT_3.sch DIGIT_3.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab2/DIGIT_3.sch DIGIT_3.vhf
 --Design Name: DIGIT_3
 --Device: spartan3e
 --Purpose:

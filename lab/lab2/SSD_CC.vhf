@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : SSD_CC.vhf
--- /___/   /\     Timestamp : 06/05/2017 22:15:07
+-- /___/   /\     Timestamp : 06/06/2017 19:10:22
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /disk/Documents/SJTU/VE270/lab/lab2/SSD_CC.sch SSD_CC.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab2/SSD_CC.sch SSD_CC.vhf
 --Design Name: SSD_CC
 --Device: spartan3e
 --Purpose:
@@ -34,8 +34,6 @@ entity SSD_CC is
 end SSD_CC;
 
 architecture BEHAVIORAL of SSD_CC is
-   attribute BOX_TYPE   : string ;
-   signal XLXN_5 : std_logic;
    component DIGIT_2
       port ( IN0  : in    std_logic; 
              IN1  : in    std_logic; 
@@ -44,23 +42,13 @@ architecture BEHAVIORAL of SSD_CC is
              OUT2 : out   std_logic);
    end component;
    
-   component INV
-      port ( I : in    std_logic; 
-             O : out   std_logic);
-   end component;
-   attribute BOX_TYPE of INV : component is "BLACK_BOX";
-   
 begin
    XLXI_1 : DIGIT_2
       port map (IN0=>B0,
                 IN1=>B1,
                 IN2=>B2,
                 IN3=>B3,
-                OUT2=>XLXN_5);
-   
-   XLXI_5 : INV
-      port map (I=>XLXN_5,
-                O=>CC);
+                OUT2=>CC);
    
 end BEHAVIORAL;
 

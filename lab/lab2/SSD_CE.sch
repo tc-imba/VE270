@@ -13,11 +13,6 @@ BEGIN SCHEMATIC
         SIGNAL B1
         SIGNAL XLXN_30
         SIGNAL XLXN_33
-        SIGNAL XLXN_34
-        SIGNAL XLXN_35
-        SIGNAL XLXN_36
-        SIGNAL XLXN_38
-        SIGNAL XLXN_39
         SIGNAL XLXN_43
         SIGNAL CE
         PORT Input B0
@@ -61,15 +56,16 @@ BEGIN SCHEMATIC
             LINE N 64 -32 0 -32 
             LINE N 320 -224 384 -224 
         END BLOCKDEF
-        BEGIN BLOCKDEF or4
+        BEGIN BLOCKDEF nor4
             TIMESTAMP 2000 1 1 10 10 10
             LINE N 0 -64 48 -64 
             LINE N 0 -128 64 -128 
             LINE N 0 -192 64 -192 
             LINE N 0 -256 48 -256 
-            LINE N 256 -160 192 -160 
-            ARC N 28 -208 204 -32 192 -160 112 -208 
+            LINE N 256 -160 216 -160 
+            CIRCLE N 192 -172 216 -148 
             LINE N 112 -208 48 -208 
+            ARC N 28 -208 204 -32 192 -160 112 -208 
             LINE N 112 -112 48 -112 
             LINE N 48 -256 48 -208 
             LINE N 48 -64 48 -112 
@@ -104,7 +100,7 @@ BEGIN SCHEMATIC
             PIN IN3 B3
             PIN OUT8 XLXN_43
         END BLOCK
-        BEGIN BLOCK XLXI_21 or4
+        BEGIN BLOCK XLXI_22 nor4
             PIN I0 XLXN_43
             PIN I1 XLXN_33
             PIN I2 XLXN_30
@@ -175,7 +171,6 @@ BEGIN SCHEMATIC
         END INSTANCE
         BEGIN INSTANCE XLXI_20 1120 2256 R0
         END INSTANCE
-        INSTANCE XLXI_21 1744 1728 R0
         BEGIN BRANCH XLXN_30
             WIRE 1504 1328 1520 1328
             WIRE 1520 1328 1520 1536
@@ -194,5 +189,6 @@ BEGIN SCHEMATIC
             WIRE 2000 1568 2032 1568
         END BRANCH
         IOMARKER 2032 1568 CE R0 28
+        INSTANCE XLXI_22 1744 1728 R0
     END SHEET
 END SCHEMATIC

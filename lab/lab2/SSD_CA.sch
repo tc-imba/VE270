@@ -6,24 +6,13 @@ BEGIN SCHEMATIC
         EDITTRAIT all:0
     END ATTR
     BEGIN NETLIST
-        SIGNAL XLXN_25
-        SIGNAL XLXN_26
-        SIGNAL XLXN_27
-        SIGNAL XLXN_28
         SIGNAL XLXN_29
         SIGNAL XLXN_30
         SIGNAL CA
-        SIGNAL XLXN_32
-        SIGNAL XLXN_33
-        SIGNAL XLXN_34
         SIGNAL B0
         SIGNAL B1
         SIGNAL B2
         SIGNAL B3
-        SIGNAL XLXN_39
-        SIGNAL XLXN_48
-        SIGNAL XLXN_49
-        SIGNAL XLXN_50
         PORT Output CA
         PORT Input B0
         PORT Input B1
@@ -47,17 +36,16 @@ BEGIN SCHEMATIC
             LINE N 64 -32 0 -32 
             LINE N 320 -224 384 -224 
         END BLOCKDEF
-        BEGIN BLOCKDEF nor2
+        BEGIN BLOCKDEF or2
             TIMESTAMP 2000 1 1 10 10 10
             LINE N 0 -64 64 -64 
             LINE N 0 -128 64 -128 
-            LINE N 256 -96 216 -96 
-            CIRCLE N 192 -108 216 -84 
+            LINE N 256 -96 192 -96 
             ARC N 28 -224 204 -48 112 -48 192 -96 
-            ARC N 28 -144 204 32 192 -96 112 -144 
             ARC N -40 -152 72 -40 48 -48 48 -144 
-            LINE N 112 -48 48 -48 
             LINE N 112 -144 48 -144 
+            ARC N 28 -144 204 32 192 -96 112 -144 
+            LINE N 112 -48 48 -48 
         END BLOCKDEF
         BEGIN BLOCK XLXI_8 DIGIT_1
             PIN IN0 B0
@@ -73,7 +61,7 @@ BEGIN SCHEMATIC
             PIN IN3 B3
             PIN OUT4 XLXN_30
         END BLOCK
-        BEGIN BLOCK XLXI_14 nor2
+        BEGIN BLOCK XLXI_15 or2
             PIN I0 XLXN_30
             PIN I1 XLXN_29
             PIN O CA
@@ -104,7 +92,6 @@ BEGIN SCHEMATIC
         IOMARKER 880 704 B3 R270 28
         BEGIN INSTANCE XLXI_12 976 1584 R0
         END INSTANCE
-        INSTANCE XLXI_14 1472 1264 R0
         BEGIN BRANCH XLXN_29
             WIRE 1360 1008 1376 1008
             WIRE 1376 1008 1376 1136
@@ -135,5 +122,6 @@ BEGIN SCHEMATIC
         BEGIN INSTANCE XLXI_8 976 1232 R0
         END INSTANCE
         IOMARKER 1760 1168 CA R0 28
+        INSTANCE XLXI_15 1472 1264 R0
     END SHEET
 END SCHEMATIC

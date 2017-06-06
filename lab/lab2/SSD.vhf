@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : SSD.vhf
--- /___/   /\     Timestamp : 06/05/2017 22:15:08
+-- /___/   /\     Timestamp : 06/06/2017 19:10:17
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /disk/Documents/SJTU/VE270/lab/lab2/SSD.sch SSD.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab2/SSD.sch SSD.vhf
 --Design Name: SSD
 --Device: spartan3e
 --Purpose:
@@ -161,17 +161,17 @@ begin
                 B3=>B3,
                 CD=>CG);
    
-   XLXI_23 : VCC
-      port map (P=>AN0);
+   XLXI_28 : VCC
+      port map (P=>AN1);
    
-   XLXI_24 : GND
-      port map (G=>AN1);
+   XLXI_29 : VCC
+      port map (P=>AN2);
    
-   XLXI_25 : GND
-      port map (G=>AN2);
+   XLXI_30 : VCC
+      port map (P=>AN3);
    
-   XLXI_26 : GND
-      port map (G=>AN3);
+   XLXI_31 : GND
+      port map (G=>AN0);
    
 end BEHAVIORAL;
 

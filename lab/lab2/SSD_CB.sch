@@ -10,7 +10,6 @@ BEGIN SCHEMATIC
         SIGNAL B0
         SIGNAL B2
         SIGNAL XLXN_29
-        SIGNAL XLXN_5
         SIGNAL XLXN_30
         SIGNAL B3
         SIGNAL B1
@@ -19,18 +18,6 @@ BEGIN SCHEMATIC
         PORT Input B2
         PORT Input B3
         PORT Input B1
-        BEGIN BLOCKDEF nor2
-            TIMESTAMP 2000 1 1 10 10 10
-            LINE N 0 -64 64 -64 
-            LINE N 0 -128 64 -128 
-            LINE N 256 -96 216 -96 
-            CIRCLE N 192 -108 216 -84 
-            ARC N 28 -224 204 -48 112 -48 192 -96 
-            ARC N 28 -144 204 32 192 -96 112 -144 
-            ARC N -40 -152 72 -40 48 -48 48 -144 
-            LINE N 112 -48 48 -48 
-            LINE N 112 -144 48 -144 
-        END BLOCKDEF
         BEGIN BLOCKDEF DIGIT_5
             TIMESTAMP 2017 6 5 12 10 25
             RECTANGLE N 64 -256 320 0 
@@ -49,11 +36,17 @@ BEGIN SCHEMATIC
             LINE N 64 -32 0 -32 
             LINE N 320 -224 384 -224 
         END BLOCKDEF
-        BEGIN BLOCK XLXI_14 nor2
-            PIN I0 XLXN_30
-            PIN I1 XLXN_29
-            PIN O CB
-        END BLOCK
+        BEGIN BLOCKDEF or2
+            TIMESTAMP 2000 1 1 10 10 10
+            LINE N 0 -64 64 -64 
+            LINE N 0 -128 64 -128 
+            LINE N 256 -96 192 -96 
+            ARC N 28 -224 204 -48 112 -48 192 -96 
+            ARC N -40 -152 72 -40 48 -48 48 -144 
+            LINE N 112 -144 48 -144 
+            ARC N 28 -144 204 32 192 -96 112 -144 
+            LINE N 112 -48 48 -48 
+        END BLOCKDEF
         BEGIN BLOCK XLXI_16 DIGIT_5
             PIN IN0 B0
             PIN IN1 B1
@@ -67,6 +60,11 @@ BEGIN SCHEMATIC
             PIN IN2 B2
             PIN IN3 B3
             PIN OUT6 XLXN_30
+        END BLOCK
+        BEGIN BLOCK XLXI_18 or2
+            PIN I0 XLXN_30
+            PIN I1 XLXN_29
+            PIN O CB
         END BLOCK
     END NETLIST
     BEGIN SHEET 1 3520 2720
@@ -88,7 +86,6 @@ BEGIN SCHEMATIC
             WIRE 688 1312 688 1664
             WIRE 688 1664 864 1664
         END BRANCH
-        INSTANCE XLXI_14 1360 1440 R0
         BEGIN BRANCH XLXN_29
             WIRE 1248 1184 1264 1184
             WIRE 1264 1184 1264 1312
@@ -125,5 +122,6 @@ BEGIN SCHEMATIC
         END INSTANCE
         BEGIN INSTANCE XLXI_17 864 1760 R0
         END INSTANCE
+        INSTANCE XLXI_18 1360 1440 R0
     END SHEET
 END SCHEMATIC

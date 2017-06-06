@@ -1,48 +1,24 @@
 CommandLine-Map
 
 s
-CommandLine-Map
-
--
 CommandLine-Ngdbuild
-C:\Xilinx\10.1\ISE\bin\nt\unwrapped\ngdbuild.exe -ise C:/Users/MSY/Documents/VE270/lab/lab2/lab2.ise -intstyle ise -dd _ngo -nt timestamp -i -p xc3s1200e-fg320-4 SSD.ngc SSD.ngd
-s
-CommandLine-Ngdbuild
-
--
-CommandLine-Par
 
 s
 CommandLine-Par
 
--
-CommandLine-Xst
-
 s
 CommandLine-Xst
 
--
-Previous-NGD
-SSD_prev_built.ngd
 s
 Previous-NGD
-
--
-Previous-NGM
 
 s
 Previous-NGM
 
--
-Previous-Packed-NCD
-
 s
 Previous-Packed-NCD
-
--
-Previous-Routed-NCD
 
 s
 Previous-Routed-NCD
 
--
+s

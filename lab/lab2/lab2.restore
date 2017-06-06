@@ -862,7 +862,6 @@ proc restore { { project_dir "" } } {
   } "A problem occured while restoring user files."
 
   set imported_files { 
-      "SSD_guide.ncd" 
       "SSD_test.xwv"}
 
   set origination 2

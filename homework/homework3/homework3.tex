@@ -21,7 +21,141 @@
 \maketitle
 
 \section{}
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\matrix[row sep=1.5mm]{
+    		\node (m1) {$m_0$}; & \node (m2) {$m_1$}; & \node (m3) {$m_2$}; & \node (m4) {$m_3$}; & \node (m5) {$m_4$}; & \node (m6) {$m_5$}; & \node (m7) {$m_6$}; & \node (m8) {$m_7$}; & \node (m9) {$m_8$}; & \node (m10) {$m_9$}; & \\
+		&&&&&&&&&& \node [and gate,inputs=niiiiiiiii] (g1) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iniiiiiiii] (g2) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiniiiiiii] (g3) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiniiiiii] (g4) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiiniiiii] (g5) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiiiniiii] (g6) {}; &[2cm] \node [nor gate,inputs=nnnnnnnnnnn] (g) {}; &[1cm] \node (F) {F}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiiiiniii] (g7) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiiiiinii] (g8) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiiiiiini] (g9) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiiiiiiin] (g10) {}; \\
+		&&&&&&&&&& \node [and gate,inputs=iiiiiiiiii] (g11) {}; \\
+	};
+	\foreach \j / \offset in {1/14,2/12,3/10,4/8,5/6,6/6,7/6,8/8,9/10,10/12,11/14} {
+		\foreach \i in {1,2,...,10} {
+			\draw (m\i);
+			\pgfgetlastxy{\x}{\y};
+			\draw (g\j.input \i);
+			\pgfgetlastxy{\xtemp}{\y};
+			\filldraw (\x,\y) circle [radius=0.5mm];
+			\draw (m\i) |- (g\j.input \i);
+		}
+		\draw (g\j.output) -- ++(right:\offset mm) |- (g.input \j);
+	}
+	\draw (g.output) -- (F);
+	\end{tikzpicture}
+\end{center}
 
+\section{}
+$$\rm C=(M_0M_1'M_2'M_3'+M_0'M_1M_2'M_3'+M_0'M_1'M_2M_3'+M_0'M_1'M_2'M_3+M_0'M_1'M_2'M_3')'$$
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\matrix[row sep=1.5mm]{
+    		\node (m1) {$M_0$}; & \node (m2) {$M_1$}; & \node (m3) {$M_2$}; & \node (m4) {$M_3$}; &[1cm] \\
+		&&&& \node [and gate,inputs=niii,scale=1.5] (g1) {}; \\
+		&&&& \node [and gate,inputs=inii,scale=1.5] (g2) {}; \\
+		&&&& \node [and gate,inputs=iini,scale=1.5] (g3) {}; &[2cm] \node [nor gate,inputs=nnnnn,scale=1.5] (g) {}; &[1cm] \node (C) {C}; \\
+		&&&& \node [and gate,inputs=iiin,scale=1.5] (g4) {}; \\
+		&&&& \node [and gate,inputs=iiii,scale=1.5] (g5) {}; \\
+	};
+	\foreach \j / \offset in {1/10,2/6,3/6,4/6,5/10} {
+		\foreach \i in {1,2,...,4} {
+			\draw (m\i);
+			\pgfgetlastxy{\x}{\y};
+			\draw (g\j.input \i);
+			\pgfgetlastxy{\xtemp}{\y};
+			\filldraw (\x,\y) circle [radius=0.5mm];
+			\draw (m\i) |- (g\j.input \i);
+		}
+		\draw (g\j.output) -- ++(right:\offset mm) |- (g.input \j);
+	}
+	\draw (g.output) -- (C);
+	\end{tikzpicture}
+\end{center}
 
+\section{}
+
+Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
+
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\matrix[column sep=20mm]{
+		\node (m0) {$m_0$}; \\
+		\node (m1) {$m_1$}; \\
+		\node (m2) {$m_2$}; & \node [not gate,scale=1.5] (g) {}; & \node (T) {T}; \\
+		\node (m3) {$m_3$}; \\
+		\node (m4) {$m_4$}; \\
+	};
+	\draw (m4) -- ++(right:12mm) |- (g.input) (g.output) -- (T);
+	\end{tikzpicture}
+\end{center}
+
+\section{}
+
+\begin{center}
+	\begin{tikzpicture}
+	\draw (0,0.0) node (d) {door d};
+	\draw (0,0.5) node (c) {door c};
+	\draw (0,1.0) node (b) {door b};
+	\draw (0,1.5) node (a) {door a};
+	\draw (4,0.75) node (mux) [shape=rectangle,draw,minimum height=2.2cm] {2-bit 4x1 mux};
+	\draw (0,-2) node (switch) [shape=rectangle,draw,minimum height=1.5cm] {switch};
+	\draw (4,-2) node (decoder) [shape=rectangle,draw,minimum height=1.5cm] {2x4 decoder};
+	\draw (8,0.75) node (LED) [shape=rectangle,draw,minimum height=1.5cm] {LED};
+	\draw (8,-2) node (output) [shape=rectangle,draw,minimum height=1.5cm] {switch output};
+	\draw [->] (switch) -- (decoder);
+	\draw [->] (decoder) -- (mux);
+	\draw [->] (mux) -- (LED);
+	\draw [->] (decoder) -- (output);
+	\foreach \i in {a,b,c,d} {
+		\draw (\i);
+		\pgfgetlastxy{\xi}{\yi};
+		\draw (mux.west);
+		\pgfgetlastxy{\xj}{\yj};
+		\draw [->] (\i) -- (\xj,\yi);
+	}
+	\end{tikzpicture}
+\end{center}
+
+\section{}
+
+\begin{center}
+	\begin{tikzpicture}
+	\foreach \i in {1,2,3,4} {
+		\draw (0,8-2*\i) node (m\i) [shape=rectangle,draw,minimum height=1.5cm] {2x1 mux};
+	}
+	\foreach \i/\j in {1/0,2/2,3/4,4/6} \draw (-3,8-2*\i+0.4) node (i\j) {$i_\j$};
+	\foreach \i/\j in {1/1,2/3,3/5,4/7} \draw (-3,8-2*\i-0.4) node (i\j) {$i_\j$};
+	\foreach \i in {0,1,...,7} {
+		\draw (i\i);
+		\pgfgetlastxy{\xi}{\yi};
+		\draw (m1.west);
+		\pgfgetlastxy{\xj}{\yj};
+		\draw (i\i) -- (\xj,\yi);
+	}
+	\draw (4,3) node (m) [shape=rectangle,draw,minimum height=3cm] {4x1 mux};
+	\draw (m1.east) -- ++(right:16mm) |- ($(m.west)+(up:7.5mm)$);
+	\draw (m2.east) -- ++(right:8mm) |- ($(m.west)+(up:2.5mm)$);
+	\draw (m3.east) -- ++(right:8mm) |- ($(m.west)+(down:2.5mm)$);
+	\draw (m4.east) -- ++(right:16mm) |- ($(m.west)+(down:7.5mm)$);
+	\draw (6,3) node (d) {d} (m) -- (d);
+	\foreach \i in {0,1,2} {
+		\draw (5-0.66*\i,0) node (s\i) {$s_\i$};
+	}
+	\draw (m.south);
+	\pgfgetlastxy{\x}{\y};
+	\foreach \i in {1,2} {
+		\draw (s\i);
+		\pgfgetlastxy{\xx}{\yy};
+		\draw (s\i) -- (\xx,\y);
+	}
+	\end{tikzpicture}
+\end{center}
 
 \end{document}

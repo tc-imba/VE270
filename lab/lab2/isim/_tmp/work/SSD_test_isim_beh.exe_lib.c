@@ -16,8 +16,8 @@ struct XSI_INFO xsi_info;
 
 char *IEEE_P_2592010699;
 char *STD_STANDARD;
-char *IEEE_P_1242562249;
 char *UNISIM_P_0947159679;
+char *IEEE_P_1242562249;
 char *IEEE_P_3564397177;
 char *STD_TEXTIO;
 char *IEEE_P_3499444699;
@@ -69,8 +69,8 @@ int isim_run(int argc, char **argv)
 
     IEEE_P_2592010699 = xsi_get_engine_memory("ieee_p_2592010699");
     STD_STANDARD = xsi_get_engine_memory("std_standard");
-    IEEE_P_1242562249 = xsi_get_engine_memory("ieee_p_1242562249");
     UNISIM_P_0947159679 = xsi_get_engine_memory("unisim_p_0947159679");
+    IEEE_P_1242562249 = xsi_get_engine_memory("ieee_p_1242562249");
     IEEE_P_3564397177 = xsi_get_engine_memory("ieee_p_3564397177");
     STD_TEXTIO = xsi_get_engine_memory("std_textio");
     IEEE_P_3499444699 = xsi_get_engine_memory("ieee_p_3499444699");

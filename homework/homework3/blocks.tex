@@ -21,3 +21,32 @@
 	\draw (#2) ++(right:7.5mm) ++(up:17.5mm) node {$d_0$} ++(down:5mm) node {$d_1$} ++(down:5mm) node {$d_2$} ++(down:5mm) node {$d_3$} ++(down:5mm) node {$d_4$} ++(down:5mm) node {$d_5$} ++(down:5mm) node {$d_6$} ++(down:5mm) node {$d_7$};
 	\draw (#2) ++(left:7.5mm) node {$i_1$} ++(up:5mm) node {$i_0$} ++(down:10mm) node {$i_2$};
 }
+\newcommand{\drawfulladder}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(left:7.5mm) node {$c_o$};
+	\draw (#2) ++(right:7.5mm) node {$c_i$};
+	\draw (#2) ++(down:7.5mm) node {$s$};
+	\draw (#2) ++(up:7.5mm) ++(left:3.3mm) node {$a$} ++(right:6.6mm) node {$b$};
+}
+
+\newcommand{\drawaddermodel}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=4cm,text width=3cm,align=center] {#3};
+	\draw (#2) ++(left:17.5mm) node {$c_o$};
+	\draw (#2) ++(right:17.5mm) node {$c_i$};
+	\draw (#2) ++(down:7.5mm) node {$s$};
+	\draw (#2) ++(up:7.5mm) ++(left:10mm) node {$a$} ++(right:20mm) node {$b$};
+}
+
+\newcommand{\drawadder}[4]{
+	\drawaddermodel{#1}{#2}{#3}
+	\draw (#2) ++(up:10mm) ++(left:10mm) to node {$\diagup$} node[left] {8} ++(up:10mm) ;
+	\draw (#2) ++(up:10mm) ++(right:10mm) to node {$\diagup$} node[left] {8} ++(up:10mm) ;
+}
+
+\newcommand{\drawsubtractor}[4]{
+	\drawaddermodel{#1}{#2}{#3}
+	\draw (#2) ++(up:10mm) ++(left:10mm) to node {$\diagup$} node[left] {8} ++(up:20mm);
+	\draw (#2) ++(up:21.5mm) ++(right:10mm) node[not gate,point down] (#2__notgate) {#4 bit};
+	\draw (#2) ++(up:10mm) ++(right:10mm) to node {$\diagup$} node[left] {#4} (#2__notgate.output);
+	\draw (#2) ++(up:30mm) ++(right:10mm) to node {$\diagup$} node[left] {#4} (#2__notgate.input);
+}

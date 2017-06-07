@@ -11,7 +11,7 @@
 \usetikzlibrary{circuits.logic.US}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{calc}
-\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=4.0cm}
+\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=3.0cm}
 \renewcommand{\thesection}{Problem \arabic{section}.}
 \title{VE270 Homework 3}
 \author{Liu Yihao 515370910207}
@@ -106,21 +106,19 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 	\draw (0,0.5) node (c) {door c};
 	\draw (0,1.0) node (b) {door b};
 	\draw (0,1.5) node (a) {door a};
-	\draw (4,0.75) node (mux) [shape=rectangle,draw,minimum height=2.2cm] {2-bit 4x1 mux};
+	\drawmuxfour{(4,0.75)}{mux}{1-bit 4x1 mux}
 	\draw (0,-2) node (switch) [shape=rectangle,draw,minimum height=1.5cm] {switch};
-	\draw (4,-2) node (decoder) [shape=rectangle,draw,minimum height=1.5cm] {2x4 decoder};
 	\draw (8,0.75) node (LED) [shape=rectangle,draw,minimum height=1.5cm] {LED};
 	\draw (8,-2) node (output) [shape=rectangle,draw,minimum height=1.5cm] {switch output};
-	\draw [->] (switch) -- (decoder);
-	\draw [->] (decoder) -- (mux);
-	\draw [->] (mux) -- (LED);
-	\draw [->] (decoder) -- (output);
+	\draw (switch) -- (output);
+	\draw (switch) -| (mux);
+	\draw (mux) -- (LED);
 	\foreach \i in {a,b,c,d} {
 		\draw (\i);
 		\pgfgetlastxy{\xi}{\yi};
 		\draw (mux.west);
 		\pgfgetlastxy{\xj}{\yj};
-		\draw [->] (\i) -- (\xj,\yi);
+		\draw (\i) -- (\xj,\yi);
 	}
 	\end{tikzpicture}
 \end{center}
@@ -180,6 +178,8 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 	\end{tikzpicture}
 \end{center}
 
+\newpage
+
 \section{}
 $$\rm F=c'+ab'$$
 \begin{center}
@@ -213,6 +213,24 @@ $$\rm F=c'+ab'$$
 	\end{tikzpicture}
 \end{center}
 
+\section{}
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\foreach \i in {1,...,4} {
+		\drawfulladder{(\i*2.5-2.5,3)}{add\i}{Full Adder};
+	}
+	\foreach \i in {5,...,8} {
+		\drawfulladder{(\i*2.5-12.5,0)}{add\i}{Full Adder};
+	}
+	\end{tikzpicture}
+\end{center}
+
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\drawadder{(0,0)}{adder}{8bit 2's Complement Adder}{8};
+	\drawsubtractor{(0,-4)}{adder}{8bit 2's Complement Subtractor}{8};
+	\end{tikzpicture}
+\end{center}
 
 
 \end{document}

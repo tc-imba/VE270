@@ -23,6 +23,22 @@
 \maketitle
 
 \section{}
+
+\begin{align*}
+\rm F=(
+&\rm m_0m_1'm_2'm_3'm_4'm_5'm_6'm_7'm_8'm_9'+\\
+&\rm m_0'm_1m_2'm_3'm_4'm_5'm_6'm_7'm_8'm_9'+\\
+&\rm m_0'm_1'm_2m_3'm_4'm_5'm_6'm_7'm_8'm_9'+\\
+&\rm m_0'm_1'm_2'm_3m_4'm_5'm_6'm_7'm_8'm_9'+\\
+&\rm m_0'm_1'm_2'm_3'm_4m_5'm_6'm_7'm_8'm_9'+\\
+&\rm m_0'm_1'm_2'm_3'm_4'm_5m_6'm_7'm_8'm_9'+\\
+&\rm m_0'm_1'm_2'm_3'm_4'm_5'm_6m_7'm_8'm_9'+\\
+&\rm m_0'm_1'm_2'm_3'm_4'm_5'm_6'm_7m_8'm_9'+\\
+&\rm m_0'm_1'm_2'm_3'm_4'm_5'm_6'm_7'm_8m_9'+\\
+&\rm m_0'm_1'm_2'm_3'm_4'm_5'm_6'm_7'm_8'm_9+\\
+&\rm m_0'm_1'm_2'm_3'm_4'm_5'm_6'm_7'm_8'm_9')'
+\end{align*}
+
 \begin{center}
 	\begin{tikzpicture}[circuit logic US]
 	\matrix[row sep=1.5mm]{
@@ -45,7 +61,9 @@
 			\pgfgetlastxy{\x}{\y};
 			\draw (g\j.input \i);
 			\pgfgetlastxy{\xtemp}{\y};
-			\filldraw (\x,\y) circle [radius=0.5mm];
+			\ifnum \j<11
+				\filldraw (\x,\y) circle [radius=0.5mm];
+			\fi
 			\draw (m\i) |- (g\j.input \i);
 		}
 		\draw (g\j.output) -- ++(right:\offset mm) |- (g.input \j);
@@ -72,7 +90,9 @@ $$\rm C=(M_0M_1'M_2'M_3'+M_0'M_1M_2'M_3'+M_0'M_1'M_2M_3'+M_0'M_1'M_2'M_3+M_0'M_1
 			\pgfgetlastxy{\x}{\y};
 			\draw (g\j.input \i);
 			\pgfgetlastxy{\xtemp}{\y};
-			\filldraw (\x,\y) circle [radius=0.5mm];
+			\ifnum \j<5
+				\filldraw (\x,\y) circle [radius=0.5mm];
+			\fi
 			\draw (m\i) |- (g\j.input \i);
 		}
 		\draw (g\j.output) -- ++(right:\offset mm) |- (g.input \j);
@@ -106,12 +126,14 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 	\draw (0,0.5) node (c) {door c};
 	\draw (0,1.0) node (b) {door b};
 	\draw (0,1.5) node (a) {door a};
-	\drawmuxfour{(4,0.75)}{mux}{1-bit 4x1 mux}
+	\drawmuxfour{(4,0.75)}{mux}{1-bit 4x2  mux}
 	\draw (0,-2) node (switch) [shape=rectangle,draw,minimum height=1.5cm] {switch};
 	\draw (8,0.75) node (LED) [shape=rectangle,draw,minimum height=1.5cm] {LED};
 	\draw (8,-2) node (output) [shape=rectangle,draw,minimum height=1.5cm] {switch output};
-	\draw (switch) -- (output);
-	\draw (switch) -| (mux);
+	\draw (switch) -- (4,-2);
+	\filldraw (4,-2) circle [radius=0.5mm];
+	\draw (4,-2) to node {$\diagup$} node [above] {2} (output);
+	\draw (4,-2) to node {$\diagup$} node [left] {2} (mux);
 	\draw (mux) -- (LED);
 	\foreach \i in {a,b,c,d} {
 		\draw (\i);
@@ -139,7 +161,7 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 		\pgfgetlastxy{\xj}{\yj};
 		\draw (i\i) -- (\xj,\yi);
 	}
-	\drawmuxfour{(4,3.75)}{m}{4x1 mux};
+	\drawmuxfour{(4,3.75)}{m}{4x2 mux};
 	\draw (m1.east) -- ++(right:14mm) |- ($(m.west)+(up:7.5mm)$);
 	\draw (m2.east) -- ++(right:7mm) |- ($(m.west)+(up:2.5mm)$);
 	\draw (m3.east) -- ++(right:7mm) |- ($(m.west)+(down:2.5mm)$);
@@ -156,14 +178,16 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 		\draw (s\i) -- (\xx,\y);
 	}
 	\draw (s0) -- (5,-1.25) -| (m4) (5,-1.25) -- (-4,-1.25) -- (-4,6.25);
+	\filldraw (0,-1.25) circle [radius=0.5mm];
 	\foreach \i in {1,2,3} \draw (-4,8.75-2.5*\i) -| (m\i.south);
+	\foreach \i in {2,3} \filldraw (-4,8.75-2.5*\i) circle [radius=0.5mm];
 	\end{tikzpicture}
 \end{center}
 
 \section{}
 \begin{center}
 	\begin{tikzpicture}
-	\drawmuxeight{(0,0)}{m}{8x1 mux};
+	\drawmuxeight{(0,0)}{m}{8x3 mux};
 	\draw (m.east) ++(right:1.5cm) node (d) {$d$} (m) -- (d);
  	\foreach \i in {0,...,3} {
  		\draw (-3,1.75-0.5*\i) node (i\i) {$i_\i$};
@@ -184,7 +208,7 @@ Suppose $m_i$, i=0,1,2,3,4, represents the ith bit of the current tire pressure.
 $$\rm F=c'+ab'$$
 \begin{center}
 	\begin{tikzpicture}
-	\drawmuxfour{(0,0)}{m}{4x1 mux};
+	\drawmuxfour{(0,0)}{m}{4x2 mux};
 	\draw (m.east) ++(right:1.5cm) node (F) {F} (m) -- (F);
  	\draw (-3,0.75) node (i0) {0} (i0) -- (-1,0.75);
  	\draw (-3,0.25) node (i1) {b} (i1) -- (-1.2,0.25);
@@ -214,21 +238,158 @@ $$\rm F=c'+ab'$$
 \end{center}
 
 \section{}
+
+The inner design of 8-bit and gate:
 \begin{center}
 	\begin{tikzpicture}[circuit logic US]
-	\foreach \i in {1,...,4} {
-		\drawfulladder{(\i*2.5-2.5,3)}{add\i}{Full Adder};
-	}
-	\foreach \i in {5,...,8} {
-		\drawfulladder{(\i*2.5-12.5,0)}{add\i}{Full Adder};
+	\foreach \i in {0,...,7} {
+		\draw (\i*2,0) node[and gate,point down,scale=2] (g\i) {};
+		\draw (g\i.input 1) ++(up:6.5mm) node (a\i) {$a_\i$};
+		\draw (g\i.input 2) ++(up:6.5mm) node (b\i) {$b_\i$};
+		\draw (g\i.output) ++(down:6.5mm) node (s\i) {$s_\i$};
+		\draw (g\i.input 1) -- (a\i) (g\i.input 2) -- (b\i) (g\i.output) -- (s\i);
 	}
 	\end{tikzpicture}
 \end{center}
 
+The inner design of 8-bit or gate:
 \begin{center}
 	\begin{tikzpicture}[circuit logic US]
-	\drawadder{(0,0)}{adder}{8bit 2's Complement Adder}{8};
-	\drawsubtractor{(0,-4)}{adder}{8bit 2's Complement Subtractor}{8};
+	\foreach \i in {0,...,7} {
+		\draw (\i*2,0) node[or gate,point down,scale=2] (g\i) {};
+		\draw (g\i.input 1) ++(up:6.5mm) node (a\i) {$a_\i$};
+		\draw (g\i.input 2) ++(up:6.5mm) node (b\i) {$b_\i$};
+		\draw (g\i.output) ++(down:6.5mm) node (s\i) {$s_\i$};
+		\draw (g\i.input 1) -- (a\i) (g\i.input 2) -- (b\i) (g\i.output) -- (s\i);
+	}
+	\end{tikzpicture}
+\end{center}
+
+The inner design of 8-bit xor gate:
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\foreach \i in {0,...,7} {
+		\draw (\i*2,0) node[xor gate,point down,scale=2] (g\i) {};
+		\draw (g\i.input 1) ++(up:6.5mm) node (a\i) {$a_\i$};
+		\draw (g\i.input 2) ++(up:6.5mm) node (b\i) {$b_\i$};
+		\draw (g\i.output) ++(down:6.5mm) node (s\i) {$s_\i$};
+		\draw (g\i.input 1) -- (a\i) (g\i.input 2) -- (b\i) (g\i.output) -- (s\i);
+	}
+	\end{tikzpicture}
+\end{center}
+
+The inner design of 8-bit not gate:
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\foreach \i in {0,...,7} {
+		\draw (\i*2,0) node[not gate,point down,scale=2] (g\i) {};
+		\draw (g\i.input) ++(up:6.5mm) node (a\i) {$a_\i$};
+		\draw (g\i.output) ++(down:6.5mm) node (s\i) {$s_\i$};
+		\draw (g\i.input) -- (a\i) (g\i.output) -- (s\i);
+	}
+	\end{tikzpicture}
+\end{center}
+
+The inner design of 8-bit Carry Ripple Adder:
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\foreach \i in {0,...,7} {
+		\ifnum \i<4
+			\drawfulladder{(9-\i*3,3)}{add\i}{Full Adder};
+		\else
+			\drawfulladder{(21-\i*3,0)}{add\i}{Full Adder};
+		\fi
+		\draw (add\i.south) ++(down:6.5mm) node (s\i) {$s_\i$};
+		\draw (add\i.south) -- (s\i);
+		\draw (add\i.north) ++(left:3.3mm) ++(up:6.5mm) node (a\i) {$a_\i$};
+		\draw (add\i.north) ++(left:3.3mm) -- (a\i);
+		\draw (add\i.north) ++(right:3.3mm) ++(up:6.5mm) node (b\i) {$b_\i$};
+		\draw (add\i.north) ++(right:3.3mm) -- (b\i);
+	}
+	\draw (add0) -- (add1) -- (add2) -- (add3);
+	\draw (add4) -- (add5) -- (add6) -- (add7);
+	\draw (add0.east) ++(right:1cm) node (ci) {$c_i$};
+	\draw (add0.east) -- (ci);
+	\draw (add7.west) ++(left:1cm) node (co) {$c_o$};
+	\draw (add7.west) -- (co);
+	\draw (add3.west) -| (-3,-2) -- (11,-2) |- (add4.east);
+	\end{tikzpicture}
+\end{center}
+
+The design of ALU:
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\drawadder{(0,0)}{adder}{8-bit Carry Ripple Adder}{8};
+	\drawsubtractor{(0,-4)}{subtractor}{8-bit Carry Ripple Adder}{8};
+	\drawadderone{(0,-7)}{adderone}{8-bit Carry Ripple Adder}{8};
+	\draw (0,-10.5) node (and) [and gate] {8-bit and gate};
+	\draw (0,-13) node (or) [or gate,text width=2.2cm,align=right] {8-bit or gate};
+	\draw (0,-15.5) node (xor) [xor gate,text width=2.2cm,align=right] {8-bit xor gate};
+	\draw (0,-18) node (not) [not gate,text width=2.3cm,align=right] {8-bit not gate};
+	\drawmuxeight{(7,-8)}{mux}{8 bit 8x3 mux};
+	\draw (adder.south) ++(down:5mm) -- ++(right:5cm) |- ($(mux.west)+(up:1.75cm)$)	;
+	\draw (subtractor.south) ++(down:5mm) -- ++(right:4cm) |- ($(mux.west)+(up:1.25cm)$)	;
+	\draw (adderone.south) ++(down:5mm) -- ++(right:2.5cm) |- ($(mux.west)+(up:0.75cm)$)	;
+	\draw (-3,-9) to node {$\diagup$} node [above] {8} ++(right:6cm) |- ($(mux.west)+(up:0.25cm)$);
+	\draw (and.output) to node {$\diagup$} node [above] {8} ++(right:2cm) |- ($(mux.west)+(down:0.25cm)$);
+	\draw (or.output) to node {$\diagup$} node [above] {8} ++(right:2.5cm) |- ($(mux.west)+(down:0.75cm)$);
+	\draw (xor.output) to node {$\diagup$} node [above] {8} ++(right:3cm) |- ($(mux.west)+(down:1.25cm)$);
+	\draw (not.output) to node {$\diagup$} node [above] {8} ++(right:3.5cm) |- ($(mux.west)+(down:1.75cm)$);
+	\draw (mux.east) ++(right:2cm) node (S) {S};
+	\draw (mux.east) to node {$\diagup$} node [above] {8} (S);
+	\foreach \i/\j in {1/a,2/b,3/c} {
+		\draw (mux.south) ++(right:30-5*\i mm) ++(down:2cm) node (\j) {\j};
+		\draw (mux.south) ++(right:30-5*\i mm) -- (\j);
+	}
+	\draw (-6,0) node (A) {A} (-4,0) node (B) {B};
+	\draw (not.input);
+	\pgfgetlastxy{\x}{\y};
+	\draw (A) -- (-6,\y) to node {$\diagup$} node [above] {8} (not.input);
+	\draw (xor.input 2);
+	\pgfgetlastxy{\x}{\y};
+	\draw (B) -- (-4,\y) to node {$\diagup$} node [above] {8} (xor.input 2);;
+	\draw (B) ++(down:2 cm) -- ++(right:6.77cm);
+	\filldraw (B) ++(down:2 cm) circle [radius=0.5mm];
+	\foreach \i in {2.5,5.5,9} {
+		\draw (A) ++(down:\i cm) -- ++(right:5cm);
+		\filldraw (A) ++(down:\i cm) circle [radius=0.5mm];
+	}
+	\foreach \i in {and,or,xor} {
+		\draw (\i.input 1);
+		\pgfgetlastxy{\x}{\y};
+		\draw (-6,\y) -- (-4,\y) to node {$\diagup$} node [above] {8} (\i.input 1);
+		\filldraw (-6,\y) circle [radius=0.5mm];
+	}
+	\foreach \i in {and,or} {
+		\draw (\i.input 2);
+		\pgfgetlastxy{\x}{\y};
+		\draw (-4,\y) to node {$\diagup$} node [above] {8} (\i.input 2);
+		\filldraw (-4,\y) circle [radius=0.5mm];
+	}
+	\draw (A) |- (-1,1.5) (B) |- (1,2);
+	\end{tikzpicture}
+\end{center}
+
+\section{}
+
+$$t_a=t_b=0.5+1+0.5+0.75+0.5+1+0.5=4.75{\rm\,ns}$$
+$$t_c=0.5+0.75+0.5+1+0.5=3.25{\rm\,ns}$$
+
+One of the critical paths is shown below.
+
+\begin{center}
+	\begin{tikzpicture}[circuit logic US]
+	\matrix[column sep=15mm]{
+		\node (a) {a}; \\
+		& \node [and gate,scale=1.5] (g1) {}; & \node [not gate,scale=1.5] (g3) {}; \\
+		\node (b) {b}; & & & \node [and gate,scale=1.5] (g4) {}; & \node (F) {F}; \\
+		\node (c) {c}; & \node [not gate,scale=1.5] (g2) {}; \\
+	};
+	\draw (a) -- ++(right:10mm) |- (g1.input 1) (b) -- ++(right:10mm) |- (g1.input 2) (c) -- (g2.input);
+	\draw (g1.output) -- (g3.input);
+	\draw (g3.output) -- ++(right:5mm) |- (g4.input 1) (g2.output) -- ++(right:33mm) |- (g4.input 2);
+	\draw (g4.output) -- (F);
+	\draw[dashed] (a) .. controls +(right:25mm) and +(up:0.5mm) .. (F);
 	\end{tikzpicture}
 \end{center}
 

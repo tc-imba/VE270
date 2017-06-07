@@ -35,18 +35,30 @@
 	\draw (#2) ++(right:17.5mm) node {$c_i$};
 	\draw (#2) ++(down:7.5mm) node {$s$};
 	\draw (#2) ++(up:7.5mm) ++(left:10mm) node {$a$} ++(right:20mm) node {$b$};
+	\draw (#2) ++(down:10mm) to node {$\diagup$} node[left] {8} ++(down:5mm) ;
 }
 
 \newcommand{\drawadder}[4]{
 	\drawaddermodel{#1}{#2}{#3}
-	\draw (#2) ++(up:10mm) ++(left:10mm) to node {$\diagup$} node[left] {8} ++(up:10mm) ;
+	\draw (#2) ++(up:10mm) ++(left:10mm) to node {$\diagup$} node[left] {8} ++(up:5mm) ;
 	\draw (#2) ++(up:10mm) ++(right:10mm) to node {$\diagup$} node[left] {8} ++(up:10mm) ;
+	\draw (#2.east) ++(right:10mm) node (#2__ci) {0};
+	\draw (#2.east) -- (#2__ci);
+}
+
+\newcommand{\drawadderone}[4]{
+	\drawaddermodel{#1}{#2}{#3}
+	\draw (#2) ++(up:10mm) ++(left:10mm) to node {$\diagup$} node[left] {8} ++(up:5mm) ; ;
+	\draw (#2.east) ++(right:10mm) node (#2__ci) {1};
+	\draw (#2.east) -- (#2__ci);
 }
 
 \newcommand{\drawsubtractor}[4]{
 	\drawaddermodel{#1}{#2}{#3}
-	\draw (#2) ++(up:10mm) ++(left:10mm) to node {$\diagup$} node[left] {8} ++(up:20mm);
-	\draw (#2) ++(up:21.5mm) ++(right:10mm) node[not gate,point down] (#2__notgate) {#4 bit};
-	\draw (#2) ++(up:10mm) ++(right:10mm) to node {$\diagup$} node[left] {#4} (#2__notgate.output);
-	\draw (#2) ++(up:30mm) ++(right:10mm) to node {$\diagup$} node[left] {#4} (#2__notgate.input);
+	\draw (#2) ++(up:10mm) ++(left:10mm) to node {$\diagup$} node[left] {8} ++(up:5mm);
+	\draw (#2) ++(up:15mm) ++(right:20mm) node[not gate,point left] (#2__notgate) {\tiny #4bit};
+	\draw (#2) ++(up:10mm) ++(right:10mm) to node {$\diagup$} node[left] {#4} ++(up:5mm) -- (#2__notgate.output);
+	\draw (#2__notgate.input) -- ++(right:5mm) to node {$\diagup$} node[left] {#4} ++(up:5mm);
+	\draw (#2.east) ++(right:10mm) node (#2__ci) {1};
+	\draw (#2.east) -- (#2__ci);
 }

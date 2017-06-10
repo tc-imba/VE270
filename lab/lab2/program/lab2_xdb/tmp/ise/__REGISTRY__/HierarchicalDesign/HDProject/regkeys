@@ -2,7 +2,7 @@ CommandLine-Map
 
 s
 CommandLine-Ngdbuild
-
+/opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/ngdbuild -ise /home/liu/SJTU/VE270/lab/lab2/program/lab2.ise -intstyle ise -dd _ngo -nt timestamp -i -p xc3s1200e-fg320-4 SSD.ngc SSD.ngd
 s
 CommandLine-Par
 
@@ -11,7 +11,7 @@ CommandLine-Xst
 
 s
 Previous-NGD
-
+SSD_prev_built.ngd
 s
 Previous-NGM
 

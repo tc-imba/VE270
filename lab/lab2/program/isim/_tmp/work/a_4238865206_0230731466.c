@@ -20,7 +20,7 @@
 #include <malloc.h>
 #define alloca _alloca
 #endif
-static const char *ng0 = "/home/liu/VE270/lab/lab2/SSD_test.vhw";
+static const char *ng0 = "/home/liu/SJTU/VE270/lab/lab2/program/SSD_test.vhw";
 
 
 

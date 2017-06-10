@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : SSD_CC.vhf
--- /___/   /\     Timestamp : 06/06/2017 19:10:22
+-- /___/   /\     Timestamp : 06/10/2017 20:08:47
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab2/SSD_CC.sch SSD_CC.vhf
+--Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /home/liu/SJTU/VE270/lab/lab2/program/SSD_CC.sch SSD_CC.vhf
 --Design Name: SSD_CC
 --Device: spartan3e
 --Purpose:

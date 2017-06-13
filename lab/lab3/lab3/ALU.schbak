@@ -1,0 +1,109 @@
+VERSION 6
+BEGIN SCHEMATIC
+    BEGIN ATTR DeviceFamilyName "spartan3e"
+        DELETE all:0
+        EDITNAME all:0
+        EDITTRAIT all:0
+    END ATTR
+    BEGIN NETLIST
+        SIGNAL A0
+        SIGNAL A1
+        SIGNAL A2
+        SIGNAL A3
+        SIGNAL XLXN_5
+        SIGNAL XLXN_6
+        SIGNAL XLXN_7
+        SIGNAL XLXN_8
+        PORT Input A0
+        PORT Input A1
+        PORT Input A2
+        PORT Input A3
+        PORT Input XLXN_5
+        PORT Input XLXN_6
+        PORT Input XLXN_7
+        PORT Input XLXN_8
+        BEGIN BLOCKDEF add4
+            TIMESTAMP 2000 1 1 10 10 10
+            LINE N 112 -832 112 -804 
+            LINE N 64 -832 112 -832 
+            LINE N 0 -832 64 -832 
+            LINE N 0 -192 64 -192 
+            LINE N 448 -352 384 -352 
+            LINE N 448 -416 384 -416 
+            LINE N 448 -480 384 -480 
+            LINE N 448 -544 384 -544 
+            LINE N 0 -256 64 -256 
+            LINE N 0 -320 64 -320 
+            LINE N 0 -384 64 -384 
+            LINE N 0 -512 64 -512 
+            LINE N 0 -576 64 -576 
+            LINE N 0 -640 64 -640 
+            LINE N 0 -704 64 -704 
+            LINE N 240 -64 384 -64 
+            LINE N 240 -124 240 -64 
+            LINE N 336 -128 336 -148 
+            LINE N 384 -128 336 -128 
+            LINE N 384 -736 64 -816 
+            LINE N 384 -160 384 -736 
+            LINE N 64 -80 384 -160 
+            LINE N 64 -416 64 -80 
+            LINE N 144 -448 64 -416 
+            LINE N 64 -480 144 -448 
+            LINE N 64 -816 64 -480 
+            LINE N 448 -64 384 -64 
+            LINE N 448 -128 384 -128 
+        END BLOCKDEF
+        BEGIN BLOCK XLXI_1 add4
+            PIN A0 A0
+            PIN A1 A1
+            PIN A2 A2
+            PIN A3 A3
+            PIN B0 XLXN_5
+            PIN B1 XLXN_6
+            PIN B2 XLXN_7
+            PIN B3 XLXN_8
+            PIN CI
+            PIN CO
+            PIN OFL
+            PIN S0
+            PIN S1
+            PIN S2
+            PIN S3
+        END BLOCK
+    END NETLIST
+    BEGIN SHEET 1 3520 2720
+        INSTANCE XLXI_1 736 1600 R0
+        BEGIN BRANCH A0
+            WIRE 704 896 736 896
+        END BRANCH
+        IOMARKER 704 896 A0 R180 28
+        BEGIN BRANCH A1
+            WIRE 704 960 736 960
+        END BRANCH
+        IOMARKER 704 960 A1 R180 28
+        BEGIN BRANCH A2
+            WIRE 704 1024 736 1024
+        END BRANCH
+        IOMARKER 704 1024 A2 R180 28
+        BEGIN BRANCH A3
+            WIRE 704 1088 736 1088
+        END BRANCH
+        IOMARKER 704 1088 A3 R180 28
+        BEGIN BRANCH XLXN_5
+            WIRE 704 1216 736 1216
+        END BRANCH
+        IOMARKER 704 1216 XLXN_5 R180 28
+        BEGIN BRANCH XLXN_6
+            WIRE 704 1280 736 1280
+        END BRANCH
+        IOMARKER 704 1280 XLXN_6 R180 28
+        BEGIN BRANCH XLXN_7
+            WIRE 704 1344 736 1344
+        END BRANCH
+        IOMARKER 704 1344 XLXN_7 R180 28
+        BEGIN BRANCH XLXN_8
+            WIRE 704 1408 736 1408
+        END BRANCH
+        IOMARKER 704 1408 XLXN_8 R180 28
+    END SHEET
+END SCHEMATIC

@@ -7,7 +7,7 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : ALU.vhf
--- /___/   /\     Timestamp : 06/13/2017 20:37:10
+-- /___/   /\     Timestamp : 06/13/2017 20:29:54
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
@@ -223,22 +223,22 @@ library UNISIM;
 use UNISIM.Vcomponents.ALL;
 
 entity ALU is
-   port ( A0   : in    std_logic; 
-          A1   : in    std_logic; 
-          A2   : in    std_logic; 
-          A3   : in    std_logic; 
-          B0   : in    std_logic; 
-          B1   : in    std_logic; 
-          B2   : in    std_logic; 
-          B3   : in    std_logic; 
-          S0   : in    std_logic; 
-          S1   : in    std_logic; 
-          Cout : out   std_logic; 
-          C0   : out   std_logic; 
-          C1   : out   std_logic; 
-          C2   : out   std_logic; 
-          C3   : out   std_logic; 
-          OFL  : out   std_logic);
+   port ( A0    : in    std_logic; 
+          A1    : in    std_logic; 
+          A2    : in    std_logic; 
+          A3    : in    std_logic; 
+          B0    : in    std_logic; 
+          B1    : in    std_logic; 
+          B2    : in    std_logic; 
+          B3    : in    std_logic; 
+          S0_IN : in    std_logic; 
+          S1_IN : in    std_logic; 
+          Cout  : out   std_logic; 
+          C0    : out   std_logic; 
+          C1    : out   std_logic; 
+          C2    : out   std_logic; 
+          C3    : out   std_logic; 
+          OFL   : out   std_logic);
 end ALU;
 
 architecture BEHAVIORAL of ALU is
@@ -363,7 +363,7 @@ begin
                 B1=>XLXN_25,
                 B2=>XLXN_26,
                 B3=>XLXN_27,
-                CI=>S0,
+                CI=>S0_IN,
                 CO=>XLXN_123,
                 OFL=>OFL,
                 S0=>XLXN_132,
@@ -405,7 +405,7 @@ begin
    XLXI_27 : mux2
       port map (D0=>XLXN_123,
                 D1=>XLXN_109,
-                S=>S1,
+                S=>S1_IN,
                 C=>Cout);
    
    XLXI_28 : mux4
@@ -417,7 +417,7 @@ begin
                 B1=>XLXN_37,
                 B2=>XLXN_36,
                 B3=>XLXN_35,
-                S0=>S0,
+                S0=>S0_IN,
                 C0=>XLXN_24,
                 C1=>XLXN_25,
                 C2=>XLXN_26,
@@ -432,7 +432,7 @@ begin
                 B1=>XLXN_99,
                 B2=>XLXN_100,
                 B3=>XLXN_102,
-                S0=>S0,
+                S0=>S0_IN,
                 C0=>XLXN_104,
                 C1=>XLXN_105,
                 C2=>XLXN_106,
@@ -447,7 +447,7 @@ begin
                 B1=>XLXN_105,
                 B2=>XLXN_106,
                 B3=>XLXN_107,
-                S0=>S1,
+                S0=>S1_IN,
                 C0=>C0,
                 C1=>C1,
                 C2=>C2,

@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : and_4bit.vhf
--- /___/   /\     Timestamp : 06/13/2017 19:03:55
+-- /___/   /\     Timestamp : 06/13/2017 20:37:13
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: /opt/Xilinx/10.1/ISE/bin/lin64/unwrapped/sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w /home/liu/SJTU/VE270/lab/lab3/lab3/and_4bit.sch and_4bit.vhf
+--Command: C:\Xilinx\10.1\ISE\bin\nt\unwrapped\sch2vhdl.exe -intstyle ise -family spartan3e -flat -suppress -w C:/Users/MSY/Documents/VE270/lab/lab3/lab3/and_4bit.sch and_4bit.vhf
 --Design Name: and_4bit
 --Device: spartan3e
 --Purpose:

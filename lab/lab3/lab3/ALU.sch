@@ -6,12 +6,6 @@ BEGIN SCHEMATIC
         EDITTRAIT all:0
     END ATTR
     BEGIN NETLIST
-        SIGNAL XLXN_15
-        SIGNAL XLXN_30
-        SIGNAL XLXN_39
-        SIGNAL XLXN_40
-        SIGNAL XLXN_41
-        SIGNAL XLXN_42
         SIGNAL S0
         SIGNAL A0
         SIGNAL A1
@@ -34,22 +28,6 @@ BEGIN SCHEMATIC
         SIGNAL XLXN_46
         SIGNAL XLXN_47
         SIGNAL S1
-        SIGNAL XLXN_73
-        SIGNAL XLXN_74
-        SIGNAL XLXN_75
-        SIGNAL XLXN_76
-        SIGNAL XLXN_81
-        SIGNAL XLXN_82
-        SIGNAL XLXN_83
-        SIGNAL XLXN_84
-        SIGNAL XLXN_85
-        SIGNAL XLXN_86
-        SIGNAL XLXN_87
-        SIGNAL XLXN_88
-        SIGNAL XLXN_89
-        SIGNAL XLXN_90
-        SIGNAL XLXN_91
-        SIGNAL XLXN_92
         SIGNAL XLXN_94
         SIGNAL XLXN_95
         SIGNAL XLXN_96
@@ -58,7 +36,6 @@ BEGIN SCHEMATIC
         SIGNAL XLXN_99
         SIGNAL XLXN_100
         SIGNAL XLXN_102
-        SIGNAL XLXN_103
         SIGNAL XLXN_104
         SIGNAL XLXN_105
         SIGNAL XLXN_106
@@ -70,7 +47,7 @@ BEGIN SCHEMATIC
         SIGNAL C1
         SIGNAL C2
         SIGNAL C3
-        SIGNAL XLXN_118
+        SIGNAL XLXN_119
         PORT Input S0
         PORT Input A0
         PORT Input A1
@@ -215,12 +192,6 @@ BEGIN SCHEMATIC
             LINE N 64 -64 64 -80 
             LINE N 64 -128 64 -96 
         END BLOCKDEF
-        BEGIN BLOCKDEF vcc
-            TIMESTAMP 2000 1 1 10 10 10
-            LINE N 64 -32 64 -64 
-            LINE N 64 0 64 -32 
-            LINE N 96 -64 32 -64 
-        END BLOCKDEF
         BEGIN BLOCK XLXI_1 add4
             PIN A0 A0
             PIN A1 A1
@@ -232,7 +203,7 @@ BEGIN SCHEMATIC
             PIN B3 XLXN_27
             PIN CI S0
             PIN CO XLXN_108
-            PIN OFL XLXN_118
+            PIN OFL
             PIN S0 XLXN_44
             PIN S1 XLXN_45
             PIN S2 XLXN_46
@@ -329,9 +300,6 @@ BEGIN SCHEMATIC
         END BLOCK
         BEGIN BLOCK XLXI_22 gnd
             PIN G XLXN_109
-        END BLOCK
-        BEGIN BLOCK XLXI_23 vcc
-            PIN P XLXN_118
         END BLOCK
     END NETLIST
     BEGIN SHEET 1 3520 2720
@@ -559,7 +527,8 @@ BEGIN SCHEMATIC
         END BRANCH
         INSTANCE XLXI_22 1728 1232 R90
         BEGIN BRANCH Cout
-            WIRE 2304 1264 2336 1264
+            WIRE 2304 1264 2320 1264
+            WIRE 2320 1264 2336 1264
         END BRANCH
         IOMARKER 2336 1264 Cout R0 28
         BEGIN BRANCH C0
@@ -578,10 +547,5 @@ BEGIN SCHEMATIC
             WIRE 3088 944 3120 944
         END BRANCH
         IOMARKER 3120 944 C3 R0 28
-        BEGIN BRANCH XLXN_118
-            WIRE 1952 1168 1968 1168
-            WIRE 1968 1168 1984 1168
-        END BRANCH
-        INSTANCE XLXI_23 1920 1168 R0
     END SHEET
 END SCHEMATIC

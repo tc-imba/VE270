@@ -7,7 +7,7 @@
 -- \   \   \/     Version : 10.1
 --  \   \         Application : sch2vhdl
 --  /   /         Filename : ALU.vhf
--- /___/   /\     Timestamp : 06/13/2017 19:03:55
+-- /___/   /\     Timestamp : 06/13/2017 19:41:46
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
@@ -373,7 +373,6 @@ architecture BEHAVIORAL of ALU is
    signal XLXN_107 : std_logic;
    signal XLXN_108 : std_logic;
    signal XLXN_109 : std_logic;
-   signal XLXN_118 : std_logic;
    component ADD4_MXILINX_ALU
       port ( A0  : in    std_logic; 
              A1  : in    std_logic; 
@@ -461,11 +460,6 @@ architecture BEHAVIORAL of ALU is
    end component;
    attribute BOX_TYPE of GND : component is "BLACK_BOX";
    
-   component VCC
-      port ( P : out   std_logic);
-   end component;
-   attribute BOX_TYPE of VCC : component is "BLACK_BOX";
-   
    attribute HU_SET of XLXI_1 : label is "XLXI_1_0";
    attribute HU_SET of XLXI_10 : label is "XLXI_10_1";
    attribute HU_SET of XLXI_21 : label is "XLXI_21_2";
@@ -481,7 +475,7 @@ begin
                 B3=>XLXN_27,
                 CI=>S0,
                 CO=>XLXN_108,
-                OFL=>XLXN_118,
+                OFL=>open,
                 S0=>XLXN_44,
                 S1=>XLXN_45,
                 S2=>XLXN_46,
@@ -578,9 +572,6 @@ begin
    
    XLXI_22 : GND
       port map (G=>XLXN_109);
-   
-   XLXI_23 : VCC
-      port map (P=>XLXN_118);
    
 end BEHAVIORAL;
 

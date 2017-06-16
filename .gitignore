@@ -316,3 +316,7 @@ isim/
 *.vhw
 *.xwv_bak
 *.ant
+results.txt
+xilinxsim.ini
+isimwavedata.xwv
+.xwv

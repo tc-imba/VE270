@@ -296,3 +296,14 @@ xlnx_auto_0_xdb/
 xst/
 _ngo/
 _xmsgs/
+
+
+# other temp files
+
+*.exe
+*.docx#
+.wfs
+*.xwv
+*.cmd
+*.restore
+*_xdb

@@ -296,6 +296,7 @@ xlnx_auto_0_xdb/
 xst/
 _ngo/
 _xmsgs/
+isim/
 
 
 # other temp files
@@ -307,3 +308,11 @@ _xmsgs/
 *.cmd
 *.restore
 *_xdb
+# *.tbw
+*.jhd
+*.lfp
+*.vhd
+*.hdlsourcefiles
+*.ntrc_log
+*.vhf
+*.schlog

@@ -846,10 +846,7 @@ proc restore { { project_dir "" } } {
     AddUserFiles $iProjHelper $user_files
   } "A problem occured while restoring user files."
 
-  set imported_files { 
-      "Circuit1_guide.ncd" 
-      "tb_Full_Adder.xwv" 
-      "test2.xwv"}
+  set imported_files {}
 
   set origination 2
 

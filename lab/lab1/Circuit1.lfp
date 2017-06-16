@@ -1,5 +1,0 @@
-# begin LFP file C:\Users\MSY\Documents\VE270\lab\lab1\Circuit1.lfp
-designfile Circuit2.vhd
-parttype xc3s1200e-4-fg320
-bus_delimiter 0;
-set_busdelim_onsave 1;

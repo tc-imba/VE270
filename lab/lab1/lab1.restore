@@ -839,14 +839,16 @@ proc restore { { project_dir "" } } {
       "Circuit1.sch" 
       "Circuit2.sch" 
       "Circuit2.ucf" 
-      "tb_Full_Adder.tbw" 
-      "test2.tbw"}
+      "tb2_Full_Adder.tbw" 
+      "tb_Full_Adder.tbw"}
 
   HandleException {
     AddUserFiles $iProjHelper $user_files
   } "A problem occured while restoring user files."
 
-  set imported_files {}
+  set imported_files { 
+      "tb2_Full_Adder.xwv" 
+      "tb_Full_Adder.xwv"}
 
   set origination 2
 
@@ -861,7 +863,7 @@ proc restore { { project_dir "" } } {
       "A" "" "" "" "PROPEXT_xilxSynthAddBufg_spartan3e" "24" 
       "A" "" "" "" "PROPEXT_xilxSynthMaxFanout_virtex2" "500" 
       "A" "" "" "" "PROP_AutoGenFile" "false" 
-      "A" "" "" "" "PROP_BehavioralSimTop" "Module|test2" 
+      "A" "" "" "" "PROP_BehavioralSimTop" "Module|tb2_Full_Adder" 
       "A" "" "" "" "PROP_CPLDFitkeepio" "false" 
       "A" "" "" "" "PROP_CompxlibAbelLib" "true" 
       "A" "" "" "" "PROP_CompxlibCPLDDetLib" "true" 

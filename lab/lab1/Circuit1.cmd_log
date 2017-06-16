@@ -1,1 +1,3 @@
 sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "/home/liu/VE270/lab/lab1/Circuit1.sch" Circuit1.vhf
+sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "/home/liu/VE270/lab/lab1/Circuit1.sch" Circuit1.vhf
+sch2vhdl -intstyle ise -family spartan3e -flat -suppress -w "/home/liu/VE270/lab/lab1/Circuit1.sch" Circuit1.vhf

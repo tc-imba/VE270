@@ -297,18 +297,15 @@ xst/
 _ngo/
 _xmsgs/
 isim/
-
+*_xdb
 
 # other temp files
 
 *.exe
 *.docx#
 .wfs
-*.xwv
 *.cmd
 *.restore
-*_xdb
-# *.tbw
 *.jhd
 *.lfp
 *.vhd
@@ -316,3 +313,6 @@ isim/
 *.ntrc_log
 *.vhf
 *.schlog
+*.vhw
+*.xwv_bak
+*.ant

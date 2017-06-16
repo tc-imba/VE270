@@ -302,7 +302,7 @@ isim/
 # other temp files
 
 *.exe
-*.docx#
+*.doc*#
 .wfs
 *.cmd
 *.restore

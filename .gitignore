@@ -231,7 +231,7 @@ TSWLatexianTemp*
 ### XilinxISE template
 # intermediate build files
 *.bgn
-*.bit
+# *.bit
 *.bld
 *.cmd_log
 *.drc

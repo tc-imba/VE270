@@ -1,0 +1,7 @@
+NET "Q1"  LOC = "J15"  ;
+NET "updown"  LOC = "G18"  ;
+NET "Q2"  LOC = "K15"  ;
+NET "Q3"  LOC = "K14"  ;
+NET "Q0"  LOC = "J14"  ;
+NET "clear"  LOC = "H18"  ;
+NET "clk"  LOC = "B18"  ;

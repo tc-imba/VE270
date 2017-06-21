@@ -27,7 +27,6 @@ module Q5(counter, upper, clock);
     always @(posedge clock)
     begin
         counter = counter + 1;
-        if (counter[3]) upper = 1;
-        else upper = 0;
+        upper = counter[3];
     end
 endmodule

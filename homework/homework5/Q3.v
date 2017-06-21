@@ -26,10 +26,10 @@ module Q3(x, clock);
     reg f = f0;
     always @(posedge clock)
     begin
-        x[0] = x[1];
-        x[1] = x[2];
-        x[2] = x[3];
-        x[3] = f;
-        f = x[3] ^ x[0];
+        x[0] <= x[1];
+        x[1] <= x[2];
+        x[2] <= x[3];
+        x[3] <= f;
+        f <= x[3] ^ x[0];
     end
 endmodule

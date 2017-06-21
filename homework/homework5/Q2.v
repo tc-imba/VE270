@@ -19,7 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module Q2(Data_out, Data_in, clock, reset);
-	input [3:0] Data_in;
+    input [3:0] Data_in;
     input clock, reset;
     output [3:0] Data_out;
     d_flip_flop d0(Data_out[0], Data_in[0], clock, reset);

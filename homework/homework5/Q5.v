@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    01:54:31 06/17/2017 
+// Create Date:    21:52:47 06/21/2017 
 // Design Name: 
-// Module Name:    Q4_test 
+// Module Name:    Q5 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,17 +18,16 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Q4_test();
-    wire [3:0] counter; 
-    reg cnt, clear, set, clock;
-    Q4 UUT(counter, cnt, clear, set, clock);
-    initial begin
-        #0 cnt=0; clear=0; set=0; clock=0;
-        #20 clear=1;
-        #50 set=1; clear=0;
-        #50 set=0; 
-        #200 cnt=1;
+module Q5(counter, upper, clock);
+    output [3:0] counter;
+    output upper;
+    input clock;
+    reg [3:0] counter = 4'h0;
+    reg upper = 0;
+    always @(posedge clock)
+    begin
+        counter = counter + 1;
+        if (counter[3]) upper = 1;
+        else upper = 0;
     end
-    initial #1000 $stop;
-    always #25 clock = ~clock;
 endmodule

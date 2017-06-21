@@ -114,26 +114,14 @@ S0 & S1 & & F & Cout  \\\hline
 \label{algorithm-table}
 \end{table}
 
-According to the Table \ref{algorithm-table}, we designed the ALU circuit, shown in Figure \ref{design-alu}. \\
+According to the Table \ref{algorithm-table}, we designed the ALU circuit, shown in Figure \ref{design-counter}. \\
 
-%\begin{figure}[!htbp]
-%\centering
-%\includegraphics[width=0.8\linewidth]{alu.png}
-%\caption{Schematics design of ALU}
-%\label{design-alu}
-%\end{figure}
-
-The inner design of several symbols were shown in Figure \ref{design-inner}. \\
-
-%\begin{figure}[!hbtp]
-%\centering
-%\subfigure[1 bit 2x1 mux]{\includegraphics[width=0.5\linewidth]{mux2.png}}
-%\subfigure[8 bit 2x1 mux]{\includegraphics[width=0.45\linewidth]{mux4.png}}
-%\subfigure[8 bit and gate]{\includegraphics[width=0.4\linewidth]{and.png}}
-%\subfigure[8 bit or gate]{\includegraphics[width=0.4\linewidth]{or.png}}
-%\caption{Schematics design of symbols}
-%\label{design-inner}
-%\end{figure}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\linewidth]{counter.png}
+\caption{Schematics design of Counter}
+\label{design-counter}
+\end{figure}
 
 \newpage
 
@@ -166,7 +154,6 @@ We simulated the result of the overall system with input values in Table \ref{de
 We found the values in the simulation identical to Table \ref{def-table}.
 
 
-\newpage
 
 \section{Conclusion}
 In this lab, we successfully finished it finally, but we also met with some problems in the process. Some existing modules in ISE will cause error in the simulation and pace process, such as the inverse-4 and mux-4, so we have to build a new module ourselves. We practiced build a ALU with 2-bit select input signal and four kinds of  algorithms.

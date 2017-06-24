@@ -70,51 +70,36 @@ Design of a Simple Counter
 \newpage
 
 \section{Objectives}
-To design a simple datapath using combinational building blocks in Xilinx ISE, and to implement the circuit in an FPGA chip.
+To design a  FSM-Counter by both schematics and  HDL modeling.
 
 \section{Problem Definition}
-To form a Arithmetic and Logic Unit (ALU) which takes 4-bit input data and outputs the result(F and Cout). The algorithm being used is decided on the 2-input select signal. The algorithms are shown in Table \ref{def-table}.
-
-\begin{table}[!hbtp]
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-S0 & S1 & F & Cout & Example \\\hline
-0 & 0 & A$+$B & Carry out & A=1100, B=1110, F=1010, Cout=1 \\\hline
-0 & 1 & A$-$B & Carry out & A=1100, B=1110, F=1110, Cout=0 \\\hline
-1 & 0 & A and B & 0 & A=1100, B=1110, F=1100, Cout=0 \\\hline
-1 & 1 & A or B & 0 & A=1100, B=1110, F=1110, Cout=0 \\\hline
-\end{tabular}
-\caption{Overall truth table}
-\label{def-table}
-\end{table}
+To design a  4-bit up/down synchronous binary counter which is capable for 0 to 15 using 4 flip-flops sharing the same clock signal. It should be able to count up and down, controlled by an 1-bit inputting called “up/down” implemented by a switch. It is to increment when “up/down” signal is a binary 1 and to decrement if the signal is 0. There should be another input called “Reset” provided by a button. The counter should be 0 if the signal “Reset” is 1.
 
 \section{System Partitioning}
 \begin{enumerate}
-\item 8 Switches and 2 select signal buttons. Switches are used to input two 4-bit binary input A and B. The buttos are used to select the algorithm to be executed. Then the input signals will be transmitted to the inside circuit to calculate and come up with the result.
-\item Inside circuit. To receive the input signals and get the result. It will outputs some signals that controls the LED to illuminate.
-\item LED. LED is used as the output indicator. The illumination of different LED can indicate different different binary digit as the output F and Cout.
+\item Switches and buttons. Used to input signals like “Up/down mode choose”, “Reset” and the signals to count.
+\item Inside circuit. It is designed by using ISE and used to process the input signals and come up with output signals.
+\item LED. The output the digits got by the circuit by illuminating different segments of LED. The rule of illumination according to the output digits is the same as Lab 2.
 \end{enumerate}
 
 \section{Design Entry}
-The algorithm in this system was shown in Table \ref{algorithm-table}.
+The function of this system was shown in Table \ref{function-table}.
 
 \begin{table}[!hbtp]
 \centering
-\begin{tabular}{|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}|}
+\begin{tabular}{|p{2cm}<{\centering}|p{2cm}<{\centering}|p{4cm}<{\centering}|}
 \hline
-\multicolumn{2}{|c|}{Select signal} & \multirow{2}{*}{Algorithm} & \multicolumn{2}{c|}{Output} \\\cline{1-2}\cline{4-5}
-S0 & S1 & & F & Cout  \\\hline
-0 & 0 & Add & A$+$B & Carry out  \\\hline
-0 & 1 & Subtract & A$-$B & Carry out  \\\hline
-1 & 0 & And & A and B & 0  \\\hline
-1 & 1 & Or & A or B & 0  \\\hline
+\multicolumn{2}{|c|}{Input signals} & \multirow{2}{*}{Output (Count)}  \\\cline{1-2}
+Reset & Up/down & \\\hline
+1 & X & 0 \\\hline
+0 & 0 & Count+1 \\\hline
+0 & 1 & Count-1 \\\hline
 \end{tabular}
-\caption{Algorithm table}
-\label{algorithm-table}
+\caption{Function table}
+\label{function-table}
 \end{table}
 
-According to the Table \ref{algorithm-table}, we designed the ALU circuit, shown in Figure \ref{design-counter}. \\
+According to the Table \ref{function-table}, we designed the ALU circuit, shown in Figure \ref{design-counter}. \\
 
 \begin{figure}[!htbp]
 \centering
@@ -124,32 +109,68 @@ According to the Table \ref{algorithm-table}, we designed the ALU circuit, shown
 \end{figure}
 
 \newpage
+The rule of illumination according to the output (from Lab 2 SSD Driver) was shown in Figure \ref{ssd-fig} and Table \ref{ssd-table}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.65\linewidth]{SSD.jpg}
+\caption{SSD Definition}
+\label{ssd-fig}
+\end{figure}
+
+\begin{table}[!hbtp]
+\centering
+\begin{tabular}{|p{1cm}<{\centering}|p{1cm}<{\centering}|p{1cm}<{\centering}|p{1cm}<{\centering}|p{1cm}<{\centering}|p{1cm}<{\centering}|p{1cm}<{\centering}|p{1cm}<{\centering}|}
+\hline
+\multirow{2}{*}{Input} & \multicolumn{7}{c|}{ Outputs(LED segments) }\\\cline{2-8}
+& CA & CB & CC & CD & CE & CF & CG \\\hline
+0000 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\\hline
+0001 & 1 & 0 & 0 & 1 & 1 & 1 & 1 \\\hline
+0010 & 0 & 0 & 1 & 0 & 0 & 1 & 0 \\\hline
+0011 & 0 & 0 & 0 & 0 & 1 & 1 & 0 \\\hline
+0100 & 1 & 0 & 0 & 1 & 1 & 0 & 0 \\\hline
+0101 & 0 & 1 & 0 & 0 & 1 & 0 & 0 \\\hline
+0110 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\\hline
+0111 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\\hline
+1000 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
+1010 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\\hline
+1011 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\\hline
+1100 & 0 & 1 & 1 & 0 & 0 & 0 & 1 \\\hline
+1101 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\\hline
+1110 & 0 & 1 & 1 & 0 & 0 & 0 & 0 \\\hline
+1111 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\\hline
+\end{tabular}
+\caption{SSD truth table}
+\label{ssd-table}
+\end{table}
+
+
+
+\newpage
 
 \section{Test Plan}
 \begin{center}
 \begin{tabular}{|m{3cm}<{\centering}|m{10cm}|}
 \hline
 Test content & \multicolumn{1}{c|}{Test method} \\\hline
-CA & \multirow{7}{10cm}{Input signal that needs corresponding LED segment to illuminate, then observe if it illuminates. If it illuminates when corresponding signal inputted, this subsystem passes the test; otherwise it fails.} \\\cline{1-1}
-CB & \\\cline{1-1}
-CC & \\\cline{1-1}
-CD & \\\cline{1-1}
-CE & \\\cline{1-1}
-CF & \\\cline{1-1}
-CG & \\\hline
-The overall system & Input every kind of the 4-bit binary digit signal: 0001, 0010, 0011, 0100, 0101, 0110, 0111, 1000, 1001, then observe if LED displays the corresponding decimal digit:1,2,3,4,5,6,7,8,9. If so, the system passes the test; otherwise it fails. \\\hline
+ & \multirow{6}{10cm}{Switch the counter on up/down mode, then input an “count” signal, observe the output digit. \\[1em] 
+If the output digit gets larger by 1 in “up” mode/smaller by 1 in “down” mode, it passes the test, otherwise it fails.} \\
+Up Counter & \\ & \\\cline{1-1} & \\
+Down Counter & \\ & \\\hline
+Reset button & Input an “reset” signal by the  button, then observe the output digit.
+If the output digit becomes 0, it passes the test, otherwise it fails. \\\hline
 \end{tabular}
 \end{center}
 
 \section{Simulation Results}
-We simulated the result of the overall system with input values in Table \ref{def-table}, shown in Figure \ref{simulation}.
+We simulated the result of the overall system with input values in Table \ref{function-table}, shown in Figure \ref{simulation}.
 
-%\begin{figure}[!htbp]
-%\centering
-%\includegraphics[width=0.9\linewidth]{simulation.png}
-%\caption{Simulation of ALU}
-%\label{simulation}
-%\end{figure}
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.9\linewidth]{simulation.png}
+\caption{Simulation of Counter}
+\label{simulation}
+\end{figure}
 
 We found the values in the simulation identical to Table \ref{def-table}.
 

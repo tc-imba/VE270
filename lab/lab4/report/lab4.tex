@@ -172,12 +172,43 @@ We simulated the result of the overall system with input values in Table \ref{fu
 \label{simulation}
 \end{figure}
 
-We found the values in the simulation identical to Table \ref{def-table}.
+We found the values in the simulation identical to Table \ref{function-table}.
 
+\section{Hardware Implementation and Testing}
 
+We implemented the schematic part with the following .ucf file.\\
+
+\begin{minipage}{0.2\linewidth}\end{minipage}
+\begin{minipage}{0.7\linewidth}
+\inputminted{c}{../lab4/counter.ucf}
+\end{minipage}
+\ \\
+
+We implemented the verilog part with the following .ucf file.\\
+
+\begin{minipage}{0.2\linewidth}\end{minipage}
+\begin{minipage}{0.7\linewidth}
+\inputminted{c}{../lab4/counter_verilog.ucf}
+\end{minipage}
+\ \\
+
+Some of the hardware testing pictures was shown in Figure \ref{test-fig}.
+
+\begin{figure}[!htbp]
+\centering
+\subfigure[]{\includegraphics[width=0.45\linewidth]{1.jpg}}
+\subfigure[]{\includegraphics[width=0.45\linewidth]{2.jpg}}
+\subfigure[]{\includegraphics[width=0.45\linewidth]{3.jpg}}
+\subfigure[]{\includegraphics[width=0.45\linewidth]{4.jpg}}
+\subfigure[]{\includegraphics[width=0.45\linewidth]{5.jpg}}
+\caption{Testing pictures for verilog design}
+\label{test-fig}
+\end{figure}
+
+\newpage
 
 \section{Conclusion}
-In this lab, we successfully finished it finally, but we also met with some problems in the process. Some existing modules in ISE will cause error in the simulation and pace process, such as the inverse-4 and mux-4, so we have to build a new module ourselves. We practiced build a ALU with 2-bit select input signal and four kinds of  algorithms.
+In this lab, we made a counter which has “up/down” mode and a button “Reset”. We practiced using schematics and  HDL modeling. In the HDL code writing, we used the result from the previous lab(SSD) to implement the LED illumination to output the hex digit from 0 to F.
 
 \section{Appendix}
 The schematics of our design had been submitted to canvas before.

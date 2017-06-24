@@ -300,6 +300,7 @@ isim/
 *_xdb
 
 # other temp files
+.directory
 
 *.exe
 *.doc*#

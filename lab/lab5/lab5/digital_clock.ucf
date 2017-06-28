@@ -1,0 +1,14 @@
+# NET "clock" CLOCK_DEDICATED_ROUTE = FALSE;
+NET "clock"  LOC = "B8"  ;
+NET "reset"  LOC = "H18"  ;
+NET "C<0>"  LOC = "L18"  ;
+NET "C<1>"  LOC = "F18"  ;
+NET "C<2>"  LOC = "D17"  ;
+NET "C<3>"  LOC = "D16"  ;
+NET "C<4>"  LOC = "G14"  ;
+NET "C<5>"  LOC = "J17"  ;
+NET "C<6>"  LOC = "H14"  ;
+NET "AN<0>"  LOC = "F17"  ;
+NET "AN<1>"  LOC = "H17"  ;
+NET "AN<2>"  LOC = "C18"  ;
+NET "AN<3>"  LOC = "F15"  ;

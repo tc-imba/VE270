@@ -26,37 +26,51 @@
 \section{}
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
-	\foreach \i/\val in {1/11,2/14,3/8,4/1,5/5,6/9,7/15,8/15,9/3,10/3,11/9,12/14,13/0,14/0,15/0,16/7,17/2,18/7} {
-		\draw (\i*0.75,0) node {\val};
-		\ifnum \i<18
-			\draw (\i*0.75+0.375,0.375) -- ++(down:7.5mm);
-		\fi
+	%I
+	\draw (-2,-0.375) node {I};
+	\foreach \i/\val in {0/5,1/1,2/124,3/65,4/92,5/0,6/0,7/21}
+		\draw (2.5*0.75*\i+0.6,-0.375) node {\val};
+	\foreach \i in {0,...,6} {
+		\draw (2.5*0.75*\i+0.375,0) -- ++(right:1cm) -- ++($(right:2.5mm)+(down:7.5mm)$) -- ++(right:1cm);
+		\draw (2.5*0.75*\i+0.375,-0.75) -- ++(right:1cm) -- ++($(right:2.5mm)+(up:7.5mm)$) -- ++(right:1cm);
 	};
-	\draw (14.875,0.375) -- (0.125,0.375) -- (-0.375,0);
-	\draw (14.875,-0.375) -- (0.125,-0.375) -- (-0.375,0);
-	\foreach \i in {0,...,5} {
-		\draw (3*0.75*\i+0.375,-1.5+0.375) -- ++(right:1cm) -- ++(up:5mm) -- ++(right:2.5mm) -- ++(down:5mm) -- ++(right:1cm);
+	\draw (0.375,0) -- ++(left:0.5cm) -- ++($(left:1.25mm)+(down:3.75mm)$);
+	\draw (0.375,-0.75) -- ++(left:0.5cm) -- ++($(left:1.25mm)+(up:3.75mm)$);
+	\draw (-0.25,-0.375) -- ++(left:1cm);
+	\draw (13.875,0) -- ++(right:0.5cm) -- ++($(right:1.25mm)+(down:3.75mm)$);
+	\draw (13.875,-0.75) -- ++(right:0.5cm) -- ++($(right:1.25mm)+(up:3.75mm)$);
+	\draw (14.5,-0.375) -- ++(right:1cm);
+	
+	%ld
+	\draw (-2,-1.375) node {ld};
+	\draw (-1.25,-2+0.375) -- ++(right:1.75cm) -- ++(up:5mm) -- ++(right:4.25cm) -- ++(down:5mm) -- ++(right:6cm) -- ++(up:5mm) -- ++(right:1.75cm) -- ++(down:5mm) -- ++(right:3cm);
+	
+	%clr
+	\draw (-2,-2.375) node {clr};
+	\draw (-1.25,-3+0.375) -- ++(right:6.75cm) -- ++(up:5mm) -- ++(right:3.25cm) -- ++(down:5mm) -- ++(right:4cm) -- ++(up:5mm) -- ++(right:0.5cm) -- ++(down:5mm) -- ++(right:2.25cm);	
+	
+	%clk
+	\draw (-2,-3.375) node {clk};
+	\foreach \i in {0,...,7} {
+		\draw (2.5*0.75*\i-0.5,-4+0.375) -- ++(right:7.5mm) -- ++(up:5mm) -- ++(right:5mm) -- ++(down:5mm) -- ++(right:7.5mm);
 	};
-	\draw (0.375,-1.5+0.375) -- ++(left:1cm) (13.875,-1.5+0.375) -- ++(right:1cm);
-	\foreach \j in {0,1,2} {
-		\foreach \i in {0,...,5} {
-			\draw (3*0.75*\i+0.375,-1.5-\j) -- ++(right:1cm) -- ++($(right:2.5mm)+(down:7.5mm)$) -- ++(right:1cm);
-			\draw (3*0.75*\i+0.375,-2.25-\j) -- ++(right:1cm) -- ++($(right:2.5mm)+(up:7.5mm)$) -- ++(right:1cm);
-		};
-		\draw (0.375,-1.5-\j) -- ++(left:1cm) (13.875,-1.5-\j) -- ++(right:1cm);
-		\draw (0.375,-2.25-\j) -- ++(left:1cm) (13.875,-2.25-\j) -- ++(right:1cm);
+	\draw (-0.25,-4+0.375) -- ++(left:1cm) (13.875+0.75,-4+0.375) -- ++(right:1cm);
+	
+	%Q
+	\draw (-2,-4.375) node {Q};
+	\foreach \i/\val in {0/X,1/1,2/124,3/0}
+		\draw (2.5*0.75*\i+1.5,-4.375) node {\val};
+	\foreach \i in {0,...,2} {
+		\draw (2.5*0.75*\i+1.25,-4) -- ++(right:1cm) -- ++($(right:2.5mm)+(down:7.5mm)$) -- ++(right:1cm);
+		\draw (2.5*0.75*\i+1.25,-4.75) -- ++(right:1cm) -- ++($(right:2.5mm)+(up:7.5mm)$) -- ++(right:1cm);
 	};
-	\foreach \i/\val in {0/X,1/14,2/5,3/15,4/9,5/0,6/2}
-		\draw (3*0.75*\i+0.375,-1.875) node {\val};
-	\foreach \i/\val in {0/X,1/X,2/14,3/5,4/15,5/9,6/0} {
-		\draw (3*0.75*\i+0.375,-2.875) node {\val};
-		\draw (3*0.75*\i+0.375,-3.875) node {\val};
-	};
-	\draw (-1.5,0) node {$a_3\dots a_0$};
-	\draw (-1.5,-0.875) node {$C$};
-	\draw (-1.5,-1.875) node {$b_3\dots b_0$};
-	\draw (-1.5,-2.875) node {$c_3\dots c_0$};
-	\draw (-1.5,-3.875) node {$d_3\dots d_0$};
+	\draw (1.25,-4) -- ++(left:1.375cm) -- ++($(left:1.25mm)+(down:3.75mm)$);
+	\draw (1.25,-4.75) -- ++(left:1.375cm) -- ++($(left:1.25mm)+(up:3.75mm)$);
+	\draw (-0.25,-4.375) -- ++(left:1cm);
+	\draw (6.875,-4) -- ++(right:7.5cm) -- ++($(right:1.25mm)+(down:3.75mm)$);
+	\draw (6.875,-4.75) -- ++(right:7.5cm) -- ++($(right:1.25mm)+(up:3.75mm)$);
+	\draw (14.5,-4.375) -- ++(right:1cm);
+	
 \end{tikzpicture}
 \end{center}
 
@@ -110,27 +124,30 @@ a};
 \begin{tikzpicture}[circuit logic US]
 	\draw (0,0) node (c) [draw,shape=rectangle,minimum height=5cm,minimum width=3cm,text width=1cm,align=center] {7-bit up counter};
 	\foreach \i in {0,...,6} {
-		\draw (c) ++(left:1.25cm) ++(up:0.5*\i-1) node {$D_\i$};
+		%\draw (c) ++(left:1.25cm) ++(up:0.5*\i-1) node {$D_\i$};
 		\draw (c) ++(right:1.25cm) ++(up:0.5*\i-1) node {$Q_\i$};
-		\draw (c) ++(left:2.5cm) ++(up:0.5*\i-1) node (g\i) {0};
-		\draw (c) ++(left:1.5cm) ++(up:0.5*\i-1) -- (g\i);
+%		\draw (c) ++(left:2.5cm) ++(up:0.5*\i-1) node (g\i) {0};
+%		\draw (c) ++(left:1.5cm) ++(up:0.5*\i-1) -- (g\i);
 	};
-	\draw (c) ++(left:1.1cm) ++(down:1.5) node {load};
+	\draw (c) ++(left:1.1cm) ++(down:1.5) node {clear};
 	\draw (c) ++(left:1.5cm) ++(down:1.75) -- ++($(right:5mm)+(down:2.5mm)$) -- ++($(left:5mm)+(down:2.5mm)$);
-	\draw (c) ++(down:2.25cm) node {reset};
+	%\draw (c) ++(down:2.25cm) node {reset};
 	\draw (3.5,1.5) node (g) [and gate,scale=2,inputs=nnn] {};
 	\draw (1.5,2) -- ++(right:6mm) |- (g.input 1);
 	\draw (1.5,1.5) -- (g.input 2);
 	\draw (1.5,-0.5) -- ++(right:6mm) |- (g.input 3);
 	\draw (g.output) -- ++(right:1cm) -- ++(up:2cm) -- ++(left:9cm) |- (-1.5,-1.5);
-	\drawdflipflop{(5,-1.5)}{dfp}{D flip flop};
-	\draw (2.75,-1.25) node (rst) {reset};
-	\draw (rst) -- (4,-1.25);
+%	\drawdflipflop{(5,-1.5)}{dfp}{D flip flop};
+%	\draw (2.75,-1.25) node (rst) {reset};
+%	\draw (rst) -- (4,-1.25);
 	\draw (-3.5,-2) node (clk) {clock};
 	\draw (clk) -- (-1.5,-2);
-	\filldraw (-2.25,-2) circle [radius=0.5mm];
-	\draw (-2.25,-2) -- ++(down:1cm) -- ++(right:5.5cm) |- (4,-1.75);
-	\draw (6,-1.75) -- ++(right:1cm) -- ++(down:1.75cm) -| (0,-2.5);
+%	\filldraw (-2.25,-2) circle [radius=0.5mm];
+%	\draw (-2.25,-2) -- ++(down:1cm) -- ++(right:5.5cm) |- (4,-1.75);
+%	\draw (6,-1.75) -- ++(right:1cm) -- ++(down:1.75cm) -| (0,-2.5);
+	\draw (g.output) ++(right:2.5cm) node (Q) {Q};
+	\draw (g.output) -- (Q);
+	\filldraw (g.output) ++(right:1cm) circle [radius=0.5mm];
 \end{tikzpicture}
 \end{center}
 \item \
@@ -153,6 +170,10 @@ a};
 	\draw (g.output) -- ++(right:1cm) -- ++(up:2cm) -- ++(left:9cm) |- (-1.5,-1.5);
 	\draw (-3.5,-2) node (clk) {clock};
 	\draw (clk) -- (-1.5,-2);
+	\draw (g.output) ++(right:2.5cm) node (Q) {Q};
+	\draw (g.output) -- (Q);
+	\filldraw (g.output) ++(right:1cm) circle [radius=0.5mm];
+
 \end{tikzpicture}
 \end{center}
 \end{enumerate}

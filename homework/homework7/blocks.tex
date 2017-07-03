@@ -1,0 +1,39 @@
+\newcommand{\drawdflipflop}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(left:7.5mm) ++(up:2.5mm) node {$D$};
+	\draw (#2) ++(left:6.54mm) ++(down:2.5mm) -- ++($(left:3.46mm)+(down:2mm)$);
+	\draw (#2) ++(left:6.54mm) ++(down:2.5mm) -- ++($(left:3.46mm)+(up:2mm)$);
+	\draw (#2) ++(right:7.5mm) ++(down:2.5mm) node {$Q$} ++(up:5mm) node {$Q'$}
+	++(right:3.5mm) circle [radius=1mm];
+}
+\newcommand{\drawregister}[4]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {#3};
+	\draw (#2) ++(up:7.5mm) node {I};
+	\draw (#2) to node {$\diagup$} node[left] {#4} ++(up:15mm);
+	\draw (#2) ++(down:7.5mm) node {Q};
+	\draw (#2) to node {$\diagup$} node[left] {#4} ++(down:15mm);
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
+}
+\newcommand{\drawmuxfour}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=3cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(left:7.5mm) ++(up:7.5mm) node {$i_0$} ++(down:5mm) node {$i_1$} ++(down:5mm) node {$i_2$} ++(down:5mm) node {$i_3$};
+	\draw (#2) ++(down:12.5mm)++(left:3.33mm) node {$s_1$} ++(right:6.66mm) node {$s_0$};
+	\draw (#2) ++(right:7.5mm) node {$d$};
+}
+
+\newcommand{\drawshifter}[4]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=1cm,minimum width=4cm,text width=2cm,align=center] {#3};
+	\draw (#2) ++(left:17.5mm) node {sh};
+	\draw (#2) ++(right:17.5mm) node {in};
+	\draw (#2) to node {$\diagup$} node[left] {#4} ++(up:10mm);
+	\draw (#2) to node {$\diagup$} node[left] {#4} ++(down:10mm);
+}
+
+\newcommand{\drawshiftreg}[4]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {#3};
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
+	\draw (#2) ++(right:12.5mm) node {in};
+	\draw (#2.south) to node {$\diagup$} node[left] {#4} ++(down:5mm);
+}

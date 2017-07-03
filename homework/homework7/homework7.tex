@@ -1,0 +1,167 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{circuits.logic.US}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=3.0cm}
+\renewcommand{\thesection}{Problem \arabic{section}.}
+\title{VE270 Homework 7}
+\author{Liu Yihao 515370910207}
+\date{}
+
+\input{blocks}
+
+\begin{document}
+\maketitle
+
+\section{}
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,0.5) node (io) {Inputs: $X$; Outputs: $Y$};
+	\draw (0,-1) node (wait) [draw,shape=circle,minimum size=1.25cm] {Wait};
+	\node [left] at (wait.west) {$Y=0$};
+	\draw (0,-3) node (on1) [draw,shape=circle,minimum size=1.25cm] {On1};
+	\node [below] at (on1.south) {$Y=1$};
+	\draw (2,-3) node (on2) [draw,shape=circle,minimum size=1.25cm] {On2};
+	\node [below] at (on2.south) {$Y=1$};
+	\draw (4,-3) node (end) [draw,shape=circle,minimum size=1.25cm] {End};
+	\node [below] at (end.south) {$Y=0$};
+
+	\draw[->] (wait) edge [loop right] node {$X'$} ();
+	\draw[->] (wait) edge [bend right=45] node [left] {$X$} (on1);
+	\draw[->] (on1) edge [bend left=45] node {} (on2);
+	\draw[->] (on2) edge [bend left=45] node [above] {$X$} (end);
+	\draw[->] (on2.north) [bend right=22.5] edge node [above] {$X'$} (wait.south);
+	\draw[->] (end) edge [loop right] node {$X$} ();
+	\draw[->] (end) edge [bend right=45] node [above] {$X'$} (wait.north);
+\end{tikzpicture}
+\end{center}
+
+\section{}
+Encode the states: Wait: 00, On1: 01, On2: 10, End: 03.
+
+
+\begin{center}
+\begin{tikzpicture}
+	%\draw (0,0) node [draw,shape=rectangle,text width=2cm,align=center] {2-bit state register};
+	\drawregister{(0,0)}{r}{2-bit state register}{2};
+	
+\end{tikzpicture}
+\end{center}
+
+\section{}
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,3) node (io) {Outputs: $x,y,z$};
+	\draw (-1.5,1.5) node(C1) [draw,shape=circle,minimum size=1.25cm] {C1};
+	\node [left] at (C1.west) {$xyz=000$};
+	\draw (1.5,1.5) node(C2) [draw,shape=circle,minimum size=1.25cm] {C2};
+	\node [right] at (C2.east) {$xyz=001$};
+	\draw (1.5,-1.5) node(C3) [draw,shape=circle,minimum size=1.25cm] {C3};
+	\node [right] at (C3.east) {$xyz=010$};
+	\draw (-1.5,-1.5) node(C4) [draw,shape=circle,minimum size=1.25cm] {C4};
+	\node [left] at (C4.west) {$xyz=100$};
+	\draw[->] (C1) edge [bend left=45] (C2);
+	\draw[->] (C2) edge [bend left=45] (C3);
+	\draw[->] (C3) edge [bend left=45] (C4);
+	\draw[->] (C4) edge [bend left=45] (C1);
+\end{tikzpicture}
+\end{center}
+
+\section{}
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,3) node (io) {Inputs: $I$; Outputs: $x,y,z$};
+	\draw (-1.5,1.5) node(C1) [draw,shape=circle,minimum size=1.25cm] {C1};
+	\node [left] at (C1.west) {$xyz=000$};
+	\draw (1.5,1.5) node(C2) [draw,shape=circle,minimum size=1.25cm] {C2};
+	\node [right] at (C2.east) {$xyz=001$};
+	\draw (1.5,-1.5) node(C3) [draw,shape=circle,minimum size=1.25cm] {C3};
+	\node [right] at (C3.east) {$xyz=010$};
+	\draw (-1.5,-1.5) node(C4) [draw,shape=circle,minimum size=1.25cm] {C4};
+	\node [left] at (C4.west) {$xyz=100$};
+	\draw[->] (C1) edge [bend left=45] node [below] {$I$} (C2);
+	\draw[->] (C2) edge [bend left=45] node [left] {$I$} (C3);
+	\draw[->] (C3) edge [bend left=45] node [above] {$I$} (C4);
+	\draw[->] (C4) edge [bend left=45] node [right] {$I$} (C1);
+	\draw[->] (C1) edge [in=300,out=330,loop] node [below right] {$I'$} ();
+	\draw[->] (C2) edge [in=210,out=240,loop] node [below left] {$I'$} ();
+	\draw[->] (C3) edge [in=120,out=150,loop] node [above left] {$I'$} ();
+	\draw[->] (C4) edge [in=30,out=60,loop] node [above right] {$I'$} ();
+\end{tikzpicture}
+\end{center}
+
+\section{}
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,3) node (io) {Inputs: $I$; Outputs: $x,y,z$};
+	\draw (-1.5,1.5) node(C1) [draw,shape=circle,minimum size=1.25cm] {C1};
+	\node [left] at (C1.west) {$xyz=000$};
+	\draw (1.5,1.5) node(C2) [draw,shape=circle,minimum size=1.25cm] {C2};
+	\node [right] at (C2.east) {$xyz=001$};
+	\draw (1.5,-1.5) node(C3) [draw,shape=circle,minimum size=1.25cm] {C3};
+	\node [right] at (C3.east) {$xyz=010$};
+	\draw (-1.5,-1.5) node(C4) [draw,shape=circle,minimum size=1.25cm] {C4};
+	\node [left] at (C4.west) {$xyz=100$};
+	\draw[->] (C1) edge [bend left=45] node [below] {$I$} (C2);
+	\draw[->] (C2) edge [bend left=45] node [left] {$I$} (C3);
+	\draw[->] (C3) edge [bend left=45] node [above] {$I$} (C4);
+	\draw[->] (C4) edge [bend left=45] node [right] {$I$} (C1);
+	\draw[->] (C1) edge [in=120,out=150,loop] node [above left] {$I'$} ();
+	\draw[->] (C2) edge node [below] {$I'$} (C1);
+	\draw[->] (C3) edge node [above right] {$I'$} (C1);
+	\draw[->] (C4) edge node [right] {$I'$} (C1);
+\end{tikzpicture}
+\end{center}
+
+\section{}
+
+\section{}
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,5.5) node (io) {Inputs: $B$; Outputs: $s_1,s_0$};
+	\draw (-2.5,2.5) node (C1) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Time};
+	\node [left] at (C1.west) {$s_1s_0=00$};
+	\draw (0,3.5) node (W2) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Alarm (Wait)};
+	\node [above] at (W2.north) {$s_1s_0=01$};
+	\draw (2.5,2.5) node (C2) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Alarm};
+	\node [right] at (C2.east) {$s_1s_0=01$};
+	\draw (3.5,0) node (W3) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Stop watch (Wait)};
+	\node [right] at (W3.east) {$s_1s_0=10$};
+	\draw (2.5,-2.5) node (C3) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Stop watch};
+	\node [right] at (C3.east) {$s_1s_0=10$};
+	\draw (0,-3.5) node (W4) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Date (Wait)};
+	\node [below] at (W4.south) {$s_1s_0=11$};
+	\draw (-2.5,-2.5) node (C4) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Date};
+	\node [left] at (C4.west) {$s_1s_0=11$};
+	\draw (-3.5,0) node (W1) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Time (Wait)};
+	\node [left] at (W1.west) {$s_1s_0=00$};
+	\draw[->] (C1) edge [bend left=30] node [above] {$B$} (W2);
+	\draw[->] (W2) edge [bend left=30] node [above] {$B'$} (C2);
+	\draw[->] (C2) edge [bend left=30] node [right] {$B$} (W3);
+	\draw[->] (W3) edge [bend left=30] node [right] {$B'$} (C3);
+	\draw[->] (C3) edge [bend left=30] node [below] {$B$} (W4);
+	\draw[->] (W4) edge [bend left=30] node [below] {$B'$} (C4);
+	\draw[->] (C4) edge [bend left=30] node [left] {$B$} (W1);
+	\draw[->] (W1) edge [bend left=30] node [left] {$B'$} (C1);
+	\draw[->] (C1) edge [in=300,out=330,loop] node [below right] {$B'$} ();
+	\draw[->] (W2) edge [loop below] node [below] {$B$} ();
+	\draw[->] (C2) edge [in=210,out=240,loop] node [below left] {$B'$} ();
+	\draw[->] (W3) edge [loop left] node [left] {$B$} ();
+	\draw[->] (C3) edge [in=120,out=150,loop] node [above left] {$B'$} ();
+	\draw[->] (W4) edge [loop above] node [above] {$B$} ();
+	\draw[->] (C4) edge [in=30,out=60,loop] node [above right] {$B'$} ();
+	\draw[->] (W1) edge [loop right] node [right] {$B$} ();
+\end{tikzpicture}
+\end{center}
+
+
+\end{document}

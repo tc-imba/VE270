@@ -46,16 +46,22 @@
 \end{center}
 
 \section{}
-Encode the states: Wait: 00, On1: 01, On2: 10, End: 03.
+Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 
 
 \begin{center}
 \begin{tikzpicture}
 	%\draw (0,0) node [draw,shape=rectangle,text width=2cm,align=center] {2-bit state register};
 	\drawregister{(0,0)}{r}{2-bit state register}{2};
+	\draw (r.west) ++(left:1.5cm) node (clock) {clock};
+	\draw (r.west) -- (clock);
+	\draw (r.south) ++(down:5mm) to node [above] {$s_0$} ++(right:1.5cm);
+	\draw (r.south) -- ++(down:10mm) to node [above] {$s_1$}  ++(right:1.5cm);
 	
 \end{tikzpicture}
 \end{center}
+
+
 
 \section{}
 \begin{center}
@@ -102,23 +108,35 @@ Encode the states: Wait: 00, On1: 01, On2: 10, End: 03.
 \section{}
 \begin{center}
 \begin{tikzpicture}[>/.tip={Latex}]
-	\draw (0,3) node (io) {Inputs: $I$; Outputs: $x,y,z$};
-	\draw (-1.5,1.5) node(C1) [draw,shape=circle,minimum size=1.25cm] {C1};
+	\draw (0,4.5) node (io) {Inputs: $I$; Outputs: $x,y,z$};
+	\draw (-2.5,2.5) node(C1) [draw,shape=circle,minimum size=1.25cm] {C1};
 	\node [left] at (C1.west) {$xyz=000$};
-	\draw (1.5,1.5) node(C2) [draw,shape=circle,minimum size=1.25cm] {C2};
+	\draw (2.5,2.5) node(C2) [draw,shape=circle,minimum size=1.25cm] {C2};
 	\node [right] at (C2.east) {$xyz=001$};
-	\draw (1.5,-1.5) node(C3) [draw,shape=circle,minimum size=1.25cm] {C3};
+	\draw (1,1) node(W2) [draw,shape=circle,minimum size=1.25cm] {W2};
+	\node [right] at (W2.east) {$xyz=001$};
+	\draw (2.5,-2.5) node(C3) [draw,shape=circle,minimum size=1.25cm] {C3};
 	\node [right] at (C3.east) {$xyz=010$};
-	\draw (-1.5,-1.5) node(C4) [draw,shape=circle,minimum size=1.25cm] {C4};
+	\draw (1,-1) node(W3) [draw,shape=circle,minimum size=1.25cm] {W3};
+	\node [right] at (W3.east) {$xyz=010$};
+	\draw (-2.5,-2.5) node(C4) [draw,shape=circle,minimum size=1.25cm] {C4};
 	\node [left] at (C4.west) {$xyz=100$};
+	\draw (-1,-1) node(W4) [draw,shape=circle,minimum size=1.25cm] {W4};
+	\node [below] at (W4.south) {$xyz=100$};
 	\draw[->] (C1) edge [bend left=45] node [below] {$I$} (C2);
 	\draw[->] (C2) edge [bend left=45] node [left] {$I$} (C3);
 	\draw[->] (C3) edge [bend left=45] node [above] {$I$} (C4);
 	\draw[->] (C4) edge [bend left=45] node [right] {$I$} (C1);
 	\draw[->] (C1) edge [in=120,out=150,loop] node [above left] {$I'$} ();
-	\draw[->] (C2) edge node [below] {$I'$} (C1);
-	\draw[->] (C3) edge node [above right] {$I'$} (C1);
-	\draw[->] (C4) edge node [right] {$I'$} (C1);
+	\draw[->] (C2) edge [bend right=45] node [above] {$I'$} (W2);
+	\draw[->] (W2) edge [bend right=45] node [below left] {$I$} (C1);
+	\draw[->] (C3) edge [bend left=45] node [below left] {$I'$} (W3);
+	\draw[->] (W3) edge node {$I$} (C1);
+	\draw[->] (C4) edge [bend left=45] node [above left] {$I'$} (W4);
+	\draw[->] (W4) edge [bend left=45] node [above right] {$I$} (C1);
+	\draw[->] (W2) edge [loop left] node [right] {$I'$} ();
+	\draw[->] (W3) edge [in=30,out=60,loop] node [above right] {$I'$} ();
+	\draw[->] (W4) edge [loop above] node [below] {$I'$} ();
 \end{tikzpicture}
 \end{center}
 

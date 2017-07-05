@@ -17,8 +17,6 @@
 \author{Liu Yihao 515370910207}
 \date{}
 
-\input{blocks}
-
 \begin{document}
 \maketitle
 
@@ -42,42 +40,16 @@
 	\draw[->] (on2) [bend right=15] edge node [right] {$X'$} (wait);
 	\draw[->] (end) edge [loop right] node {$X$} ();
 	\draw[->] (end) edge [bend right=45] node [above] {$X'$} (wait.north);
+	
+	\draw (-2,0) node (init) {};
+	\draw[->] (init) edge (wait);
 \end{tikzpicture}
 \end{center}
 
 \section{}
-Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
+Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01. \\
 
-\begin{center}
-\begin{tikzpicture}
-	\drawfsmreigistertwo{(0,0)}{r}{2-bit state register}{2};
-	\draw (r.west) ++(left:1.5cm) node (clock) {clock};
-	\draw (r.west) -- (clock);
-	\draw (r.south) ++(left:5mm) -- ++(down:2cm) -- ++(right:1.5cm) node (s1){};
-	\draw (r.south) ++(right:5mm)-- ++(down:2.5cm) --  ++(right:1.5cm) node (s0){};
-	\draw (s1) ++(right:7cm) node (Y) {Y};
-	\draw (Y) -- ++(left:7cm);
-	\drawfsmmuxtwo{(r)++(right:6cm)}{m}{2-bit 4x2 mux};
-	\filldraw (m.south) ++(left:3.3mm) ++(down:0.5cm) circle [radius=0.5mm];
-	\draw (m.south) ++(left:3.3mm) -- ++(down:0.5cm);
-	\draw (m.south) ++(right:3.3mm) |- (s0.west);	
-	\draw (m.east) ++(up:2.5mm) -- ++(right:1cm) -- ++(up:3.25cm) -| ($(r.north)+(left:5mm)$);
-	\draw (m.east) ++(down:2.5mm) -- ++(right:1.5cm) -- ++(up:3.25cm) -| ($(r.north)+(right:5mm)$);
-	\draw (m.west) ++(up:17.5mm) ++(left:4cm) node (X) {$X$};
-	\draw (m.west) ++(up:12.5mm) ++(left:1cm) node (b0) {0};
-	\draw (m.west) ++(up:7.5mm) ++(left:1cm) node (a1) {0};
-	\draw (m.west) ++(down:2.5mm) ++(left:1cm) node (a2) {1};
-	\draw (m.west) ++(down:7.5mm) ++(left:1cm) node (b2) {1};
-	\draw (m.west) ++(down:12.5mm) ++(left:1cm) node (a3) {1};
-	\draw (b0) -- ++(right:1cm) (a1) -- ++(right:1cm) (a2) -- ++(right:1cm) (b2) -- ++(right:1cm) (a3) -- ++(right:1cm);
-	\draw (X) -- ++(right:4cm);
-	\draw (X) ++(right:1cm) |- ($(m.west)+(down:17.5mm)$);
-	\draw (X) ++(right:1cm) |- ($(m.west)+(up:2.5mm)$);
-	\filldraw (X) ++(right:1cm) circle [radius=0.5mm] ++(down:1.5cm) circle [radius=0.5mm];
-\end{tikzpicture}
-\end{center}
-
-
+\input{p2}
 
 \section{}
 \begin{center}
@@ -95,6 +67,9 @@ Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 	\draw[->] (C2) edge [bend left=45] (C3);
 	\draw[->] (C3) edge [bend left=45] (C4);
 	\draw[->] (C4) edge [bend left=45] (C1);
+	
+	\draw (-3,3) node (init) {};
+	\draw[->] (init) edge (C1);
 \end{tikzpicture}
 \end{center}
 
@@ -118,6 +93,9 @@ Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 	\draw[->] (C2) edge [in=210,out=240,loop] node [below left] {$I'$} ();
 	\draw[->] (C3) edge [in=120,out=150,loop] node [above left] {$I'$} ();
 	\draw[->] (C4) edge [in=30,out=60,loop] node [above right] {$I'$} ();
+	
+	\draw (-3,3) node (init) {};
+	\draw[->] (init) edge (C1);
 \end{tikzpicture}
 \end{center}
 
@@ -125,40 +103,46 @@ Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 \begin{center}
 \begin{tikzpicture}[>/.tip={Latex}]
 	\draw (0,4.5) node (io) {Inputs: $I$; Outputs: $x,y,z$};
-	\draw (-2.5,2.5) node(C1) [draw,shape=circle,minimum size=1.25cm] {C1};
+	\draw (-2.5,2.5) node (C1) [draw,shape=circle,minimum size=1.25cm] {C1};
 	\node [left] at (C1.west) {$xyz=000$};
-	\draw (2.5,2.5) node(C2) [draw,shape=circle,minimum size=1.25cm] {C2};
+	\draw (2.5,2.5) node (C2) [draw,shape=circle,minimum size=1.25cm] {C2};
 	\node [right] at (C2.east) {$xyz=001$};
-	\draw (1,1) node(W2) [draw,shape=circle,minimum size=1.25cm] {W2};
+	\draw (1,1) node (W2) [draw,shape=circle,minimum size=1.25cm] {W2};
 	\node [right] at (W2.east) {$xyz=001$};
-	\draw (2.5,-2.5) node(C3) [draw,shape=circle,minimum size=1.25cm] {C3};
+	\draw (2.5,-2.5) node (C3) [draw,shape=circle,minimum size=1.25cm] {C3};
 	\node [right] at (C3.east) {$xyz=010$};
-	\draw (1,-1) node(W3) [draw,shape=circle,minimum size=1.25cm] {W3};
+	\draw (1,-1) node (W3) [draw,shape=circle,minimum size=1.25cm] {W3};
 	\node [right] at (W3.east) {$xyz=010$};
-	\draw (-2.5,-2.5) node(C4) [draw,shape=circle,minimum size=1.25cm] {C4};
+	\draw (-2.5,-2.5) node (C4) [draw,shape=circle,minimum size=1.25cm] {C4};
 	\node [left] at (C4.west) {$xyz=100$};
-	\draw (-1,-1) node(W4) [draw,shape=circle,minimum size=1.25cm] {W4};
+	\draw (-1,-1) node (W4) [draw,shape=circle,minimum size=1.25cm] {W1};
 	\node [below] at (W4.south) {$xyz=100$};
+	
 	\draw[->] (C1) edge [bend left=45] node [below] {$I$} (C2);
 	\draw[->] (C2) edge [bend left=45] node [left] {$I$} (C3);
 	\draw[->] (C3) edge [bend left=45] node [above] {$I$} (C4);
 	\draw[->] (C4) edge [bend left=45] node [right] {$I$} (C1);
-	\draw[->] (C1) edge [in=120,out=150,loop] node [above left] {$I'$} ();
+	\draw[->] (C4) edge [in=210,out=240,loop] node [above left] {$I'$} ();
 	\draw[->] (C2) edge [bend right=45] node [above] {$I'$} (W2);
 	\draw[->] (W2) edge [bend right=45] node [below left] {$I$} (C1);
 	\draw[->] (C3) edge [bend left=45] node [below left] {$I'$} (W3);
-	\draw[->] (W3) edge node {$I$} (C1);
-	\draw[->] (C4) edge [bend left=45] node [above left] {$I'$} (W4);
-	\draw[->] (W4) edge [bend left=45] node [above right] {$I$} (C1);
+	\draw[->] (W3) edge [bend left=15] node [above right] {$I$} (C1);
+	\draw[->] (C1) edge [bend right=45] node [left] {$I'$} (W4);
+	\draw[->] (W4) edge node [left] {$I$} (C1);
 	\draw[->] (W2) edge [loop left] node [right] {$I'$} ();
 	\draw[->] (W3) edge [in=30,out=60,loop] node [above right] {$I'$} ();
-	\draw[->] (W4) edge [loop above] node [below] {$I'$} ();
+	\draw[->] (W4) edge [loop left] node [left] {$I'$} ();
+	
+	\draw (-4,4) node (init) {};
+	\draw[->] (init) edge (C1);
 \end{tikzpicture}
 \end{center}
 
+\newpage
+
 \section{}
 
-Encode the states ($s_2a_1s_0$): C1: 000, C2: 001, W2: 010, C3: 011, W3: 100, C4: 101.
+Encode the states ($s_2a_1s_0$): C1: 000, W1: 001, C2: 010, W2: 011, C3: 100, W3: 101, C4: 110. \\
 
 \input{p6}
 
@@ -183,6 +167,7 @@ Encode the states ($s_2a_1s_0$): C1: 000, C2: 001, W2: 010, C3: 011, W3: 100, C4
 	\node [left] at (C4.west) {$s_1s_0=11$};
 	\draw (-3.5,0) node (W1) [draw,shape=circle,minimum size=1.5cm,text width=1cm,align=center] {Time (Wait)};
 	\node [left] at (W1.west) {$s_1s_0=00$};
+	
 	\draw[->] (C1) edge [bend left=30] node [above] {$B$} (W2);
 	\draw[->] (W2) edge [bend left=30] node [above] {$B'$} (C2);
 	\draw[->] (C2) edge [bend left=30] node [right] {$B$} (W3);
@@ -199,8 +184,17 @@ Encode the states ($s_2a_1s_0$): C1: 000, C2: 001, W2: 010, C3: 011, W3: 100, C4
 	\draw[->] (W4) edge [loop above] node [above] {$B$} ();
 	\draw[->] (C4) edge [in=30,out=60,loop] node [above right] {$B'$} ();
 	\draw[->] (W1) edge [loop right] node [right] {$B$} ();
+	
+	\draw (-4,4) node (init) {};
+	\draw[->] (init) edge (C1);
 \end{tikzpicture}
 \end{center}
 
+Encode the states ($s_2s_1s_0$): Time (Wait): 000, Time: 001, Alarm (Wait): 010, Alarm: 011, Stopwatch (wait): 100, Stopwatch: 101, Date (Wait): 110, Date (Wait): 111. \\
+
+\input{p7}
+
+\section{}
+Same as Problem 7.
 
 \end{document}

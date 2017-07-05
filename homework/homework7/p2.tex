@@ -1,0 +1,82 @@
+The truth table is 
+
+\begin{center}
+\begin{tabular}{ccc|ccc}
+$s_{1}$ & $s_{0}$ & $X$ & $n_{1}$ & $n_{0}$ & $Y$ \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & 1 & 0 \\
+1 & 0 & 0 & 1 & 1 & 1 \\
+1 & 0 & 1 & 1 & 1 & 1 \\
+1 & 1 & 0 & 0 & 0 & 1 \\
+1 & 1 & 1 & 0 & 1 & 1 \\
+\end{tabular}
+\end{center}
+
+The euqations are 
+
+$$n_{1}=s_{0}'X+s_{1}s_{0}'$$
+$$n_{0}=s_{0}X+s_{1}s_{0}'$$
+$$Y=s_{1}$$
+
+
+The schematics is 
+
+\begin{center}
+\begin{tikzpicture}[circuit logic US]
+\draw (0,0) node (r) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {2-bit state register};
+\draw (-3,0) node (clock) {clock};\draw (clock) -- (r.west);\draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
+\draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
+\draw (r.west) ++(up:7.5mm) ++(right:10.000000mm) node {$s_1$};
+\draw (r.west) ++(down:7.5mm) ++(right:10.000000mm) node {$n_1$};
+\draw (r.west) ++(up:7.5mm) ++(right:20.000000mm) node {$s_0$};
+\draw (r.west) ++(down:7.5mm) ++(right:20.000000mm) node {$n_0$};
+\draw (-2.000000,0.750000) node {$X$};
+\draw (r.north) ++(up:1.000000cm) ++(right:2cm) node (and1) [and gate,inputs=nin] {};
+\draw (0.500000,1.000000) |- (and1.input 2) ;
+\draw (-2.000000,1.000000) |- (and1.input 3) ;
+\draw (r.north) ++(up:2.000000cm) ++(right:2cm) node (and2) [and gate,inputs=nin] {};
+\draw (-0.500000,1.000000) |- (and2.input 1) ;
+\draw (0.500000,1.000000) |- (and2.input 2) ;
+\draw (and1.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.500000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:1.500000cm) ++(right:4cm) node (or1) [or gate,inputs=nn] {};
+\draw (and1.output) -- ++(right:0.500000cm) |- (or1.input 2);
+\draw (and2.output) -- ++(right:0.500000cm) |- (or1.input 1);
+\draw (or1.output) -- (5.000000,2.500000);
+\draw (5.000000,2.500000) -- (5.000000,-1.500000) -| (-0.500000,-1);
+\draw (r.north) ++(up:3.000000cm) ++(right:2cm) node (and3) [and gate,inputs=nnn] {};
+\draw (0.500000,1.000000) |- (and3.input 2) ;
+\draw (-2.000000,1.000000) |- (and3.input 3) ;
+\draw (and2.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.500000,\y) circle [radius=0.5mm];
+\draw (and1.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-2.000000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:4.000000cm) ++(right:2cm) node (and4) [and gate,inputs=nin] {};
+\draw (-0.500000,1.000000) |- (and4.input 1) ;
+\draw (0.500000,1.000000) |- (and4.input 2) ;
+\draw (and2.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.500000,\y) circle [radius=0.5mm];
+\draw (and3.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.500000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:3.500000cm) ++(right:4cm) node (or2) [or gate,inputs=nn] {};
+\draw (and3.output) -- ++(right:0.500000cm) |- (or2.input 2);
+\draw (and4.output) -- ++(right:0.500000cm) |- (or2.input 1);
+\draw (or2.output) -- (6.000000,4.500000);
+\draw (6.000000,4.500000) -- (6.000000,-2.000000) -| (0.500000,-1);
+\draw (r.north) ++(up:5.000000cm) ++(right:2cm) node (and5) [buffer gate] {};
+\draw (-0.500000,1.000000) |- (and5.input) ;
+\draw (and4.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.500000,\y) circle [radius=0.5mm];
+\draw (and5.output) -- (5.750000,6.000000);
+\draw (6,6.000000) node {$Y$};
+\end{tikzpicture}
+\end{center}

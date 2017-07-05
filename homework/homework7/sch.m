@@ -3,9 +3,41 @@
 % Date: July 5, 2017
 % Latest update: July 5, 2017
 % 
-% This program is used to convert a truth table into some tex code to
+% This program is used to convert a truth table into some LaTeX code to
 % display it by a schemeatics and equations
+% 
+% Tikz package is required, and two tikzlibrary should be used in LaTeX
+%   \usepackage{tikz}
+%   \usetikzlibrary{circuits.logic.US}
+%   \usetikzlibrary{calc}
 %
+% Input file format:
+%   First line : size of state register
+%   Second line: input size and inputs
+%   Third line : output size and outputs
+%   Other lines: truth table 2^(size+input size) lines
+% 
+% For example:
+%   3               the state register is 3 bit (S2 S1 S0)=>(N2 N1 N0)
+%   1 I             input size is 1, I is the input
+%   3 X Y Z         output size is 3, X Y Z are the outputs
+%   0 0 1 0 0 0     S2 S1 S0 I=0000, N2 N1 N0 X Y Z=001000
+%   0 1 0 0 0 0     S2 S1 S0 I=0001, N2 N1 N0 X Y Z=010000
+%   0 0 1 0 0 0     S2 S1 S0 I=0010, N2 N1 N0 X Y Z=001000
+%   0 0 0 0 0 0     S2 S1 S0 I=0011, N2 N1 N0 X Y Z=000000
+%   0 1 1 0 0 1     S2 S1 S0 I=0100, N2 N1 N0 X Y Z=011001
+%   1 0 0 0 0 1     S2 S1 S0 I=0101, N2 N1 N0 X Y Z=100001
+%   0 1 1 0 0 1     S2 S1 S0 I=0110, N2 N1 N0 X Y Z=011001
+%   0 0 0 0 0 1     S2 S1 S0 I=0111, N2 N1 N0 X Y Z=000001
+%   1 0 1 0 1 0     S2 S1 S0 I=1000, N2 N1 N0 X Y Z=101010
+%   1 1 0 0 1 0     S2 S1 S0 I=1001, N2 N1 N0 X Y Z=110010
+%   1 0 1 0 1 0     S2 S1 S0 I=1010, N2 N1 N0 X Y Z=101010
+%   0 0 0 0 1 0     S2 S1 S0 I=1011, N2 N1 N0 X Y Z=000010
+%   1 1 0 1 0 0     S2 S1 S0 I=1100, N2 N1 N0 X Y Z=110100
+%   0 0 0 1 0 0     S2 S1 S0 I=1101, N2 N1 N0 X Y Z=000100
+%   - - - - - -     S2 S1 S0 I=1110, N2 N1 N0 X Y Z=XXXXXX
+%   - - - - - -     S2 S1 S0 I=1111, N2 N1 N0 X Y Z=XXXXXX
+% 
 % Acknowledgement: Using Petter Källström's minTruthtable
 % (https://mathworks.com/matlabcentral/fileexchange/37118)
 %
@@ -136,6 +168,9 @@ function sch(input, output)
     fprintf(fid, 'The schematics is \n\n');
     fprintf(fid, '\\begin{center}\n\\begin{tikzpicture}[circuit logic US]\n');
     fprintf(fid, '\\draw (0,0) node (r) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {%d-bit state register};\n', bit);
+    fprintf(fid, '\\draw (-3,0) node (clock) {clock};');
+    fprintf(fid, '\\draw (clock) -- (r.west);');
+    
     sep = 30/(bit+1);
     fprintf(fid, '\\draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);\n');
     fprintf(fid, '\\draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);\n');
@@ -152,11 +187,11 @@ function sch(input, output)
     in_y=[in_y ones(1,ni)];
 
     for i=1:ni
-        fprintf(fid, '\\draw (%f,%f) node {%s};\n', in_x(i+bit), in_y(i+bit)-0.25, char(inputs(i)));
+        fprintf(fid, '\\draw (%f,%f) node {$%s$};\n', in_x(i+bit), in_y(i+bit)-0.25, char(inputs(i)));
     end
 
     andgate_num = 0;
-    last_cross = zeros(1, bit+ni);
+    last_cross = zeros(2, bit+ni);
 
     for i=1:bit+no
         bins = minTruthtable(data(i,:), 'e');
@@ -164,24 +199,43 @@ function sch(input, output)
         for j=1:row
             andgate_num = andgate_num + 1;
             col = length(bins(j,:));
-            a = [];
-            for k=1:col
-                if (bins(j,k)=='0')
-                    a=[a,'i'];
+            i_num = find(bins(j,:)~='-');
+            if length(i_num)==1
+                if (bins(j,i_num)=='0')
+                    fprintf(fid, '\\draw (r.north) ++(up:%fcm) ++(right:2cm) node (and%d) [not gate] {};\n', andgate_num, andgate_num);
                 else
-                    a=[a,'n'];
+                    fprintf(fid, '\\draw (r.north) ++(up:%fcm) ++(right:2cm) node (and%d) [buffer gate] {};\n', andgate_num, andgate_num);
+                end
+                fprintf(fid, '\\draw (%f,%f) |- (and%d.input) ;\n', in_x(i_num), in_y(i_num), andgate_num);
+            else
+                a = [];
+                for k=1:col
+                    if (bins(j,k)=='0')
+                        a=[a,'i'];
+                    else
+                        a=[a,'n'];
+                    end
+                end
+                fprintf(fid, '\\draw (r.north) ++(up:%fcm) ++(right:2cm) node (and%d) [and gate,inputs=%s] {};\n', andgate_num, andgate_num, a);
+                for k=1:col
+                    if (bins(j,k)~='-')
+                        fprintf(fid, '\\draw (%f,%f) |- (and%d.input %d) ;\n', in_x(k), in_y(k), andgate_num, k);
+                    end
                 end
             end
-            fprintf(fid, '\\draw (r.north) ++(up:%fcm) ++(right:2cm) node (and%d) [and gate,inputs=%s] {};\n', andgate_num, andgate_num, a);
             for k=1:col
                 if (bins(j,k)~='-')
-                    fprintf(fid, '\\draw (%f,%f) |- (and%d.input %d) ;\n', in_x(k), in_y(k), andgate_num, k);
-                    if last_cross(k)~=0
-                        fprintf(fid, '\\draw (and%d.input %d) ;\n', last_cross(k), k);
+                    if last_cross(1,k)~=0
+                        if last_cross(2,k)>0
+                            fprintf(fid, '\\draw (and%d.input %d) ;\n', last_cross(1,k), k);
+                        else
+                            fprintf(fid, '\\draw (and%d.input) ;\n', last_cross(1,k));
+                        end
                         fprintf(fid, '\\pgfgetlastxy{\\x}{\\y};\n');
                         fprintf(fid, '\\filldraw (%f,\\y) circle [radius=0.5mm];\n', in_x(k));
                     end
-                    last_cross(k)=andgate_num;
+                    last_cross(1,k)=andgate_num;
+                    last_cross(2,k)=length(i_num);
                 end
             end
         end
@@ -209,7 +263,7 @@ function sch(input, output)
         if (i<=bit)
             fprintf(fid, '\\draw (%f,%f) -- (%f,%f) -| (%f,-1);\n', or_x, or_y, or_x, -1-0.5*i, in_x(i));
         else
-            fprintf(fid, '\\draw (6,%f) node {%s};\n', or_y, char(outputs(i-bit)));
+            fprintf(fid, '\\draw (6,%f) node {$%s$};\n', or_y, char(outputs(i-bit)));
         end
     end
 

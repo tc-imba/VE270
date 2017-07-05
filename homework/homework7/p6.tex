@@ -1,0 +1,13 @@
+\begin{center}
+\begin{tikzpicture}[circuit logic US]
+\draw (0,0) node (r) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {3-bit state register};
+\draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
+\draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
+\draw (r.west) ++(up:7.5mm) ++(right:7.500000mm) node {$n_2$};
+\draw (r.west) ++(down:7.5mm) ++(right:7.500000mm) node {$s_2$};
+\draw (r.west) ++(up:7.5mm) ++(right:15.000000mm) node {$n_1$};
+\draw (r.west) ++(down:7.5mm) ++(right:15.000000mm) node {$s_1$};
+\draw (r.west) ++(up:7.5mm) ++(right:22.500000mm) node {$n_0$};
+\draw (r.west) ++(down:7.5mm) ++(right:22.500000mm) node {$s_0$};
+\end{tikzpicture}
+\end{center}

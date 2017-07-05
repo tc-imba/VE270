@@ -160,35 +160,7 @@ Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 
 Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 
-\begin{center}
-\begin{tikzpicture}
-	\drawfsmreigistertwo{(0,0)}{r}{2-bit state register}{2};
-	\draw (r.west) ++(left:1.5cm) node (clock) {clock};
-	\draw (r.west) -- (clock);
-	\draw (r.south) ++(left:5mm) -- ++(down:2cm) -- ++(right:1.5cm) node (s1){};
-	\draw (r.south) ++(right:5mm)-- ++(down:2.5cm) --  ++(right:1.5cm) node (s0){};
-	\draw (s1) ++(right:7cm) node (Y) {Y};
-	\draw (Y) -- ++(left:7cm);
-	\drawfsmmuxtwo{(r)++(right:6cm)}{m}{2-bit 4x2 mux};
-	\filldraw (m.south) ++(left:3.3mm) ++(down:0.5cm) circle [radius=0.5mm];
-	\draw (m.south) ++(left:3.3mm) -- ++(down:0.5cm);
-	\draw (m.south) ++(right:3.3mm) |- (s0.west);	
-	\draw (m.east) ++(up:2.5mm) -- ++(right:1cm) -- ++(up:3.25cm) -| ($(r.north)+(left:5mm)$);
-	\draw (m.east) ++(down:2.5mm) -- ++(right:1.5cm) -- ++(up:3.25cm) -| ($(r.north)+(right:5mm)$);
-	\draw (m.west) ++(up:17.5mm) ++(left:4cm) node (X) {$X$};
-	\draw (m.west) ++(up:12.5mm) ++(left:1cm) node (b0) {0};
-	\draw (m.west) ++(up:7.5mm) ++(left:1cm) node (a1) {0};
-	\draw (m.west) ++(down:2.5mm) ++(left:1cm) node (a2) {1};
-	\draw (m.west) ++(down:7.5mm) ++(left:1cm) node (b2) {1};
-	\draw (m.west) ++(down:12.5mm) ++(left:1cm) node (a3) {1};
-	\draw (b0) -- ++(right:1cm) (a1) -- ++(right:1cm) (a2) -- ++(right:1cm) (b2) -- ++(right:1cm) (a3) -- ++(right:1cm);
-	\draw (X) -- ++(right:4cm);
-	\draw (X) ++(right:1cm) |- ($(m.west)+(down:17.5mm)$);
-	\draw (X) ++(right:1cm) |- ($(m.west)+(up:2.5mm)$);
-	\filldraw (X) ++(right:1cm) circle [radius=0.5mm] ++(down:1.5cm) circle [radius=0.5mm];
-\end{tikzpicture}
-\end{center}
-
+\input{p6}
 
 \section{}
 \begin{center}

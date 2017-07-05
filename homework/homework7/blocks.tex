@@ -1,3 +1,8 @@
+\newcommand{\drawbit}[4]{
+	\draw #1 to node {$\diagup$} node [#4] {#3} #2;
+}
+
+
 \newcommand{\drawdflipflop}[3]{
 	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=2cm,text width=1cm,align=center] {#3};
 	\draw (#2) ++(left:7.5mm) ++(up:2.5mm) node {$D$};
@@ -15,6 +20,25 @@
 	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
 	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
 }
+
+\newcommand{\drawfsmreigistertwo}[4]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {#3};
+	\draw (#2) ++(up:7.5mm) ++(right:5mm) node {$n_0$};
+	\draw (#2) ++(up:7.5mm) ++(left:5mm) node {$n_1$};
+	\draw (#2) ++(down:7.5mm) ++(right:5mm) node {$s_0$};
+	\draw (#2) ++(down:7.5mm) ++(left:5mm) node {$s_1$};
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
+}
+
+\newcommand{\drawfsmmuxtwo}[3]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=5cm,minimum width=2cm,text width=1cm,align=center] {#3};
+	\draw (#2) ++(left:7.5mm) ++(up:17.5mm) node {$a_0$} ++(down:5mm) node {$b_0$} ++(down:5mm) node {$a_1$} ++(down:5mm) node {$b_1$} ++(down:5mm) node {$a_2$} ++(down:5mm) node {$b_2$} ++(down:5mm) node {$a_3$} ++(down:5mm) node {$b_3$};
+	\draw (#2) ++(down:22.5mm)++(left:3.33mm) node {$s_1$} ++(right:6.66mm) node {$s_0$};
+	\draw (#2) ++(right:7.5mm) ++(up:2.5mm) node {$d_a$};
+	\draw (#2) ++(right:7.5mm) ++(down:2.5mm) node {$d_b$};
+}
+
 \newcommand{\drawmuxfour}[3]{
 	\draw #1 node (#2) [shape=rectangle,draw,minimum height=3cm,minimum width=2cm,text width=1cm,align=center] {#3};
 	\draw (#2) ++(left:7.5mm) ++(up:7.5mm) node {$i_0$} ++(down:5mm) node {$i_1$} ++(down:5mm) node {$i_2$} ++(down:5mm) node {$i_3$};

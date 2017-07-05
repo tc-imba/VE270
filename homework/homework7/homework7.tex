@@ -39,7 +39,7 @@
 	\draw[->] (wait) edge [bend right=45] node [left] {$X$} (on1);
 	\draw[->] (on1) edge [bend left=45] node {} (on2);
 	\draw[->] (on2) edge [bend left=45] node [above] {$X$} (end);
-	\draw[->] (on2.north) [bend right=22.5] edge node [above] {$X'$} (wait.south);
+	\draw[->] (on2) [bend right=15] edge node [right] {$X'$} (wait);
 	\draw[->] (end) edge [loop right] node {$X$} ();
 	\draw[->] (end) edge [bend right=45] node [above] {$X'$} (wait.north);
 \end{tikzpicture}
@@ -48,16 +48,32 @@
 \section{}
 Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 
-
 \begin{center}
 \begin{tikzpicture}
-	%\draw (0,0) node [draw,shape=rectangle,text width=2cm,align=center] {2-bit state register};
-	\drawregister{(0,0)}{r}{2-bit state register}{2};
+	\drawfsmreigistertwo{(0,0)}{r}{2-bit state register}{2};
 	\draw (r.west) ++(left:1.5cm) node (clock) {clock};
 	\draw (r.west) -- (clock);
-	\draw (r.south) ++(down:5mm) to node [above] {$s_0$} ++(right:1.5cm);
-	\draw (r.south) -- ++(down:10mm) to node [above] {$s_1$}  ++(right:1.5cm);
-	
+	\draw (r.south) ++(left:5mm) -- ++(down:2cm) -- ++(right:1.5cm) node (s1){};
+	\draw (r.south) ++(right:5mm)-- ++(down:2.5cm) --  ++(right:1.5cm) node (s0){};
+	\draw (s1) ++(right:7cm) node (Y) {Y};
+	\draw (Y) -- ++(left:7cm);
+	\drawfsmmuxtwo{(r)++(right:6cm)}{m}{2-bit 4x2 mux};
+	\filldraw (m.south) ++(left:3.3mm) ++(down:0.5cm) circle [radius=0.5mm];
+	\draw (m.south) ++(left:3.3mm) -- ++(down:0.5cm);
+	\draw (m.south) ++(right:3.3mm) |- (s0.west);	
+	\draw (m.east) ++(up:2.5mm) -- ++(right:1cm) -- ++(up:3.25cm) -| ($(r.north)+(left:5mm)$);
+	\draw (m.east) ++(down:2.5mm) -- ++(right:1.5cm) -- ++(up:3.25cm) -| ($(r.north)+(right:5mm)$);
+	\draw (m.west) ++(up:17.5mm) ++(left:4cm) node (X) {$X$};
+	\draw (m.west) ++(up:12.5mm) ++(left:1cm) node (b0) {0};
+	\draw (m.west) ++(up:7.5mm) ++(left:1cm) node (a1) {0};
+	\draw (m.west) ++(down:2.5mm) ++(left:1cm) node (a2) {1};
+	\draw (m.west) ++(down:7.5mm) ++(left:1cm) node (b2) {1};
+	\draw (m.west) ++(down:12.5mm) ++(left:1cm) node (a3) {1};
+	\draw (b0) -- ++(right:1cm) (a1) -- ++(right:1cm) (a2) -- ++(right:1cm) (b2) -- ++(right:1cm) (a3) -- ++(right:1cm);
+	\draw (X) -- ++(right:4cm);
+	\draw (X) ++(right:1cm) |- ($(m.west)+(down:17.5mm)$);
+	\draw (X) ++(right:1cm) |- ($(m.west)+(up:2.5mm)$);
+	\filldraw (X) ++(right:1cm) circle [radius=0.5mm] ++(down:1.5cm) circle [radius=0.5mm];
 \end{tikzpicture}
 \end{center}
 
@@ -141,6 +157,38 @@ Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
 \end{center}
 
 \section{}
+
+Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01.
+
+\begin{center}
+\begin{tikzpicture}
+	\drawfsmreigistertwo{(0,0)}{r}{2-bit state register}{2};
+	\draw (r.west) ++(left:1.5cm) node (clock) {clock};
+	\draw (r.west) -- (clock);
+	\draw (r.south) ++(left:5mm) -- ++(down:2cm) -- ++(right:1.5cm) node (s1){};
+	\draw (r.south) ++(right:5mm)-- ++(down:2.5cm) --  ++(right:1.5cm) node (s0){};
+	\draw (s1) ++(right:7cm) node (Y) {Y};
+	\draw (Y) -- ++(left:7cm);
+	\drawfsmmuxtwo{(r)++(right:6cm)}{m}{2-bit 4x2 mux};
+	\filldraw (m.south) ++(left:3.3mm) ++(down:0.5cm) circle [radius=0.5mm];
+	\draw (m.south) ++(left:3.3mm) -- ++(down:0.5cm);
+	\draw (m.south) ++(right:3.3mm) |- (s0.west);	
+	\draw (m.east) ++(up:2.5mm) -- ++(right:1cm) -- ++(up:3.25cm) -| ($(r.north)+(left:5mm)$);
+	\draw (m.east) ++(down:2.5mm) -- ++(right:1.5cm) -- ++(up:3.25cm) -| ($(r.north)+(right:5mm)$);
+	\draw (m.west) ++(up:17.5mm) ++(left:4cm) node (X) {$X$};
+	\draw (m.west) ++(up:12.5mm) ++(left:1cm) node (b0) {0};
+	\draw (m.west) ++(up:7.5mm) ++(left:1cm) node (a1) {0};
+	\draw (m.west) ++(down:2.5mm) ++(left:1cm) node (a2) {1};
+	\draw (m.west) ++(down:7.5mm) ++(left:1cm) node (b2) {1};
+	\draw (m.west) ++(down:12.5mm) ++(left:1cm) node (a3) {1};
+	\draw (b0) -- ++(right:1cm) (a1) -- ++(right:1cm) (a2) -- ++(right:1cm) (b2) -- ++(right:1cm) (a3) -- ++(right:1cm);
+	\draw (X) -- ++(right:4cm);
+	\draw (X) ++(right:1cm) |- ($(m.west)+(down:17.5mm)$);
+	\draw (X) ++(right:1cm) |- ($(m.west)+(up:2.5mm)$);
+	\filldraw (X) ++(right:1cm) circle [radius=0.5mm] ++(down:1.5cm) circle [radius=0.5mm];
+\end{tikzpicture}
+\end{center}
+
 
 \section{}
 \begin{center}

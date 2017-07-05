@@ -115,8 +115,8 @@ Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01. \\
 	\node [right] at (W3.east) {$xyz=010$};
 	\draw (-2.5,-2.5) node (C4) [draw,shape=circle,minimum size=1.25cm] {C4};
 	\node [left] at (C4.west) {$xyz=100$};
-	\draw (-1,-1) node (W4) [draw,shape=circle,minimum size=1.25cm] {W1};
-	\node [below] at (W4.south) {$xyz=100$};
+	\draw (-1,-1) node (W1) [draw,shape=circle,minimum size=1.25cm] {W1};
+	\node [below] at (W1.south) {$xyz=000$};
 	
 	\draw[->] (C1) edge [bend left=45] node [below] {$I$} (C2);
 	\draw[->] (C2) edge [bend left=45] node [left] {$I$} (C3);
@@ -127,11 +127,11 @@ Encode the states ($s_1s_0$): Wait: 00, On1: 10, On2: 11, End: 01. \\
 	\draw[->] (W2) edge [bend right=45] node [below left] {$I$} (C1);
 	\draw[->] (C3) edge [bend left=45] node [below left] {$I'$} (W3);
 	\draw[->] (W3) edge [bend left=15] node [above right] {$I$} (C1);
-	\draw[->] (C1) edge [bend right=45] node [left] {$I'$} (W4);
-	\draw[->] (W4) edge node [left] {$I$} (C1);
+	\draw[->] (C1) edge [bend right=45] node [left] {$I'$} (W1);
+	\draw[->] (W1) edge node [left] {$I$} (C1);
 	\draw[->] (W2) edge [loop left] node [right] {$I'$} ();
 	\draw[->] (W3) edge [in=30,out=60,loop] node [above right] {$I'$} ();
-	\draw[->] (W4) edge [loop left] node [left] {$I'$} ();
+	\draw[->] (W1) edge [loop left] node [left] {$I'$} ();
 	
 	\draw (-4,4) node (init) {};
 	\draw[->] (init) edge (C1);

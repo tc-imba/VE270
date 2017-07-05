@@ -3,12 +3,10 @@
 % Date: July 5, 2017
 % Latest update: July 5, 2017
 % 
-% This program is used to convert a truth table into some tex code to
-% display it by a schemeatics and equations
+% This program is used to convert a truth table into 
 %
-% Acknowledgement: Using Petter Källström's minTruthtable
-% (https://mathworks.com/matlabcentral/fileexchange/37118)
-%
+% Acknowledgement: This file is inspired by Andey Popov's function "minBool"
+% (http://www.tu-harburg.de/~rtsap/#Programs)
 
 function sch(input, output)
     fid = fopen(input, 'r');

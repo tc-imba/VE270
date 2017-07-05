@@ -1,13 +1,199 @@
+The truth table is 
+
+\begin{center}
+\begin{tabular}{cccc|cccccc}
+$s_{2}$ & $s_{1}$ & $s_{0}$ & $I$ & $n_{2}$ & $n_{1}$ & $n_{0}$ & $X$ & $Y$ & $Z$ \\
+\hline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 \\
+0 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+0 & 1 & 1 & 1 & 1 & 0 & 1 & 0 & 1 & 0 \\
+1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+1 & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+1 & 1 & 0 & 0 & X & X & X & X & X & X \\
+1 & 1 & 0 & 1 & X & X & X & X & X & X \\
+1 & 1 & 1 & 0 & X & X & X & X & X & X \\
+1 & 1 & 1 & 1 & X & X & X & X & X & X \\
+\end{tabular}
+\end{center}
+
+The euqations are 
+
+$$n_{2}=s_{1}s_{0}+s_{2}I'$$
+$$n_{1}=s_{2}'s_{1}'s_{0}+s_{1}s_{0}'I'$$
+$$n_{0}=s_{2}'s_{1}'I+s_{2}'s_{0}I+s_{2}s_{0}I'$$
+$$X=s_{2}s_{0}$$
+$$Y=s_{1}s_{0}+s_{2}s_{0}'$$
+$$Z=s_{2}'s_{1}'s_{0}+s_{1}s_{0}'$$
+
+
+The schematics is 
+
 \begin{center}
 \begin{tikzpicture}[circuit logic US]
 \draw (0,0) node (r) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {3-bit state register};
 \draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
 \draw (r) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
-\draw (r.west) ++(up:7.5mm) ++(right:7.500000mm) node {$n_2$};
-\draw (r.west) ++(down:7.5mm) ++(right:7.500000mm) node {$s_2$};
-\draw (r.west) ++(up:7.5mm) ++(right:15.000000mm) node {$n_1$};
-\draw (r.west) ++(down:7.5mm) ++(right:15.000000mm) node {$s_1$};
-\draw (r.west) ++(up:7.5mm) ++(right:22.500000mm) node {$n_0$};
-\draw (r.west) ++(down:7.5mm) ++(right:22.500000mm) node {$s_0$};
+\draw (r.west) ++(up:7.5mm) ++(right:7.500000mm) node {$s_2$};
+\draw (r.west) ++(down:7.5mm) ++(right:7.500000mm) node {$n_2$};
+\draw (r.west) ++(up:7.5mm) ++(right:15.000000mm) node {$s_1$};
+\draw (r.west) ++(down:7.5mm) ++(right:15.000000mm) node {$n_1$};
+\draw (r.west) ++(up:7.5mm) ++(right:22.500000mm) node {$s_0$};
+\draw (r.west) ++(down:7.5mm) ++(right:22.500000mm) node {$n_0$};
+\draw (-2.000000,0.750000) node {I};
+\draw (r.north) ++(up:1.000000cm) ++(right:2cm) node (and1) [and gate,inputs=nnnn] {};
+\draw (0.000000,1.000000) |- (and1.input 2) ;
+\draw (0.750000,1.000000) |- (and1.input 3) ;
+\draw (r.north) ++(up:2.000000cm) ++(right:2cm) node (and2) [and gate,inputs=nnni] {};
+\draw (-0.750000,1.000000) |- (and2.input 1) ;
+\draw (-2.000000,1.000000) |- (and2.input 4) ;
+\draw (r.north) ++(up:1.500000cm) ++(right:4cm) node (or1) [or gate,inputs=nn] {};
+\draw (and1.output) -- ++(right:0.500000cm) |- (or1.input 2);
+\draw (and2.output) -- ++(right:0.500000cm) |- (or1.input 1);
+\draw (or1.output) -- (5.000000,2.500000);
+\draw (5.000000,2.500000) -- (5.000000,-1.500000) -| (-0.750000,-1);
+\draw (r.north) ++(up:3.000000cm) ++(right:2cm) node (and3) [and gate,inputs=iinn] {};
+\draw (-0.750000,1.000000) |- (and3.input 1) ;
+\draw (and2.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.750000,\y) circle [radius=0.5mm];
+\draw (0.000000,1.000000) |- (and3.input 2) ;
+\draw (and1.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.000000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and3.input 3) ;
+\draw (and1.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:4.000000cm) ++(right:2cm) node (and4) [and gate,inputs=nnii] {};
+\draw (0.000000,1.000000) |- (and4.input 2) ;
+\draw (and3.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.000000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and4.input 3) ;
+\draw (and3.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (-2.000000,1.000000) |- (and4.input 4) ;
+\draw (and2.input 4) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-2.000000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:3.500000cm) ++(right:4cm) node (or2) [or gate,inputs=nn] {};
+\draw (and3.output) -- ++(right:0.500000cm) |- (or2.input 2);
+\draw (and4.output) -- ++(right:0.500000cm) |- (or2.input 1);
+\draw (or2.output) -- (5.500000,4.500000);
+\draw (5.500000,4.500000) -- (5.500000,-2.000000) -| (0.000000,-1);
+\draw (r.north) ++(up:5.000000cm) ++(right:2cm) node (and5) [and gate,inputs=iinn] {};
+\draw (-0.750000,1.000000) |- (and5.input 1) ;
+\draw (and3.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.750000,\y) circle [radius=0.5mm];
+\draw (0.000000,1.000000) |- (and5.input 2) ;
+\draw (and4.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.000000,\y) circle [radius=0.5mm];
+\draw (-2.000000,1.000000) |- (and5.input 4) ;
+\draw (and4.input 4) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-2.000000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:6.000000cm) ++(right:2cm) node (and6) [and gate,inputs=innn] {};
+\draw (-0.750000,1.000000) |- (and6.input 1) ;
+\draw (and5.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.750000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and6.input 3) ;
+\draw (and4.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (-2.000000,1.000000) |- (and6.input 4) ;
+\draw (and5.input 4) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-2.000000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:7.000000cm) ++(right:2cm) node (and7) [and gate,inputs=nnni] {};
+\draw (-0.750000,1.000000) |- (and7.input 1) ;
+\draw (and6.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.750000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and7.input 3) ;
+\draw (and6.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (-2.000000,1.000000) |- (and7.input 4) ;
+\draw (and6.input 4) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-2.000000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:6.000000cm) ++(right:4cm) node (or3) [or gate,inputs=nnn] {};
+\draw (and5.output) -- ++(right:0.500000cm) |- (or3.input 3);
+\draw (and6.output) -- ++(right:0.000000cm) |- (or3.input 2);
+\draw (and7.output) -- ++(right:0.500000cm) |- (or3.input 1);
+\draw (or3.output) -- (6.000000,7.000000);
+\draw (6.000000,7.000000) -- (6.000000,-2.500000) -| (0.750000,-1);
+\draw (r.north) ++(up:8.000000cm) ++(right:2cm) node (and8) [and gate,inputs=nnnn] {};
+\draw (-0.750000,1.000000) |- (and8.input 1) ;
+\draw (and7.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.750000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and8.input 3) ;
+\draw (and7.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (and8.output) -- (5.750000,9.000000);
+\draw (6,9.000000) node {X};
+\draw (r.north) ++(up:9.000000cm) ++(right:2cm) node (and9) [and gate,inputs=nnnn] {};
+\draw (0.000000,1.000000) |- (and9.input 2) ;
+\draw (and5.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.000000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and9.input 3) ;
+\draw (and8.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:10.000000cm) ++(right:2cm) node (and10) [and gate,inputs=nnin] {};
+\draw (-0.750000,1.000000) |- (and10.input 1) ;
+\draw (and8.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.750000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and10.input 3) ;
+\draw (and9.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:9.500000cm) ++(right:4cm) node (or5) [or gate,inputs=nn] {};
+\draw (and9.output) -- ++(right:0.500000cm) |- (or5.input 2);
+\draw (and10.output) -- ++(right:0.500000cm) |- (or5.input 1);
+\draw (or5.output) -- (5.750000,10.500000);
+\draw (6,10.500000) node {Y};
+\draw (r.north) ++(up:11.000000cm) ++(right:2cm) node (and11) [and gate,inputs=iinn] {};
+\draw (-0.750000,1.000000) |- (and11.input 1) ;
+\draw (and10.input 1) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (-0.750000,\y) circle [radius=0.5mm];
+\draw (0.000000,1.000000) |- (and11.input 2) ;
+\draw (and9.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.000000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and11.input 3) ;
+\draw (and10.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:12.000000cm) ++(right:2cm) node (and12) [and gate,inputs=nnin] {};
+\draw (0.000000,1.000000) |- (and12.input 2) ;
+\draw (and11.input 2) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.000000,\y) circle [radius=0.5mm];
+\draw (0.750000,1.000000) |- (and12.input 3) ;
+\draw (and11.input 3) ;
+\pgfgetlastxy{\x}{\y};
+\filldraw (0.750000,\y) circle [radius=0.5mm];
+\draw (r.north) ++(up:11.500000cm) ++(right:4cm) node (or6) [or gate,inputs=nn] {};
+\draw (and11.output) -- ++(right:0.500000cm) |- (or6.input 2);
+\draw (and12.output) -- ++(right:0.500000cm) |- (or6.input 1);
+\draw (or6.output) -- (5.750000,12.500000);
+\draw (6,12.500000) node {Z};
 \end{tikzpicture}
 \end{center}

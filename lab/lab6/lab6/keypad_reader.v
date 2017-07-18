@@ -30,12 +30,13 @@ module keypad_reader(col, C, AN, display, row, clock, reset);
     reg [2:0] state=0;
     reg [3:0] col=4'b1111;
     reg [3:0] display=4'b0000;
+    reg [3:0] col_saved, row_saved;
     reg or_row=0;
     clock_divider #(50000000) cd(clock_1, clock, reset);
-    keypad_encoder ke(code, AN, row, col, clock_1, reset);
+    keypad_encoder ke(code, AN, row_saved, col_saved, state, clock_1, reset);
     ssd_driver ssd(C, code);
     
-    always @(row) display=row;
+    always @(posedge clock_1) display=row;
     
     always @(posedge clock_1 or posedge reset) begin
         if (reset) begin    
@@ -54,6 +55,8 @@ module keypad_reader(col, C, AN, display, row, clock, reset);
                 3'd1: begin
                     if (or_row) begin 
                         state=5;
+                        col_saved=4'b0001;
+                        row_saved=row;
                         col=4'b1111;
                     end
                     else begin 
@@ -64,6 +67,8 @@ module keypad_reader(col, C, AN, display, row, clock, reset);
                 3'd2: begin
                     if (or_row) begin 
                         state=5;
+                        col_saved=4'b0010;
+                        row_saved=row;
                         col=4'b1111;
                     end
                     else begin 
@@ -74,6 +79,8 @@ module keypad_reader(col, C, AN, display, row, clock, reset);
                 3'd3: begin
                     if (or_row) begin 
                         state=5;
+                        col_saved=4'b0100;
+                        row_saved=row;
                         col=4'b1111;
                     end
                     else begin 
@@ -84,6 +91,8 @@ module keypad_reader(col, C, AN, display, row, clock, reset);
                 3'd4: begin
                     if (or_row) begin 
                         state=5;
+                        col_saved=4'b1000;
+                        row_saved=row;
                         col=4'b1111;
                     end
                     else begin 

@@ -122,12 +122,33 @@ Outputs: sum\_lt (whether sum<5099)
 \end{center}
 
 \section{}
+Step 1: HLSM Design
 
+Inputs: clr, CT, WT
+
+Outputs: alarm
+
+Local registers: reg1, reg2, reg3 reg4
 \begin{center}
-\begin{tikzpicture}
-	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm,text width=0.75cm,align=center] {Init};
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
+	\node [below,text width=1.5cm,align=center] at (init.south) {alarm:=0 reg1:=0 reg2:=0 reg3:=0 reg4:=0};
+	\draw (2,0) node (sample) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sample};
+	\node [below,text width=1.5cm,align=center] at (sample.south) {reg4:=reg3 reg3:=reg2 reg2:=reg1 reg1:=CT };
+	\draw (0,3) node (alarm)	 [draw,shape=circle,minimum size=1.25cm] {Alarm};
+	\node [below,text width=1.5cm,align=center] at (alarm.south) {alarm:=1};
+
+	\path[->] (init) edge [bend left=45] node [above] {clr'} (sample);
+	\path[->] (sample) edge [bend left=45] node [above] {clr} (init);
+	\path[->] (sample) edge [loop right] node [right] {clr' and $\dfrac{1}{4}$(reg1+reg2+reg3+reg4)<WT} (w1);
+	\path[->] (sample) edge [bend right=30] node [above right] {clr' and $\dfrac{1}{4}$(reg1+reg2+reg3+reg4)>=WT} (alarm);
+	\path[->] (alarm) edge [loop left] node {clr} ();
+	\path[->] (init) edge [loop left] node {clr} ();
+	\path[->] (alarm) edge [bend right=60] node [left] {clr'} (init);
 \end{tikzpicture}
 \end{center}
+
+Step 2: Datapath Design
 
 \begin{center}
 \begin{tikzpicture}
@@ -182,6 +203,52 @@ Outputs: sum\_lt (whether sum<5099)
 	}
 \end{tikzpicture}
 \end{center}
+
+Step 3: Connect the datapath to a controller
+
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (-2,0) node (ct) [shape=rectangle,draw,minimum height=3cm,minimum width=2cm] {Controller};
+	\draw (2,0) node (dp) [shape=rectangle,draw,minimum height=3cm,minimum width=2cm] {Datapath};
+	\draw (-4,2) node (clr) {clr};
+	\draw[->] (clr) -| (ct);
+	\draw[->] (clr) -| (dp);
+	\draw[->] (ct.east) ++(up:5mm) -- node [above] {ld} ($(dp.west)+(up:5mm)$);
+	\draw[->] (dp.west) ++(down:5mm) -- node [above] {avg\_lt\_wt} ($(ct.east)+(down:5mm)$);
+	\draw (dp.east) ++(up:5mm) ++(right:2cm) node (CT) {CT};
+	\draw (dp.east) ++(down:5mm) ++(right:2cm) node (WT) {WT};
+	\draw (ct.west) ++(left:2cm) node (alarm) {alarm};
+	\draw[->] (CT) -- node {$\diagup$} node [above] {16} ($(dp.east)+(up:5mm)$);
+	\draw[->] (WT) -- node {$\diagup$} node [above] {16} ($(dp.east)+(down:5mm)$);
+	\draw[->] (ct.west) -- (alarm);
+\end{tikzpicture}
+\end{center}
+
+Step 4: FSM Design
+
+Inputs: clr
+
+Outputs: alarm
+
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
+	\node [below,text width=1.5cm,align=center] at (init.south) {alarm=0};
+	\draw (2,0) node (sample) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sample};
+	\draw (0,3) node (alarm)	 [draw,shape=circle,minimum size=1.25cm] {Alarm};
+	\node [below,text width=1.5cm,align=center] at (alarm.south) {alarm=1};
+
+	\path[->] (init) edge [bend left=45] node [above] {clr'} (sample);
+	\path[->] (sample) edge [bend left=45] node [above] {clr} (init);
+	\path[->] (sample) edge [loop right] node [right] {clr'avg\_lt\_wt} (w1);
+	\path[->] (sample) edge [bend right=30] node [above right] {clr'avg\_lt\_wt'} (alarm);
+	\path[->] (alarm) edge [loop left] node {clr} ();
+	\path[->] (init) edge [loop left] node {clr} ();
+	\path[->] (alarm) edge [bend right=60] node [left] {clr'} (init);
+\end{tikzpicture}
+\end{center}
+
+\section{}
 
 
 \end{document}

@@ -135,23 +135,22 @@ Local registers: reg1, reg2, reg3 reg4
 	\node [below,text width=1.5cm,align=center] at (init.south) {alarm:=0 reg1:=0 reg2:=0 reg3:=0 reg4:=0};
 	\draw (2,0) node (sample) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sample};
 	\node [below,text width=1.5cm,align=center] at (sample.south) {reg4:=reg3 reg3:=reg2 reg2:=reg1 reg1:=CT };
-	\draw (0,3) node (alarm)	 [draw,shape=circle,minimum size=1.25cm] {Alarm};
-	\node [below,text width=1.5cm,align=center] at (alarm.south) {alarm:=1};
-
+	\draw (7,0) node (judge) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Judge};
+	\node [below] at (judge.south) {alarm:=$\dfrac{1}{4}$(reg1+reg2+reg3+reg4)>=WT};
 	\path[->] (init) edge [bend left=45] node [above] {clr'} (sample);
 	\path[->] (sample) edge [bend left=45] node [above] {clr} (init);
-	\path[->] (sample) edge [loop right] node [right] {clr' and $\dfrac{1}{4}$(reg1+reg2+reg3+reg4)<WT} (w1);
-	\path[->] (sample) edge [bend right=30] node [above right] {clr' and $\dfrac{1}{4}$(reg1+reg2+reg3+reg4)>=WT} (alarm);
-	\path[->] (alarm) edge [loop left] node {clr} ();
-	\path[->] (init) edge [loop left] node {clr} ();
-	\path[->] (alarm) edge [bend right=60] node [left] {clr'} (init);
+	\path[->] (sample) edge [bend left=15] node [above] {clr'} (judge);
+	\path[->] (judge) edge [bend left=15] node [above] {clr'} (sample);
+	\path[->] (judge) edge [bend right=60] node [above] {clr} (init);
+	\path[->] (init) edge [loop left] node {clr} ();	
+	\path[->] (-1,1) edge (init);
 \end{tikzpicture}
 \end{center}
 
 Step 2: Datapath Design
 
 \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[circuit logic US]
 	
 	\drawregister{(0,9)}{r1}{32-bit register}{32}
 	\drawregister{(0,6)}{r2}{32-bit register}{32}
@@ -166,7 +165,7 @@ Step 2: Datapath Design
 	\drawshifter{(4.5,-2.5)}{s2}{32-bit $>>$ 1}{32}
 	\drawshifter{(9.5,-2.5)}{s3}{32-bit $>>$ 1}{32}
 	
-	\drawcmp{(9.5,6)}{lt}{32-bit <}{32}
+	\drawcmp{(9.5,9)}{lt}{32-bit <}{32}
 	
 	
 	\draw (r1.south)++(down:5mm) -| ($(a1.north)+(left:5mm)$);
@@ -175,16 +174,17 @@ Step 2: Datapath Design
 	\draw (r4.south)++(down:5mm) -- ++(right:2.5cm) -- ++(up:3.5cm) -| ($(a2.north)+(right:5mm)$);
 	\draw (s1.south)++(down:5mm) -| ($(a3.north)+(left:5mm)$);
 	\draw (s2.south)++(down:5mm) -- ++(right:2.5cm) -- ++(up:5.5cm) -| ($(a3.north)+(right:5mm)$);
-	\draw (s3.south)++(down:5mm) -- ++(right:2.5cm) -- ++(up:11.5cm) -| ($(lt.north)+(left:5mm)$);
+	\draw (s3.south)++(down:5mm) -- ++(right:2.5cm) -- ++(up:14cm) -| ($(lt.north)+(left:5mm)$);
 	
 	\filldraw (r1.south)++(down:5mm) circle [radius=0.5mm];
 	\filldraw (r2.south)++(down:5mm) circle [radius=0.5mm];
 	\filldraw (r3.south)++(down:5mm) circle [radius=0.5mm];
 	
-	\draw (lt.north) ++(right:5mm) ++(up:2cm) node (WT) {WT};
+	\draw (lt.north) ++(right:5mm) ++(up:1.5cm) node (WT) {WT};
 	\draw (lt.north) ++(right:5mm) -- (WT);
-	\draw (lt.south) ++(down:1.5cm) node (avg_lt_wt) {avg\_lt\_wt};
-	\draw (lt.south) -- (avg_lt_wt);
+	\draw (lt.south) ++(down:1.5cm) node (g) [not gate, point down] {};
+	\draw (g.output) ++(down:1.5cm) node (alarm) {alarm};
+	\draw (lt.south) -- (g.input) (g.output) -- (alarm);
 	\draw (r1.north) ++(up:1.5cm) node (CT) {CT};
 	\draw (r1.north) -- (CT);
 	\draw (r1.east) ++(right:2cm) node (clock) {clock};
@@ -213,14 +213,13 @@ Step 3: Connect the datapath to a controller
 	\draw (-4,2) node (clr) {clr};
 	\draw[->] (clr) -| (ct);
 	\draw[->] (clr) -| (dp);
-	\draw[->] (ct.east) ++(up:5mm) -- node [above] {ld} ($(dp.west)+(up:5mm)$);
-	\draw[->] (dp.west) ++(down:5mm) -- node [above] {avg\_lt\_wt} ($(ct.east)+(down:5mm)$);
-	\draw (dp.east) ++(up:5mm) ++(right:2cm) node (CT) {CT};
-	\draw (dp.east) ++(down:5mm) ++(right:2cm) node (WT) {WT};
-	\draw (ct.west) ++(left:2cm) node (alarm) {alarm};
-	\draw[->] (CT) -- node {$\diagup$} node [above] {16} ($(dp.east)+(up:5mm)$);
-	\draw[->] (WT) -- node {$\diagup$} node [above] {16} ($(dp.east)+(down:5mm)$);
-	\draw[->] (ct.west) -- (alarm);
+	\draw[->] (ct.east) -- node [above] {ld} (dp.west);
+	\draw (dp.east) ++(up:10mm) ++(right:2cm) node (CT) {CT};
+	\draw (dp.east) ++(right:2cm) node (WT) {WT};
+	\draw (dp.east) ++(down:10mm) ++(right:2cm) node (alarm) {alarm};
+	\draw[->] (CT) -- node {$\diagup$} node [above] {16} ($(dp.east)+(up:10mm)$);
+	\draw[->] (dp.east) ++(down:10mm) -- (alarm);
+	\draw[->] (WT) -- node {$\diagup$} node [above] {16} (dp.east);
 \end{tikzpicture}
 \end{center}
 
@@ -228,23 +227,51 @@ Step 4: FSM Design
 
 Inputs: clr
 
-Outputs: alarm
+Outputs: ld
 
 \begin{center}
 \begin{tikzpicture}[>/.tip={Latex}]
 	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
-	\node [below,text width=1.5cm,align=center] at (init.south) {alarm=0};
+	\node [below,text width=1.5cm,align=center] at (init.south) {ld=0};
 	\draw (2,0) node (sample) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sample};
-	\draw (0,3) node (alarm)	 [draw,shape=circle,minimum size=1.25cm] {Alarm};
-	\node [below,text width=1.5cm,align=center] at (alarm.south) {alarm=1};
-
+	\node [below,text width=1.5cm,align=center] at (sample.south) {ld=1};
+	\draw (7,0) node (judge) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Judge};
+	\node [below] at (judge.south) {ld=0};
 	\path[->] (init) edge [bend left=45] node [above] {clr'} (sample);
 	\path[->] (sample) edge [bend left=45] node [above] {clr} (init);
-	\path[->] (sample) edge [loop right] node [right] {clr'avg\_lt\_wt} (w1);
-	\path[->] (sample) edge [bend right=30] node [above right] {clr'avg\_lt\_wt'} (alarm);
-	\path[->] (alarm) edge [loop left] node {clr} ();
+	\path[->] (sample) edge [bend left=15] node [above] {clr'} (judge);
+	\path[->] (judge) edge [bend left=15] node [above] {clr'} (sample);
+	\path[->] (judge) edge [bend right=60] node [above] {clr} (init);
 	\path[->] (init) edge [loop left] node {clr} ();
-	\path[->] (alarm) edge [bend right=60] node [left] {clr'} (init);
+	\path[->] (-1,1) edge (init);
+\end{tikzpicture}
+\end{center}
+
+\section{}
+Inputs: i\_lt16
+
+Outputs: i\_ld, i\_clr, s\_ld, s\_clr, a\_ld, a\_clr, avg\_ld, avg\_clr
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
+	\node [below,text width=1.5cm,align=center] at (init.south) {i\_ld=0 i\_clr=1 s\_ld=0 s\_clr=1 a\_ld=0 a\_clr=1 avg\_ld=0 avg\_clr=1};
+	\draw (2,0) node (index) [draw,shape=circle,minimum size=1.25cm] {Index};
+	\node [below,text width=1.5cm,align=center] at (index.south) {avg\_ld=0 i\_ld=1 i\_clr=0};
+	\draw (4,0) node (read) [draw,shape=circle,minimum size=1.25cm] {Read};
+	\node [below,text width=1.5cm,align=center] at (read.south) {i\_ld=0 a\_ld=1 a\_clr=0};
+	\draw (8,0) node (sum) [draw,shape=circle,minimum size=1.25cm] {Sum};
+	\node [below,text width=1.5cm,align=center] at (sum.south) {i\_ld=0 s\_ld=1 s\_clr=0};
+	\draw (10,0) node (avg) [draw,shape=circle,minimum size=1.25cm] {Avg};
+	\node [below,text width=1.5cm,align=center] at (avg.south) {s\_ld=0 avg\_ld=1 avg\_clr=0};
+	\draw (12,0) node (stop) [draw,shape=circle,minimum size=1.25cm] {Stop};
+	\node [above,text width=1.5cm,align=center] at (stop.north) {avg\_ld=0};
+	\path[->] (init) edge (index);
+	\path[->] (index) edge(read);
+	\path[->] (read) edge node [above] {i\_lt16} (sum);
+	\path[->] (read) edge [bend right=70] node [below] {i\_lt16'} (stop);
+	\path[->] (sum) edge (avg);
+	\path[->] (avg) edge [bend right=30] (index);
+	\path[->] (-1.5,0) edge (init);
 \end{tikzpicture}
 \end{center}
 

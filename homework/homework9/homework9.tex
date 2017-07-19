@@ -68,10 +68,18 @@
 	\draw (#2) to node {$\diagup$} node[left] {#4} ++(down:10mm);
 }
 
-\section{}
-Inputs: A, B, C, add\_s (0 for sum:=A+B and 1 for sum:=sum+C), sum\_ld, sum\_clr, sreg\_ld, sreg\_clr, clock
+\newcommand{\drawshiftreg}[4]{
+	\draw #1 node (#2) [shape=rectangle,draw,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {#3};
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
+	\draw (#2) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
+	\draw (#2) ++(right:12.5mm) node {in};
+	\draw (#2.south) to node {$\diagup$} node[left] {#4} ++(down:5mm);
+}
 
-Outputs: sum\_lt (whether sum<5099)
+\section{}
+Inputs: A (16 bits), B (16 bits), C (16 bits), add\_s (bit, 0 for sum:=A+B and 1 for sum:=sum+C), sum\_ld (bit), sum\_clr (bit), sreg\_ld (bit), sreg\_clr (bit), clock (bit)
+
+Outputs: sum\_lt (bit, whether sum<5099)
 
 \begin{center}
 \begin{tikzpicture}
@@ -124,11 +132,11 @@ Outputs: sum\_lt (whether sum<5099)
 \section{}
 Step 1: HLSM Design
 
-Inputs: clr, CT, WT
+Inputs: clr (bit), CT (32 bits), WT (32 bits)
 
-Outputs: alarm
+Outputs: alarm (bit)
 
-Local registers: reg1, reg2, reg3 reg4
+Local registers: reg1, reg2, reg3, reg4 (all 32 bits)
 \begin{center}
 \begin{tikzpicture}[>/.tip={Latex}]
 	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
@@ -290,7 +298,9 @@ Local registers: i (3 bits), r (8 bits)
 	\draw (3,0) node (in) [draw,shape=circle,minimum size=1.25cm] {In};
 	\draw (8,0) node (copy) [draw,shape=circle,minimum size=1.25cm] {Copy};
 	\draw (3,5) node (copy2) [draw,shape=circle,minimum size=1.25cm] {Copy2};
-	\node [below,text width=1.5cm,align=center] at (init.south) {i:=0};	
+	\node [below,text width=4cm,align=center] at (init.south) {For k=7 downto 1 do r[k]:=r[k-1]};
+	\draw (init.south)++(down:1.2cm) node {r[0]:=Data\_in};
+	\draw (init.south)++(down:1.65cm) node {i:=0};
 	\node [right,text width=1.5cm,align=center] at (copy2.east) {RxReg:=r};	
 	\node [below,text width=4cm,align=center] at (in.south) {For k=7 downto 1 do r[k]:=r[k-1]};
 	\draw (in.south)++(down:1.65cm) node {i:=i+1};
@@ -309,5 +319,81 @@ Local registers: i (3 bits), r (8 bits)
 	\path[->] (copy) edge [bend left=30] (in);
 \end{tikzpicture}
 \end{center}
+
+Step 2: Datapath Design
+
+\begin{center}
+\begin{tikzpicture}[circuit logic US]
+	\drawshiftreg{(0,0)}{s}{8-bit shift register}{8};
+	\drawregister{(0,-3)}{r}{8-bit register RxReg}{8};
+	\draw (-7.5,-3) node (c) [draw,shape=rectangle,minimum height=2cm,minimum width=3cm,text width=2cm,align=center] {3-bit up counter};
+	\draw (r.south) ++(down:7.5mm) node {RxReg};
+	\draw (c) ++(right:12.5mm) ++(down:5mm) node {$Q_0$};
+	\draw (c) ++(right:12.5mm) node {$Q_1$};
+	\draw (c) ++(right:12.5mm) ++(up:5mm) node {$Q_2$};
+	\draw (c) ++(left:11.54mm) -- ++($(left:3.46mm)+(down:2mm)$);
+	\draw (c) ++(left:11.54mm) -- ++($(left:3.46mm)+(up:2mm)$);
+	\draw (-4.5,-3) node (g) [nand gate,scale=2,inputs=nnn] {};
+	\draw (g.output) ++(right:5mm) ++(down:2.5cm) node (i_lt7) {i\_lt7};
+	\draw (g.output) -- ++(right:5mm) -- (i_lt7);
+	%\filldraw (g.output) ++(right:7.5mm) circle [radius=0.5mm];
+	\draw (r.west) ++(left:1cm) node (ld) {ld};
+	\draw (r.west) -- (ld);
+	\draw (c.east) ++(up:5mm) -- ++(right:5mm) |- (g.input 1);
+	\draw (c.east) -- (g.input 2);
+	\draw (c.east) ++(down:5mm) -- ++(right:5mm) |- (g.input 3);
+	\draw (-11,0) node (valid) {Valid};
+	\draw (valid) -- (s.west);
+	\filldraw (valid) ++(right:1cm) circle [radius=0.5mm];
+	\draw (valid) ++(right:1cm) |- (c.west);
+	\draw (3,0) node (in) {Data\_in};
+	\draw (in) -- (s.east);
+\end{tikzpicture}
+\end{center}
+
+Step 3: Connect the datapath to a controller
+
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (-2,0) node (ct) [shape=rectangle,draw,minimum height=3cm,minimum width=2cm] {Controller};
+	\draw (2,0) node (dp) [shape=rectangle,draw,minimum height=3cm,minimum width=2cm] {Datapath};
+	\draw (-4,2) node (clr) {Valid};
+	\draw[->] (clr) -| (ct);
+	\draw[->] (clr) -| (dp);
+	\draw[->] (ct.east) ++(up:5mm) -- node [above] {ld} ($(dp.west)+(up:5mm)$);
+	\draw[->] (dp.west) ++(down:5mm) -- node [above] {i\_lt7} ($(ct.east)+(down:5mm)$);
+	\draw (dp.east) ++(up:5mm) ++(right:2cm) node (in) {Data\_in};
+	\draw (dp.east) ++(down:5mm) ++(right:2cm) node (rxreg) {RxReg};
+	\draw[->] (in) --  ($(dp.east)+(up:5mm)$);
+	\draw[->] (dp.east) ++(down:5mm) -- node {$\diagup$} node [above] {8} (rxreg);
+\end{tikzpicture}
+\end{center}
+
+Step 4: FSM Design
+
+Inputs: Valid, i\_lt7
+
+Outputs: ld
+
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
+	\draw (3,0) node (in) [draw,shape=circle,minimum size=1.25cm] {In};
+	\draw (8,0) node (copy) [draw,shape=circle,minimum size=1.25cm] {Copy};
+	\draw (3,5) node (copy2) [draw,shape=circle,minimum size=1.25cm] {Copy2};
+	\node [below,text width=4cm,align=center] at (init.south) {ld=0};
+	\node [right,text width=1.5cm,align=center] at (copy2.east) {ld=1};	
+	\node [below,text width=4cm,align=center] at (in.south) {ld=0};
+	\node [below,text width=4cm,align=center] at (copy.south) {ld=1};
+	\path[->] (init) edge node [above] {Valid} (in);
+	\path[->] (init) edge [loop left] node {Valid'} ();
+	\path[->] (in) edge [loop right] node {i\_lt7} ();
+	\path[->] (in) edge [bend left=30] node [above] {Valid and i\_lt7'} (copy);
+	\path[->] (copy2) edge (init);
+	\path[->] (in) edge node [right] {Valid' and i\_lt7'} (copy2);
+	\path[->] (copy) edge [bend left=30] (in);
+\end{tikzpicture}
+\end{center}
+
 
 \end{document}

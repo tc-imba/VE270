@@ -266,7 +266,7 @@ Outputs: i\_ld, i\_clr, s\_ld, s\_clr, a\_ld, a\_clr, avg\_ld, avg\_clr
 	\draw (12,0) node (stop) [draw,shape=circle,minimum size=1.25cm] {Stop};
 	\node [above,text width=1.5cm,align=center] at (stop.north) {avg\_ld=0};
 	\path[->] (init) edge (index);
-	\path[->] (index) edge(read);
+	\path[->] (index) edge (read);
 	\path[->] (read) edge node [above] {i\_lt16} (sum);
 	\path[->] (read) edge [bend right=70] node [below] {i\_lt16'} (stop);
 	\path[->] (sum) edge (avg);
@@ -276,6 +276,38 @@ Outputs: i\_ld, i\_clr, s\_ld, s\_clr, a\_ld, a\_clr, avg\_ld, avg\_clr
 \end{center}
 
 \section{}
+Step 1: HLSM Design
 
+Inputs: Valid (bit), Data\_in (bit)
+
+Outputs: RxReg (8 bits)
+
+Local registers: i (3 bits), r (8 bits)
+
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
+	\draw (3,0) node (in) [draw,shape=circle,minimum size=1.25cm] {In};
+	\draw (8,0) node (copy) [draw,shape=circle,minimum size=1.25cm] {Copy};
+	\draw (3,5) node (copy2) [draw,shape=circle,minimum size=1.25cm] {Copy2};
+	\node [below,text width=1.5cm,align=center] at (init.south) {i:=0};	
+	\node [right,text width=1.5cm,align=center] at (copy2.east) {RxReg:=r};	
+	\node [below,text width=4cm,align=center] at (in.south) {For k=7 downto 1 do r[k]:=r[k-1]};
+	\draw (in.south)++(down:1.65cm) node {i:=i+1};
+	\draw (in.south)++(down:1.2cm) node {r[0]:=Data\_in};
+	\node [below,text width=4cm,align=center] at (copy.south) {For k=7 downto 1 do r[k]:=r[k-1]};
+	\draw (copy.south)++(down:1.2cm) node {RxReg:=r};
+	\draw (copy.south)++(down:1.65cm) node {r[0]:=Data\_in};
+	\draw (copy.south)++(down:2.1cm) node {i:=0};
+	
+	\path[->] (init) edge node [above] {Valid} (in);
+	\path[->] (init) edge [loop left] node {Valid'} ();
+	\path[->] (in) edge [loop right] node {i<7} ();
+	\path[->] (in) edge [bend left=30] node [above] {Valid and i>=7} (copy);
+	\path[->] (copy2) edge (init);
+	\path[->] (in) edge node [right] {Valid' and i>=7} (copy2);
+	\path[->] (copy) edge [bend left=30] (in);
+\end{tikzpicture}
+\end{center}
 
 \end{document}

@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{circuits.logic.US}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\geometry{left=3.0cm,right=3.0cm,top=3.0cm,bottom=3.0cm}
+\renewcommand{\thesection}{Problem \arabic{section}.}
+\newcommand{\unit}[1]{{\rm\,#1}}
+\title{VE270 Homework 10}
+\author{Liu Yihao 515370910207}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{}
+\begin{enumerate}[(a)]
+\item
+\input{p1}
+\item
+The critical path is the 16-bit up counter, so the delay is 5 ns.
+\item
+The maximum clock frequency is $1/5\unit{ns}=200\unit{MHz}$.
+\end{enumerate}
+
+\section{}
+The SRAM block can have $2^{32}\times8=34359738368$ bits in maximum.
+
+\section{}
+The approximate number of SRAM bit storage cells is $\lfloor 10000000/6 \rfloor=1666666$.
+
+\section{}
+SRAM cells have 6 transistors and is faster but DRAM cells have only 1 transistor and is slower. What's more, DRAM uses capacitor which discharges overtime so that it must be refreshed regularly, but SRAM needn't.
+
+\section{}
+EEPROMs are erased electronically, but flash memories can be erased simultaneously.
+
+\section{}
+ 
+
+\end{document}

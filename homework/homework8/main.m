@@ -1,3 +1,4 @@
+addpath('../sch');
 sch('p1.a.txt','p1.a.tex','tt','eq');
 sch('p1.c.txt','p1.c.tex');
 sch('p2.a.txt','p2.a.tex','tt','eq');

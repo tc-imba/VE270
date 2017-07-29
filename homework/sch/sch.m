@@ -1,7 +1,7 @@
 % function sch(input, output)
 % Author: tc-imba (https://github.com/tc-imba)
 % Date: July 5, 2017
-% Latest update: July 5, 2017
+% Latest update: July 29, 2017
 % 
 % This program is used to convert a truth table into some LaTeX code to
 % display it by a schemeatics and equations
@@ -242,7 +242,7 @@ function sch(input, output, varargin)
                 for k=1:col
                     if (bins(j,k)~='-')
                         if last_cross(1,k)~=0
-                            if last_cross(2,k)>0
+                            if last_cross(2,k)>1
                                 fprintf(fid, '\\draw (and%d.input %d) ;\n', last_cross(1,k), k);
                             else
                                 fprintf(fid, '\\draw (and%d.input) ;\n', last_cross(1,k));
@@ -271,15 +271,20 @@ function sch(input, output, varargin)
                     fprintf(fid, '\\draw (and%d.output) -- ++(right:%fcm) |- (or%d.input %d);\n', andgate_num-row+j, c*d(j), i, row+1-j);
                 end
                 or_y = or_y+1;
-                fprintf(fid, '\\draw (or%d.output) -- (%f,%f);\n', i, or_x, or_y);
+                if (i<=bit)
+                    fprintf(fid, '\\draw (or%d.output) -- (%f,%f) -- (%f,%f) -| (%f,-1);\n', i, or_x, or_y, or_x, -1-0.5*i, in_x(i));
+                else
+                    fprintf(fid, '\\draw (6,%f) node (out%d) {$%s$};\n', or_y, i-bit, char(outputs(i-bit)));
+                    fprintf(fid, '\\draw (or%d.output) -- (out%d);\n', andgate_num, i-bit);
+                end
             else
                 or_y = andgate_num+1;
-                fprintf(fid, '\\draw (and%d.output) -- (%f,%f);\n', andgate_num, or_x, or_y);
-            end
-            if (i<=bit)
-                fprintf(fid, '\\draw (%f,%f) -- (%f,%f) -| (%f,-1);\n', or_x, or_y, or_x, -1-0.5*i, in_x(i));
-            else
-                fprintf(fid, '\\draw (6,%f) node {$%s$};\n', or_y, char(outputs(i-bit)));
+                if (i<=bit)
+                    fprintf(fid, '\\draw (and%d.output) -- (%f,%f) -- (%f,%f) -| (%f,-1);\n', andgate_num, or_x, or_y, or_x, -1-0.5*i, in_x(i));
+                else
+                    fprintf(fid, '\\draw (6,%f) node (out%d) {$%s$};\n', or_y, i-bit, char(outputs(i-bit)));
+                    fprintf(fid, '\\draw (and%d.output) -- (out%d);\n', andgate_num, i-bit);
+                end
             end
         end
 

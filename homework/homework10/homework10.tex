@@ -24,7 +24,7 @@
 \section{}
 \begin{enumerate}[(a)]
 \item
-\input{p1}
+%\input{p1}
 \item
 The critical path is the 16-bit up counter, so the delay is 5 ns.
 \item
@@ -44,6 +44,29 @@ SRAM cells have 6 transistors and is faster but DRAM cells have only 1 transisto
 EEPROMs are erased electronically, but flash memories can be erased simultaneously.
 
 \section{}
- 
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
+	\node [below,text width=1.5cm,align=center] at (init.south) {$P_0$=1};
+	
+	\draw (0,4) node (reset) [draw,shape=circle,minimum size=1.25cm] {Reset};
+	\node [above,text width=5cm,align=center] at (reset.north) {ld=0, play\_counter=0, sample\_counter=0};	
+	
+	\draw (3,1.5) node (sample) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sample};
+	\node [below,text width=1.5cm,align=center] at (sample.south) {ld=1};
+	
+	\draw (3,-2) node (play) [draw,shape=circle,minimum size=1.25cm] {Play};
+	\node [below,text width=5cm,align=center] at (play.south) {$Q$=memory[play\_counter++], $P_0$=$P_0P$};
+	
+	\draw (5,-1) node (played) [draw,shape=circle,minimum size=1.25cm] {Played};
+	\node [right,text width=5cm,align=center] at (played.east) {play\_counter=0, $P_0$=$P_0P$};	
+	
+	\path[->] (init) edge [bend right=30] node [left] {R} (reset);
+	\path[->] (init) edge [loop left] node {R'(P'+S')} ();
+	\path[->] (reset) edge [bend right=30] node [right] {R'} (init);
+	\path[->] (init) edge [bend right=30] node [below left] {R'P} (play);
+	\path[->] (play) edge [loop right] node {play\_counter<sample\_counter} ();
+\end{tikzpicture}
+\end{center}
 
 \end{document}

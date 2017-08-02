@@ -24,7 +24,7 @@
 \section{}
 \begin{enumerate}[(a)]
 \item
-%\input{p1}
+\input{p1}
 \item
 The critical path is the 16-bit up counter, so the delay is 5 ns.
 \item
@@ -44,28 +44,116 @@ SRAM cells have 6 transistors and is faster but DRAM cells have only 1 transisto
 EEPROMs are erased electronically, but flash memories can be erased simultaneously.
 
 \section{}
+Inputs: $S$ (1-bit), $P$ (1-bit), $R$ (1-bit), $D$ (8-bit)
+
+Outputs: $Q$ (8-bit)
+
+Local Registers: $S_0$ (1-bit), $P_0$ (1-bit), $s\_cnt$ (16-bit), $p\_cnt$ (16-bit)
+
+Memory: mem (10000x8 SRAM)
+
 \begin{center}
 \begin{tikzpicture}[>/.tip={Latex}]
-	\draw (0,0) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
-	\node [below,text width=1.5cm,align=center] at (init.south) {$P_0$=1};
+	\draw (0,-4) node (init) [draw,shape=circle,minimum size=1.25cm] {Init};
+	\node [below,text width=1.5cm,align=center] at (init.south) {s\_cnt=0};
+
+	\draw (0,0) node (wait) [draw,shape=circle,minimum size=1.25cm] {Wait};
+	\node [below left,text width=1.5cm,align=center] at (wait.south) {$P_0$=1, $S_0$=1, p\_cnt=0};
 	
 	\draw (0,4) node (reset) [draw,shape=circle,minimum size=1.25cm] {Reset};
-	\node [above,text width=5cm,align=center] at (reset.north) {ld=0, play\_counter=0, sample\_counter=0};	
+	\node [above,text width=2cm,align=center] at (reset.north) {p\_cnt=0, s\_cnt=0, $S_0$=$S_0S$, $P_0$=$P_0P$};	
 	
-	\draw (3,1.5) node (sample) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sample};
-	\node [below,text width=1.5cm,align=center] at (sample.south) {ld=1};
+	\draw (6,2) node (sample) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sample};
+	\node [right,text width=2cm,align=center] at (sample.east) {$S_0$=$S_0S$, mem[s\_cnt++]=$D$};
 	
-	\draw (3,-2) node (play) [draw,shape=circle,minimum size=1.25cm] {Play};
-	\node [below,text width=5cm,align=center] at (play.south) {$Q$=memory[play\_counter++], $P_0$=$P_0P$};
+	\draw (3.2,3.2) node (sampled) [draw,shape=circle,minimum size=1.25cm] {\footnotesize Sampled};
+	\node [below,text width=2cm,align=center] at (sampled.south) {$S_0$=$S_0S$};
 	
-	\draw (5,-1) node (played) [draw,shape=circle,minimum size=1.25cm] {Played};
-	\node [right,text width=5cm,align=center] at (played.east) {play\_counter=0, $P_0$=$P_0P$};	
+	\draw (4,-4) node (play) [draw,shape=circle,minimum size=1.25cm] {Play};
+	\node [below,text width=3cm,align=center] at (play.south) {$Q$=mem[p\_cnt++], $P_0$=$P_0P$};
 	
-	\path[->] (init) edge [bend right=30] node [left] {R} (reset);
-	\path[->] (init) edge [loop left] node {R'(P'+S')} ();
-	\path[->] (reset) edge [bend right=30] node [right] {R'} (init);
-	\path[->] (init) edge [bend right=30] node [below left] {R'P} (play);
-	\path[->] (play) edge [loop right] node {play\_counter<sample\_counter} ();
+	\draw (8,-1) node (played) [draw,shape=circle,minimum size=1.25cm] {Played};
+	\node [right,text width=2cm,align=center] at (played.east) {p\_cnt=0, $P_0$=$P_0P$};	
+	
+	\path[->] (init.west)++(left:1cm) edge [bend left=30] (init);
+	\path[->] (init) edge (wait);
+	\path[->] (wait) edge node [left] {$R$} (reset);
+	\path[->] (reset) edge [bend right=30] node [left] {$R'S_0'P_0'$} (wait);
+	\path[->] (wait) edge [loop left] node [text width=2.5cm,align=center] {(s\_cnt>=10000 and $R'S$) or (s\_cnt==0 and $R'P$) or $R'(P'+S')$} ();
+	\path[->] (reset) edge [loop left] node {$R+S_0+P_0$} ();
+	\path[->] (wait) edge [bend right=15] node [below,sloped] {s\_cnt>0 and $R'P$} (play);
+	\path[->] (wait) edge [bend right=15] node [below,sloped] {s\_cnt<10000 and $R'S$} (sample);
+	\path[->] (sample) edge node [above,sloped] {$R'S_0'P'$} (wait);
+	\path[->] (play) edge [loop right] node {p\_cnt<s\_cnt} ();
+	\path[->] (sample) edge node [above,sloped] {$R'S_0P'$} (sampled);
+	\path[->] (play) edge [bend right=7] node [above,sloped] {p\_cnt>=s\_cnt and $P_0$} (played);
+	\path[->] (play) edge node [above,sloped] {p\_cnt>=s\_cnt and $P_0'$} (wait);
+	\path[->] (played) edge [loop below] node {$P_0R'$} ();
+	\path[->] (played) edge [bend left=15] node [below] {$P_0'R'$} (wait);
+	\draw[->] (played) .. controls (12,2) and (8,8) .. node [above right] {$R$} (reset);
+	\path[->] (sample) edge [bend right=45] node [above right] {$R$} (reset);
+	\path[->] (sample) edge [bend left=15] node [near start,right] {$R'P$} (play);
+	\path[->] (sampled) edge [bend right=30] node [above right] {$R$} (reset);
+	\path[->] (sampled) edge node [above,sloped] {$R'S_0'P'$} (wait);
+	\path[->] (sampled) edge [loop left] node {$R'S_0P'$} ();
+	\path[->] (sampled) edge [bend left=30] node [above,sloped] {$R'P$} (play);
+\end{tikzpicture}
+\end{center}
+
+\section{}
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+\draw[help lines] (0,0) grid (2,8);
+\foreach \i/\j in {0/0,1/0,2/0,3/0,4/0,5/1,6/0,7/1}
+	\draw (0.5,7.5-\i) node {\j};
+\foreach \i/\j in {0/0,1/0,2/1,3/0,4/0,5/0,6/0,7/0}
+	\draw (1.5,7.5-\i) node {\j};
+\draw (-0.25,5) node (a2) {$a_2$};
+\draw (-0.25,4) node (a1) {$a_1$};
+\draw (-0.25,3) node (a0) {$a_0$};
+\draw (a2)++(left:1.5cm) node (b) {$b$};
+\draw (a1)++(left:1.5cm) node (c) {$c$};
+\draw (a0)++(left:1.5cm) node (d) {$d$};
+\draw[->] (b) -- (a2);
+\draw[->] (c) -- (a1);
+\draw[->] (d) -- (a0);
+\draw (0.5,-0.25) node (d1) {$d_1$};
+\draw (1.5,-0.25) node (d0) {$d_0$};
+
+\draw[help lines] (5,0) grid (7,8);
+\foreach \i/\j in {0/0,1/0,2/0,3/0,4/0,5/0,6/0,7/0}
+	\draw (5.5,7.5-\i) node {\j};
+\foreach \i/\j in {0/0,1/1,2/1,3/1,4/0,5/1,6/0,7/1}
+	\draw (6.5,7.5-\i) node {\j};
+\draw (5-0.25,5) node (a2) {$a_2$};
+\draw (5-0.25,4) node (a1) {$a_1$};
+\draw (5-0.25,3) node (a0) {$a_0$};
+\draw (a2)++(left:1.5cm) node (a) {$a$};
+\draw[->] (a) -- (a2);
+\draw[->] (d1) -- ++(down:1.5cm) -- ++(right:2cm) |- (a1);
+\draw[->] (d0) -- ++(down:1cm) -- ++(right:2cm) |- (a0);
+\draw (5.5,-0.25) node (d1) {$d_1$};
+\draw (6.5,-0.25) node (d0) {$d_0$};
+\draw (d0)++(down:1.5cm) node (F) {$F$};
+\draw[->] (d0) -- (F);
+\end{tikzpicture}
+\end{center}
+
+\section{}
+
+\begin{center}
+\begin{tikzpicture}[>/.tip={Latex}]
+\draw[help lines] (0,0) grid (16,1);
+\foreach \i/\j in {0/0,1/0,2/0,3/0,4/1,5/1,6/1,7/1,8/0,9/0,10/0,11/0,12/1,13/0,14/1,15/1} {
+	\draw (\i+0.5,1.25) node {\i};
+	\draw (\i+0.5,0.5) node {\j};
+}
+\foreach \i in {1,...,4} {
+	\draw (\i*2+3,2.5) node (x\i) {$x_\i$};
+	\draw[->] (x\i) -- (\i*2+3,1);
+}
+\draw (8,-1.5) node (f) {$f$};
+\draw[->] (8,0) -- (f);
 \end{tikzpicture}
 \end{center}
 
